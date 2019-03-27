@@ -12,6 +12,7 @@
 		18094553224BAABB00D98F0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18094551224BAABB00D98F0A /* Main.storyboard */; };
 		18094555224BAACE00D98F0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18094554224BAACE00D98F0A /* Assets.xcassets */; };
 		18094558224BAACE00D98F0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18094556224BAACE00D98F0A /* LaunchScreen.storyboard */; };
+		F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,9 @@
 		18094557224BAACE00D98F0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18094559224BAACE00D98F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1809455F224BAF1200D98F0A /* UniOrient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UniOrient-Bridging-Header.h"; sourceTree = "<group>"; };
+		23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniOrient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.release.xcconfig"; sourceTree = "<group>"; };
+		CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +46,8 @@
 			children = (
 				1809454C224BAABB00D98F0A /* UniOrient */,
 				1809454B224BAABB00D98F0A /* Products */,
+				441C0E1A3E6CC5FDAF45FF78 /* Pods */,
+				D32037CDDD1D591AE02BFFBA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +73,23 @@
 			path = UniOrient;
 			sourceTree = "<group>";
 		};
+		441C0E1A3E6CC5FDAF45FF78 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */,
+				8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D32037CDDD1D591AE02BFFBA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -73,9 +97,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1809455C224BAACE00D98F0A /* Build configuration list for PBXNativeTarget "UniOrient" */;
 			buildPhases = (
+				82710C3542FBE7BE10CE5465 /* [CP] Check Pods Manifest.lock */,
 				18094546224BAABB00D98F0A /* Sources */,
 				18094547224BAABB00D98F0A /* Frameworks */,
 				18094548224BAABB00D98F0A /* Resources */,
+				DA181398F2F42588352ABF51 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +158,55 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82710C3542FBE7BE10CE5465 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UniOrient-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA181398F2F42588352ABF51 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18094546224BAABB00D98F0A /* Sources */ = {
@@ -283,6 +358,7 @@
 		};
 		1809455D224BAACE00D98F0A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -305,6 +381,7 @@
 		};
 		1809455E224BAACE00D98F0A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
