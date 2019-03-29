@@ -9,5 +9,8 @@ target 'UniOrient' do
 
 	pod 'Alamofire'	
 	pod 'AlamofireImage'
-
+    pod 'SDWebImage', '~> 4.0'
+    pod 'EDStarRating'
+    pod 'AACarousel'
+    pod 'LGSideMenuController'
 end
