@@ -42,7 +42,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var flightView: UIView!
     @IBOutlet weak var hotelView: UIView!
     
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         classChooseView .isHidden = true
@@ -67,26 +67,28 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         tempPos1 = txtDeparture.frame
         tempPos2 = lblDepartureCity.frame
    
+        let swipeRight = UISwipeGestureRecognizer(target: self, action:  #selector(swiped))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.hotelView.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swiped))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.flightView.addGestureRecognizer(swipeLeft)
     }
     
-    func respondToSwipeGesture(gesture: UIGestureRecognizer)
-    {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-   
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizer.Direction.right:
-                print("Swiped right")
-            case UISwipeGestureRecognizer.Direction.down:
-                print("Swiped down")
-            case UISwipeGestureRecognizer.Direction.left:
-                print("Swiped left")
-            case UISwipeGestureRecognizer.Direction.up:
-                print("Swiped up")
-            default:
-                break
+    @objc  func swiped(_ gesture: UISwipeGestureRecognizer) {
+            if gesture.direction == .left {
+                if (self.tabBarController?.selectedIndex)! < 2
+                { // set here  your total tabs
+                    self.tabBarController?.selectedIndex += 1
+                }
+            } else if gesture.direction == .right {
+                if (self.tabBarController?.selectedIndex)! > 0 {
+                    self.tabBarController?.selectedIndex -= 1
+                }
             }
         }
-    }
+    
     override func viewWillAppear(_ animated: Bool)
     {
         let departureCity = (UserDefaults.standard.value(forKey: "DselectedCityName") as! String)
@@ -174,7 +176,8 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             //headerView.contentView.backgroundColor = .white
-            headerView.textLabel?.textColor = UIColor.AppBlueColor()
+            headerView.textLabel?.textColor = .blue
+            
         }
     }
 ////////////////////////////////////end of tableview
@@ -297,9 +300,9 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     {
 //          let DictInput = ["Origin":self.originToPass!,"Destination":self.destinationToPass!,"DepartureDate":selectedDepartOnStrToPass!,"Returndate":selectedReturnOnStrToPass!,"WayType":self.onewayBtn.isSelected ? "one":"two","CabinClass":self.classSelectedItem,"AdultCount":self.adultSelectedItem,"ChildCount":self.childrenSelectedItem,"InfantCount":self.infantSelectedItem,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
       
-          let DictInput = ["Origin":"SIN","Destination":"KUL","DepartureDate":"15/04/2019","Returndate":"19/04/2019","WayType":"two","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+          let DictInput = ["Origin":"SIN","Destination":"KUL","DepartureDate":"2019-04-15","Returndate":"2019-04-20","WayType":"two","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
         
-        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "FlightResultVCGoomoSBID") as! FlightResultVCGoomo
+        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "FlightResultVC") as! FlightResultVCGoomo
         ctrl.inputDict = DictInput
         self.navigationController?.pushViewController(ctrl, animated: true)
     }

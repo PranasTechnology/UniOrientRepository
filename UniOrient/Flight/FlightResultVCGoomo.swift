@@ -10,67 +10,55 @@ import UIKit
 import SDWebImage
 
 class FlightResultVCGoomo: UIViewController {
-    
+ 
+//MARK: - IBOutlet
+    @IBOutlet weak var twowayView: UIView!
     @IBOutlet weak var tripDetailDestinationDateLbl: UILabel!
     @IBOutlet weak var tripDetailSourceLbl: UILabel!
     @IBOutlet weak var onewayOrTwowayImgView: UIImageView!
-    
-    var tripDetailDateFormatter = DateFormatter()
-    var convertStrToDateDF = DateFormatter()
-    
+    @IBOutlet weak var dataTV: UITableView!
+    @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var tripDateDetailLbl: UILabel!
     @IBOutlet weak var tripPassengerDetailLbl: UILabel!
-    var arrToDisplay = [FlightResultAndDetailStruct]()
-    
-    var arrToSort = [FlightResultAndDetailStruct]()
-    
-    @IBOutlet weak var filterBtn: UIButton!
-    var filteredArr = [FlightResultAndDetailStruct]()
-    
-    
-    
-    var flightResultAndDetailArrForFilterVC = [FlightResultAndDetailStruct]()
-  
     @IBOutlet weak var errorLbl: UILabel!
-    
-    var inputDict = [String:String]()
-    @IBOutlet weak var dataTV: UITableView!
-    
-    var flightResultArr = [[String:AnyObject]]()
-    var flightDetailsArr = [[String:AnyObject]]()
-    var flightResultAndDetailsArr = [FlightResultAndDetailStruct]()
-    
-    var flightDetailsReturnArr = [[String:AnyObject]]()
-    
-    var way : String!
-    let dateFormatter = DateFormatter()
-    
     @IBOutlet weak var dataTVContainerView: UIView!
     @IBOutlet weak var bottomView: UIView!
-    
-    //    @IBAction func backBtnTapped(_ sender: UIButton) {
-    //        self.navigationController?.popViewController(animated: true)
-    //    }
-    
-    @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
-    }
+  
     
     @IBOutlet weak var departureBtn: UIButton!
     @IBOutlet weak var flightBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
-    
     @IBOutlet weak var departureBtnImgView: UIImageView!
     @IBOutlet weak var flightBtnImgView: UIImageView!
     @IBOutlet weak var priceBtnImgView: UIImageView!
     
     
+//MARK: - variable Declaration
     
+    var arrToDisplay = [FlightResultAndDetailStruct]()
+    var arrToSort = [FlightResultAndDetailStruct]()
+    var tripDetailDateFormatter = DateFormatter()
+    var convertStrToDateDF = DateFormatter()
+    var filteredArr = [FlightResultAndDetailStruct]()
+    var flightResultAndDetailArrForFilterVC = [FlightResultAndDetailStruct]()
+    var inputDict = [String:String]()
+    var flightResultArr = [[String:AnyObject]]()
+    var flightDetailsArr = [[String:AnyObject]]()
+    var flightResultAndDetailsArr = [FlightResultAndDetailStruct]()
+    var flightDetailsReturnArr = [[String:AnyObject]]()
+    var way : String!
+    let dateFormatter = DateFormatter()
+ 
+    @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+//MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.filterBtn.isHidden = true
+      // self.filterBtn.isHidden = true
         //        self.filterBtn.isSelected = false
         
         self.navigationController?.navigationBar.isHidden = false
@@ -116,36 +104,20 @@ class FlightResultVCGoomo: UIViewController {
             infantStr = "Infants"
         }
         
-        self.tripPassengerDetailLbl.text = "\(self.inputDict["AdultCount"]!) \(adultStr!),\(self.inputDict["ChildCount"]!) \(childStr!),\(self.inputDict["InfantCount"]!) \(infantStr!)"
+//        self.tripPassengerDetailLbl.text = "\(self.inputDict["AdultCount"]!) \(adultStr!),\(self.inputDict["ChildCount"]!) \(childStr!),\(self.inputDict["InfantCount"]!) \(infantStr!)"
         
         
         //New Format
-        self.tripDetailSourceLbl.text = self.inputDict["Origin"]!
-        var passengerStr = "\(self.inputDict["AdultCount"]!) \(adultStr!) "
+//        self.tripDetailSourceLbl.text = self.inputDict["Origin"]!
+//        var passengerStr = "\(self.inputDict["AdultCount"]!) \(adultStr!) "
+//
+//        if Int(self.inputDict["ChildCount"]!)! != 0 {
+//            passengerStr += "\(self.inputDict["ChildCount"]!) \(childStr!) "
+//        }
+//        if Int(self.inputDict["InfantCount"]!)! != 0 {
+//            passengerStr += "\(self.inputDict["InfantCount"]!) \(infantStr!)"
+//        }
     
-        if Int(self.inputDict["ChildCount"]!)! != 0 {
-            passengerStr += "\(self.inputDict["ChildCount"]!) \(childStr!) "
-        }
-        if Int(self.inputDict["InfantCount"]!)! != 0 {
-            passengerStr += "\(self.inputDict["InfantCount"]!) \(infantStr!)"
-        }
-        
-        print("Passenger Str = ",passengerStr)
-        
-        if self.way == "one"{
-            self.onewayOrTwowayImgView.image = UIImage.init(named: "Oneway100")
-            
-            self.tripDetailDestinationDateLbl.text = "\(self.inputDict["Destination"]!) - \(departureDateStr),Oneway, \(passengerStr)"
-        }else{
-            self.onewayOrTwowayImgView.image = UIImage.init(named: "Roundtrip100")
-            
-            let stringConvertedToDate = convertStrToDateDF.date(from: self.inputDict["Returndate"]!)
-            let returnStr = tripDetailDateFormatter.string(from: stringConvertedToDate!)
-            let dateStr = departureDateStr + " - " + returnStr
-            
-            self.tripDetailDestinationDateLbl.text = "\(self.inputDict["Destination"]!) - \(dateStr),Return Trip, \(passengerStr)"
-        }
-        
         callSearchFlightService(messageDict: self.inputDict)
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -174,8 +146,8 @@ class FlightResultVCGoomo: UIViewController {
                     print("Service call success ..........")
                     self.filterBtn.isHidden = false
                     
-                    //                    self.dataTV.isHidden = false
-                    self.dataTVContainerView.isHidden = false
+                //                    self.dataTV.isHidden = false
+                  //  self.dataTVContainerView.isHidden = false
                     //                print("The ResponseDict finally =",ResponceDict!)
                     
                     let responce = ResponceDict as! [String:AnyObject]
@@ -543,7 +515,7 @@ class FlightResultVCGoomo: UIViewController {
                     
                     print("No Data for your Search!!! or No Data from Backend!!!")
                     //                    self.dataTV.isHidden = true
-                    self.dataTVContainerView.isHidden = true
+                   // self.dataTVContainerView.isHidden = true
                     self.errorLbl.text = "No Data for your Search!!! or No Data from Backend!!!"
                     self.filterBtn.isHidden = true
                 }
@@ -557,7 +529,7 @@ class FlightResultVCGoomo: UIViewController {
         }else{
             print("No Internet......")
             //            self.dataTV.isHidden = true
-            self.dataTVContainerView.isHidden = true
+         //   self.dataTVContainerView.isHidden = true
             self.errorLbl.text = "Internet connetivity Problem!!!"
         }
     }
@@ -792,38 +764,81 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "onewayCellIDGoomo", for: indexPath) as! OnewayCellClassGoomo
+       if self.inputDict["WayType"]! == "two"
+       {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! onewayTableViewCell
         
-        if self.inputDict["WayType"]! == "one"{
-            cell.returnFlightLbl.isHidden = true
-        }else{
-            cell.returnFlightLbl.isHidden = false
+        let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
+    
+        if self.arrToDisplay[indexPath.row].flightImgName == "multiairline" {
+            cell.flightImg.image = UIImage(named: "multiairline")
+            cell.flightName.text = self.arrToDisplay[indexPath.row].flightName
+     
+            cell.flightName.text = self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].operating
+            
+            if self.arrToDisplay[indexPath.row].flightImgData != nil {
+                cell.flightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].flightImgData!)
+            }else{
+                cell.flightImg.sd_setShowActivityIndicatorView(true)
+                cell.flightImg.sd_setIndicatorStyle(.gray)
+                cell.flightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "flightGreen"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                    if error == nil{
+                        self.arrToDisplay[indexPath.row].flightImgData = downloadedImage!.pngData()
+                    }else{
+                        print("Error from SBWebImage Block = ",error!)
+                    }
+                    
+                })
+                
+                
+            }
+            
         }
+        cell.departTime.text = self.arrToDisplay[indexPath.row].departureTime.appending(" - ") .appending(self.arrToDisplay[indexPath.row].arrivalTime)
+        cell.departCode.text = self.arrToDisplay[indexPath.row].departureAirportCode
+        cell.duration.text = self.arrToDisplay[indexPath.row].duration
+        cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
         
-        //        var theResultantArr = [FlightResultAndDetailStruct]()
-        //        if self.filterBtn.isSelected {
-        //            theResultantArr = filteredArr
-        //        }else{
-        //            theResultantArr = flightResultAndDetailsArr
-        //        }
+        cell.amount.lineBreakMode = .byWordWrapping
         
+        let fStr = NSMutableAttributedString()
+        let attribute1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
+        let xyz = NSAttributedString(string: self.arrToDisplay[indexPath.row].amount,attributes:attribute1)
+        
+        let attribute2 = [NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "#338EDF"),NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)]
+        //        var abc = NSAttributedString(string: "MYR",attributes:)
+        let abc = NSAttributedString(string: "MYR", attributes: attribute2)
+        
+        fStr.append(abc)
+        fStr.append(NSAttributedString(string: "\n"))
+        fStr.append(xyz)
+        cell.amount.attributedText = fStr
+        
+        return cell
+        
+       }
+//Return - Twoway
+       else
+       {
+        
+           let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! twowayTableViewCell
         let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
         /* or
          let flightImgURL = WebServicesUrl.FlightImgURL + self.flightResultAndDetailsArr[indexPath.row].flightImgName */
         
         if self.arrToDisplay[indexPath.row].flightImgName == "multiairline" {
-            cell.flightImgView.image = UIImage(named: "multiairline")
-            cell.flightNameLbl.text = self.arrToDisplay[indexPath.row].flightName
-//            self.arrToDisplay[indexPath.row].flightImgData = UIImage(named: "multiairline")!.pngData(UIImage(named: "multiairline")!.pngDatan
+            cell.flightImg.image = UIImage(named: "multiairline")
+            cell.flightName.text = self.arrToDisplay[indexPath.row].flightName
+            //            self.arrToDisplay[indexPath.row].flightImgData = UIImage(named: "multiairline")!.pngData(UIImage(named: "multiairline")!.pngDatan
             
-            cell.flightNameLbl.text = self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].operating
+            cell.flightName.text = self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].operating
             
             if self.arrToDisplay[indexPath.row].flightImgData != nil {
-                cell.flightImgView.image = UIImage(data: self.arrToDisplay[indexPath.row].flightImgData!)
+                cell.flightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].flightImgData!)
             }else{
-                cell.flightImgView.sd_setShowActivityIndicatorView(true)
-                cell.flightImgView.sd_setIndicatorStyle(.gray)
-                cell.flightImgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "flightGreen"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                cell.flightImg.sd_setShowActivityIndicatorView(true)
+                cell.flightImg.sd_setIndicatorStyle(.gray)
+                cell.flightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "flightGreen"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                     if error == nil{
                         self.arrToDisplay[indexPath.row].flightImgData = downloadedImage!.pngData()
                     }else{
@@ -837,25 +852,13 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
             
         }
         
-        //        cell.flightNameLbl.text = self.flightResultAndDetailsArr[indexPath.row].detailArrWithFlightDetailStruct[0].operating
-        /* or
-         cell.flightNameLbl.text = self.flightResultAndDetailsArr[indexPath.row].flightName */
         
-        //        self.inputDict[""]
+        cell.departTime.text = self.arrToDisplay[indexPath.row].departureTime .appending(self.arrToDisplay[indexPath.row].arrivalTime)
+        cell.lblRefundable.text = self.arrToDisplay[indexPath.row].departureAirportCode
+        cell.duration.text = self.arrToDisplay[indexPath.row].duration.appending(" - ").appending(self.arrToDisplay[indexPath.row].noOfStops)
+       // cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
         
-        cell.classTypeLbl.text = self.inputDict["CabinClass"]!
-        cell.depDateLbl.text = self.arrToDisplay[indexPath.row].departureDate
-        cell.arrDateLbl.text = self.arrToDisplay[indexPath.row].arrivalDate
-        
-        cell.refundOrNonRefundLbl.text = self.arrToDisplay[indexPath.row].faretype
-        cell.depTimeLbl.text = self.arrToDisplay[indexPath.row].departureTime
-        cell.depAirportCodeLbl.text = self.arrToDisplay[indexPath.row].departureAirportCode
-        cell.durationLbl.text = self.arrToDisplay[indexPath.row].duration
-        cell.stopDetailsLbl.text = self.arrToDisplay[indexPath.row].noOfStops
-        cell.arrivalTimeLbl.text = self.arrToDisplay[indexPath.row].arrivalTime
-        cell.arrivalAirportCodeLbl.text = self.arrToDisplay[indexPath.row].arrivalAirportCode
-        cell.amountLbl.lineBreakMode = .byWordWrapping
-        //        cell.amountLbl.text = "MYR " + self.arrToDisplay[indexPath.row].amount
+        cell.amount.lineBreakMode = .byWordWrapping
         
         let fStr = NSMutableAttributedString()
         let attribute1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
@@ -868,13 +871,11 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         fStr.append(abc)
         fStr.append(NSAttributedString(string: "\n"))
         fStr.append(xyz)
-        cell.amountLbl.attributedText = fStr
-        
-        
-        //        https://www.shioktrip.com/Airline_Images/%@.gif
-        //        imageView.sd_setImage(with: URL(string: "http://www.domain.com/path/to/image.jpg"), placeholderImage: UIImage(named: "placeholder.png"))
+        cell.amount.attributedText = fStr
         
         return cell
+        }
+     
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -894,29 +895,23 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         ctrl.providedInputDict = self.inputDict
         ctrl.selectedStruct = structToSend
         self.navigationController?.pushViewController(ctrl, animated: true)
-        
-        /*
-         if self.way == "two" {
-         let flightImgURLStr = WebServicesUrl.FlightImgURL + structToSend.returnFlightImgName + ".gif"
-         print("Image URL :",flightImgURLStr)
-         SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: flightImgURLStr), options: .highPriority, progress: nil, completed: { (downloadedImg, downloadedData, error, isFinished) in
-         if downloadedImg != nil {
-         structToSend.returnFlightImgData = downloadedData
-         ctrl.selectedStruct = structToSend
-         self.navigationController?.pushViewController(ctrl, animated: true)
-         }else{
-         print("No Img downloaded...")
-         }
-         })
-         }else{
-         ctrl.selectedStruct = structToSend
-         self.navigationController?.pushViewController(ctrl, animated: true)
-         } */
-        
-        
-        
-        
+    
     }
+}
+ func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+{
+    // 1
+    let shareAction = UITableViewRowAction(style: .default, title: "Detail" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+        // 2
+      
+    })
+    // 3
+    let rateAction = UITableViewRowAction(style: .default, title: "Rate" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
+        // 4
+     
+    })
+    // 5
+    return [shareAction,rateAction]
 }
 class OnewayCellClassGoomo : UITableViewCell {
     
@@ -1214,10 +1209,10 @@ extension FlightResultVCGoomo : FlightFilterDelegateGoomo {
         self.dataTV.reloadData()
         if self.filteredArr.count == 0 {
            
-            self.dataTVContainerView.isHidden = true
+           // self.dataTVContainerView.isHidden = true
             self.errorLbl.text = "No Result for your filter!!!"
         }else{
-            self.dataTVContainerView.isHidden = false
+          //  self.dataTVContainerView.isHidden = false
         }
         
     }

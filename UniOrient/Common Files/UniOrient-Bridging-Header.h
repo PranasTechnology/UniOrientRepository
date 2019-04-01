@@ -7,7 +7,7 @@
 
 #import "AFNetworking.h"
 #import "FSCalendar.h"
-#import "EDStarRating.h"
+//#import "EDStarRating.h"
 
 
 #endif /* UniOrient_Bridging_Header_h */

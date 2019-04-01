@@ -1,21 +1,30 @@
 PODS:
-  - Alamofire (4.8.1)
-  - AlamofireImage (3.5.0):
-    - Alamofire (~> 4.8)
+  - AACarousel (1.1.1)
+  - EDStarRating (1.1)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
+  - SwipeableTabBarController (2.1.0)
 
 DEPENDENCIES:
-  - Alamofire
-  - AlamofireImage
+  - AACarousel
+  - EDStarRating
+  - SDWebImage (~> 4.0)
+  - SwipeableTabBarController
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Alamofire
-    - AlamofireImage
+    - AACarousel
+    - EDStarRating
+    - SDWebImage
+    - SwipeableTabBarController
 
 SPEC CHECKSUMS:
-  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
-  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
+  AACarousel: e0dbd2d3153c56c36df8aa282553f20fc88e132b
+  EDStarRating: a41a6440a945020745d0e9ff8ada7d1afa952114
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
+  SwipeableTabBarController: e6445066473bb548cc74f660c0ebc04d609cde67
 
-PODFILE CHECKSUM: e14afaee236df6e87e17a5123e1b0dc31a249b09
+PODFILE CHECKSUM: 412eabed39fef7124d46dffc0cfdda3d3e890cbc
 
 COCOAPODS: 1.5.3

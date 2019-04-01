@@ -87,45 +87,26 @@ class FlightResultViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "onewaycell", for: indexPath as IndexPath) as UITableViewCell
-     
-        let blueView = cell.viewWithTag(10)
-        blueView?.layer.cornerRadius = 5
-        blueView?.layer.borderWidth = 0.1
-        blueView?.layer.borderColor = UIColor.orange.cgColor
-        blueView?.layer.shadowColor = UIColor.yellow.cgColor
-        blueView?.layer.shadowOffset = CGSize(width: 3, height: 3)
-        blueView?.layer.shadowOpacity = 0.7
-        blueView?.layer.shadowRadius = 4.0
-        
-        let img1 = cell.viewWithTag(1) as! UIImageView
-        let label2 = cell.viewWithTag(2) as! UILabel
-        let label3 = cell.viewWithTag(3) as! UILabel
-        let label4 = cell.viewWithTag(4) as! UILabel
-        let label5 = cell.viewWithTag(5) as! UILabel
-        let label6 = cell.viewWithTag(6) as! UILabel
-        let label7 = cell.viewWithTag(7) as! UILabel
-       // let label8 = cell.viewWithTag(8) as! UILabel
-        let label9 = cell.viewWithTag(9) as! UILabel
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! onewayTableViewCell
+
         if(arrflightName[indexPath.row] .contains(","))
         {
-             label2.text = "Multi Airlines"
+             cell.flightName.text = "Multi Airlines"
         }
         else{
-             label2.text = arrflightName[indexPath.row]
+             cell.flightName.text = arrflightName[indexPath.row]
         }
         let inputString = arrDepartureTime[indexPath.row]
         var splits = inputString.components(separatedBy: "T")
         splits = [String(splits[1].dropLast(3))]
         print(splits)
-     //   label3.text = arrDepartureTime[indexPath.row]
-    //    label4.text = arrArrivalTime[indexPath.row]
-      //  label5.text = arrDuration[indexPath.row]
-        label6.text = arrStops[indexPath.row]
-        label7.text = arrFareType[indexPath.row]
-       // label8.text = arrflightName[indexPath.row]
-     // label9.text = "Rs \(String(describing: arrAmount[indexPath.row]))"
+        cell.departTime.text = arrDepartureTime[indexPath.row]
+        cell.arrivalTime.text = arrArrivalTime[indexPath.row]
+        cell.duration.text = arrDuration[indexPath.row]
+        cell.stop.text = arrStops[indexPath.row]
+       //
+       // label7.text = arrFareType[indexPath.row]
+        cell.amount.text = "USD \(String(describing: arrAmount[indexPath.row]))"
         //String(arrAmount[indexPath.row])// as String
         return cell
     }

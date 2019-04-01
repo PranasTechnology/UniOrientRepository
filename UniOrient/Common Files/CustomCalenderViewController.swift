@@ -377,7 +377,8 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
     
     func dayOfWeekTextColor() -> UIColor { return .white }
     
-    func dayOfWeekBackGroundColor() -> UIColor { return .AppMaroonColor()
+    func dayOfWeekBackGroundColor() -> UIColor {
+        return .black
         
     }
     

@@ -11,7 +11,6 @@
 		2E27D3C8224C8B42009A0E1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3C6224C8B42009A0E1F /* ViewController.swift */; };
 		2E27D40D224C8D67009A0E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D3D7224C8D66009A0E1F /* Assets.xcassets */; };
 		2E27D40E224C8D67009A0E1F /* ColorsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3D8224C8D66009A0E1F /* ColorsConfig.swift */; };
-		2E27D40F224C8D67009A0E1F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3D9224C8D66009A0E1F /* Constant.swift */; };
 		2E27D410224C8D67009A0E1F /* CustomCalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3DA224C8D66009A0E1F /* CustomCalenderViewController.swift */; };
 		2E27D411224C8D67009A0E1F /* CVAuxiliaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3DC224C8D66009A0E1F /* CVAuxiliaryView.swift */; };
 		2E27D412224C8D67009A0E1F /* CVCalendarContentPresentationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3DE224C8D66009A0E1F /* CVCalendarContentPresentationCoordinator.swift */; };
@@ -47,7 +46,6 @@
 		2E27D430224C8D67009A0E1F /* file1.json in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D3FC224C8D66009A0E1F /* file1.json */; };
 		2E27D431224C8D67009A0E1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D3FD224C8D66009A0E1F /* Info.plist */; };
 		2E27D432224C8D67009A0E1F /* JSON Convertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3FE224C8D66009A0E1F /* JSON Convertion.swift */; };
-		2E27D433224C8D67009A0E1F /* JSONDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3FF224C8D66009A0E1F /* JSONDownloader.swift */; };
 		2E27D435224C8D67009A0E1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D402224C8D66009A0E1F /* Info.plist */; };
 		2E27D436224C8D67009A0E1F /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D404224C8D66009A0E1F /* UIImage+Gif.swift */; };
 		2E27D437224C8D67009A0E1F /* TakeMyTravel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D405224C8D66009A0E1F /* TakeMyTravel.xcdatamodeld */; };
@@ -55,7 +53,6 @@
 		2E27D439224C8D67009A0E1F /* FlightSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */; };
 		2E27D43A224C8D67009A0E1F /* onewayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */; };
 		2E27D43B224C8D67009A0E1F /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D40B224C8D67009A0E1F /* SearchCityViewController.swift */; };
-		2E27D43C224C8D67009A0E1F /* twowayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D40C224C8D67009A0E1F /* twowayTableViewCell.swift */; };
 		2E27D43E224C8E07009A0E1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D43D224C8E06009A0E1F /* Main.storyboard */; };
 		2E27D44E224C8EB8009A0E1F /* 1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D440224C8EB8009A0E1F /* 1.jpeg */; };
 		2E27D44F224C8EB8009A0E1F /* 2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D441224C8EB8009A0E1F /* 2.jpeg */; };
@@ -73,6 +70,11 @@
 		2E27D45B224C8EB8009A0E1F /* square.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D44D224C8EB8009A0E1F /* square.png */; };
 		2E27D45D224C8F26009A0E1F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D45C224C8F26009A0E1F /* LaunchScreen.storyboard */; };
 		2E27D45F224C9CAA009A0E1F /* NewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D45E224C9CAA009A0E1F /* NewAssets.xcassets */; };
+		2E5F5265224E1991006ACE1E /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5262224E1991006ACE1E /* ArrayExtension.swift */; };
+		2E5F5266224E1992006ACE1E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5263224E1991006ACE1E /* StringExtension.swift */; };
+		2E5F5267224E1992006ACE1E /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5264224E1991006ACE1E /* UIViewExtension.swift */; };
+		2E746CD022521AEE001192F4 /* loadingHotelGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2E746CCF22521AEB001192F4 /* loadingHotelGif.gif */; };
+		2EFCB561224E4F3100C60682 /* twowayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFCB55F224E4F2D00C60682 /* twowayTableViewCell.swift */; };
 		8F1BB08B224DE16B00032798 /* FlightResultVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */; };
 		8F1BB0A0224DE72E00032798 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08E224DE72E00032798 /* AFHTTPRequestOperation.m */; };
 		8F1BB0A1224DE72E00032798 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB090224DE72E00032798 /* AFHTTPRequestOperationManager.m */; };
@@ -104,9 +106,6 @@
 		8F1BB0E0224DE76E00032798 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F1BB0D0224DE76E00032798 /* Info.plist */; };
 		8F1BB0E2224DE8CD00032798 /* FlightReviewVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0E1224DE8CC00032798 /* FlightReviewVCGoomo.swift */; };
 		8F1BB0E4224DE90A00032798 /* FlightFilterVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0E3224DE90A00032798 /* FlightFilterVCGoomo.swift */; };
-		8F1BB0E9224DE95500032798 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0E6224DE95500032798 /* ArrayExtension.swift */; };
-		8F1BB0EA224DE95500032798 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0E7224DE95500032798 /* StringExtension.swift */; };
-		8F1BB0EB224DE95500032798 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0E8224DE95500032798 /* UIViewExtension.swift */; };
 		8F1BB0ED224DE97000032798 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0EC224DE97000032798 /* Reachability.swift */; };
 		8F1BB0EF224DE99500032798 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0EE224DE99500032798 /* General.swift */; };
 		8F1BB0F1224DEA5F00032798 /* TravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */; };
@@ -121,7 +120,6 @@
 		2E27D3C6224C8B42009A0E1F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2E27D3D7224C8D66009A0E1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E27D3D8224C8D66009A0E1F /* ColorsConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsConfig.swift; sourceTree = "<group>"; };
-		2E27D3D9224C8D66009A0E1F /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		2E27D3DA224C8D66009A0E1F /* CustomCalenderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCalenderViewController.swift; sourceTree = "<group>"; };
 		2E27D3DC224C8D66009A0E1F /* CVAuxiliaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAuxiliaryView.swift; sourceTree = "<group>"; };
 		2E27D3DD224C8D66009A0E1F /* CVCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVCalendar.h; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 		2E27D3FC224C8D66009A0E1F /* file1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = file1.json; sourceTree = "<group>"; };
 		2E27D3FD224C8D66009A0E1F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E27D3FE224C8D66009A0E1F /* JSON Convertion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "JSON Convertion.swift"; sourceTree = "<group>"; };
-		2E27D3FF224C8D66009A0E1F /* JSONDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDownloader.swift; sourceTree = "<group>"; };
 		2E27D402224C8D66009A0E1F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E27D403224C8D66009A0E1F /* SwiftGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftGif.h; sourceTree = "<group>"; };
 		2E27D404224C8D66009A0E1F /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
@@ -167,7 +164,6 @@
 		2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightSearchViewController.swift; sourceTree = "<group>"; };
 		2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onewayTableViewCell.swift; sourceTree = "<group>"; };
 		2E27D40B224C8D67009A0E1F /* SearchCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
-		2E27D40C224C8D67009A0E1F /* twowayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twowayTableViewCell.swift; sourceTree = "<group>"; };
 		2E27D43D224C8E06009A0E1F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E27D440224C8EB8009A0E1F /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
 		2E27D441224C8EB8009A0E1F /* 2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpeg; sourceTree = "<group>"; };
@@ -186,6 +182,11 @@
 		2E27D45C224C8F26009A0E1F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E27D45E224C9CAA009A0E1F /* NewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NewAssets.xcassets; sourceTree = "<group>"; };
 		2E27D460224CA0CE009A0E1F /* UniOrient-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UniOrient-Bridging-Header.h"; sourceTree = "<group>"; };
+		2E5F5262224E1991006ACE1E /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		2E5F5263224E1991006ACE1E /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		2E5F5264224E1991006ACE1E /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		2E746CCF22521AEB001192F4 /* loadingHotelGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingHotelGif.gif; sourceTree = "<group>"; };
+		2EFCB55F224E4F2D00C60682 /* twowayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = twowayTableViewCell.swift; path = "../../../../../../Documents/IOS-Rekha/TakeMyTravel/TakeMyTravel/Flight/twowayTableViewCell.swift"; sourceTree = "<group>"; };
 		8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.release.xcconfig"; sourceTree = "<group>"; };
 		8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightResultVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB08D224DE72E00032798 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -244,9 +245,6 @@
 		8F1BB0D0224DE76E00032798 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F1BB0E1224DE8CC00032798 /* FlightReviewVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightReviewVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB0E3224DE90A00032798 /* FlightFilterVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightFilterVCGoomo.swift; sourceTree = "<group>"; };
-		8F1BB0E6224DE95500032798 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
-		8F1BB0E7224DE95500032798 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		8F1BB0E8224DE95500032798 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		8F1BB0EC224DE97000032798 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		8F1BB0EE224DE99500032798 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
@@ -301,8 +299,8 @@
 		2E27D3D6224C8D66009A0E1F /* Common Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F1BB0E5224DE95400032798 /* Extensions */,
 				8F1BB0B0224DE76E00032798 /* FSCalendar */,
+				2E5F5261224E1991006ACE1E /* Extensions */,
 				8F1BB0A9224DE74B00032798 /* Service */,
 				8F1BB08C224DE72E00032798 /* AFNetworking */,
 				2E27D460224CA0CE009A0E1F /* UniOrient-Bridging-Header.h */,
@@ -311,13 +309,11 @@
 				2E27D3D7224C8D66009A0E1F /* Assets.xcassets */,
 				2E27D45E224C9CAA009A0E1F /* NewAssets.xcassets */,
 				2E27D3D8224C8D66009A0E1F /* ColorsConfig.swift */,
-				2E27D3D9224C8D66009A0E1F /* Constant.swift */,
 				2E27D3DA224C8D66009A0E1F /* CustomCalenderViewController.swift */,
 				2E27D3DB224C8D66009A0E1F /* CVCalendar */,
 				2E27D3FC224C8D66009A0E1F /* file1.json */,
 				2E27D3FD224C8D66009A0E1F /* Info.plist */,
 				2E27D3FE224C8D66009A0E1F /* JSON Convertion.swift */,
-				2E27D3FF224C8D66009A0E1F /* JSONDownloader.swift */,
 				2E27D45C224C8F26009A0E1F /* LaunchScreen.storyboard */,
 				2E27D401224C8D66009A0E1F /* SwiftGif */,
 				2E27D405224C8D66009A0E1F /* TakeMyTravel.xcdatamodeld */,
@@ -381,8 +377,8 @@
 				2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */,
 				2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */,
 				2E27D40B224C8D67009A0E1F /* SearchCityViewController.swift */,
-				2E27D40C224C8D67009A0E1F /* twowayTableViewCell.swift */,
 				8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */,
+				2EFCB55F224E4F2D00C60682 /* twowayTableViewCell.swift */,
 				8F1BB0E1224DE8CC00032798 /* FlightReviewVCGoomo.swift */,
 				8F1BB0E3224DE90A00032798 /* FlightFilterVCGoomo.swift */,
 				8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */,
@@ -393,6 +389,7 @@
 		2E27D43F224C8EB8009A0E1F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2E746CCF22521AEB001192F4 /* loadingHotelGif.gif */,
 				2E27D440224C8EB8009A0E1F /* 1.jpeg */,
 				2E27D441224C8EB8009A0E1F /* 2.jpeg */,
 				2E27D442224C8EB8009A0E1F /* 3.jpeg */,
@@ -409,6 +406,16 @@
 				2E27D44D224C8EB8009A0E1F /* square.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		2E5F5261224E1991006ACE1E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2E5F5262224E1991006ACE1E /* ArrayExtension.swift */,
+				2E5F5263224E1991006ACE1E /* StringExtension.swift */,
+				2E5F5264224E1991006ACE1E /* UIViewExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		441C0E1A3E6CC5FDAF45FF78 /* Pods */ = {
@@ -495,17 +502,6 @@
 			path = FSCalendar;
 			sourceTree = "<group>";
 		};
-		8F1BB0E5224DE95400032798 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8F1BB0E6224DE95500032798 /* ArrayExtension.swift */,
-				8F1BB0E7224DE95500032798 /* StringExtension.swift */,
-				8F1BB0E8224DE95500032798 /* UIViewExtension.swift */,
-			);
-			name = Extensions;
-			path = ../../../../TripArcher/TripArcher/Extensions;
-			sourceTree = "<group>";
-		};
 		8F1BB0F2224DEA7E00032798 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -590,6 +586,7 @@
 				2E27D459224C8EB8009A0E1F /* reverse (3).png in Resources */,
 				2E27D40D224C8D67009A0E1F /* Assets.xcassets in Resources */,
 				2E27D457224C8EB8009A0E1F /* left-arrow.png in Resources */,
+				2E746CD022521AEE001192F4 /* loadingHotelGif.gif in Resources */,
 				2E27D435224C8D67009A0E1F /* Info.plist in Resources */,
 				2E27D42F224C8D67009A0E1F /* Info.plist in Resources */,
 				2E27D453224C8EB8009A0E1F /* backgd1.jpeg in Resources */,
@@ -617,15 +614,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-UniOrient-checkManifestLockResult.txt",
 			);
@@ -639,31 +632,23 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AACarousel/AACarousel.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/EDStarRating/EDStarRating.framework",
-				"${BUILT_PRODUCTS_DIR}/LGSideMenuController/LGSideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeableTabBarController/SwipeableTabBarController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AACarousel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EDStarRating.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LGSideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeableTabBarController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -673,7 +658,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F1BB0E9224DE95500032798 /* ArrayExtension.swift in Sources */,
 				2E27D436224C8D67009A0E1F /* UIImage+Gif.swift in Sources */,
 				2E27D412224C8D67009A0E1F /* CVCalendarContentPresentationCoordinator.swift in Sources */,
 				8F1BB0AE224DE74B00032798 /* StructuresAndEnums.swift in Sources */,
@@ -690,7 +674,6 @@
 				8F1BB0D5224DE76E00032798 /* FSCalendarCollectionView.m in Sources */,
 				2E27D41C224C8D67009A0E1F /* CVCalendarView.swift in Sources */,
 				2E27D41E224C8D67009A0E1F /* CVCalendarViewAnimatorDelegate.swift in Sources */,
-				8F1BB0EA224DE95500032798 /* StringExtension.swift in Sources */,
 				2E27D438224C8D67009A0E1F /* FlightResultViewController.swift in Sources */,
 				2E27D418224C8D67009A0E1F /* CVCalendarMenuViewDelegate.swift in Sources */,
 				2E27D42E224C8D67009A0E1F /* CVWeekdaySymbolType.swift in Sources */,
@@ -701,8 +684,6 @@
 				8F1BB0EF224DE99500032798 /* General.swift in Sources */,
 				8F1BB0F4224DEA8E00032798 /* LoginPageVCGoomo.swift in Sources */,
 				8F1BB0D4224DE76E00032798 /* FSCalendarCell.m in Sources */,
-				2E27D43C224C8D67009A0E1F /* twowayTableViewCell.swift in Sources */,
-				2E27D433224C8D67009A0E1F /* JSONDownloader.swift in Sources */,
 				2E27D426224C8D67009A0E1F /* CVDate.swift in Sources */,
 				8F1BB0A6224DE72E00032798 /* AFURLRequestSerialization.m in Sources */,
 				8F1BB0D2224DE76E00032798 /* FSCalendarAppearance.m in Sources */,
@@ -719,14 +700,16 @@
 				2E27D41B224C8D67009A0E1F /* CVCalendarTouchController.swift in Sources */,
 				2E27D43B224C8D67009A0E1F /* SearchCityViewController.swift in Sources */,
 				2E27D419224C8D67009A0E1F /* CVCalendarMonthContentViewController.swift in Sources */,
+				2E5F5265224E1991006ACE1E /* ArrayExtension.swift in Sources */,
 				2E27D40E224C8D67009A0E1F /* ColorsConfig.swift in Sources */,
 				8F1BB0AF224DE74B00032798 /* WebService.swift in Sources */,
 				2E27D427224C8D67009A0E1F /* CVPresent.swift in Sources */,
+				2EFCB561224E4F3100C60682 /* twowayTableViewCell.swift in Sources */,
 				2E27D424224C8D67009A0E1F /* CVCalendarWeekday.swift in Sources */,
-				8F1BB0EB224DE95500032798 /* UIViewExtension.swift in Sources */,
 				2E27D410224C8D67009A0E1F /* CustomCalenderViewController.swift in Sources */,
 				2E27D3C7224C8B42009A0E1F /* AppDelegate.swift in Sources */,
 				2E27D428224C8D67009A0E1F /* CVRange.swift in Sources */,
+				2E5F5266224E1992006ACE1E /* StringExtension.swift in Sources */,
 				8F1BB0A3224DE72E00032798 /* AFNetworkReachabilityManager.m in Sources */,
 				8F1BB0D9224DE76E00032798 /* FSCalendarDelegationProxy.m in Sources */,
 				2E27D416224C8D67009A0E1F /* CVCalendarManager.swift in Sources */,
@@ -743,10 +726,10 @@
 				8F1BB0DA224DE76E00032798 /* FSCalendarExtensions.m in Sources */,
 				2E27D422224C8D67009A0E1F /* CVCalendarViewPresentationMode.swift in Sources */,
 				8F1BB0DE224DE76E00032798 /* FSCalendarTransitionCoordinator.m in Sources */,
+				2E5F5267224E1992006ACE1E /* UIViewExtension.swift in Sources */,
 				8F1BB0AD224DE74B00032798 /* Constants.swift in Sources */,
 				8F1BB0A8224DE72E00032798 /* AFURLSessionManager.m in Sources */,
 				8F1BB0A5224DE72E00032798 /* AFURLConnectionOperation.m in Sources */,
-				2E27D40F224C8D67009A0E1F /* Constant.swift in Sources */,
 				8F1BB0A1224DE72E00032798 /* AFHTTPRequestOperationManager.m in Sources */,
 				8F1BB0DC224DE76E00032798 /* FSCalendarSeparatorDecorationView.m in Sources */,
 				2E27D417224C8D67009A0E1F /* CVCalendarMenuView.swift in Sources */,
@@ -892,7 +875,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pt.UniOrient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/pranas/Desktop/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple1/Desktop/UniOrient/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -915,7 +898,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pt.UniOrient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/pranas/Desktop/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple1/Desktop/UniOrient/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
