@@ -10,7 +10,9 @@ import UIKit
 
 
 struct WebServicesUrl{
-    
+ //Colour Code
+  static  let appColor1 = UIColor(red: 22/255.0, green: 19/255.0, blue: 124/255.0, alpha: 1.0)
+  static let appColor2 = UIColor(red: 237/255.0, green: 36/255.0, blue: 36/255.0, alpha: 1.0)
     
     //Test URL
     //Flight
@@ -34,3 +36,4 @@ struct WebServicesUrl{
     static let MyBookingURL = "http://192.168.1.3:2217/myaccountlistservice.asmx"
     static let MyTrips = "GetBookingList"
 }
+//ed2324 - Red 16137c - violet

@@ -18,7 +18,7 @@ class onewayTableViewCell: UITableViewCell {
     @IBOutlet weak var departTime: UILabel!
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var stop: UILabel!
-   
+   @IBOutlet weak var mainView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
            }

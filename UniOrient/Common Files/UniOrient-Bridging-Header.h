@@ -7,6 +7,8 @@
 
 #import "AFNetworking.h"
 #import "FSCalendar.h"
+#import "AnimatedGIFImageSerialization.h"
+
 //#import "EDStarRating.h"
 
 

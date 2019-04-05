@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E1950B9225337C500C14A5F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 2E1950B8225337B800C14A5F /* placeholder.png */; };
+		2E1950BB22533E9100C14A5F /* twowayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1950BA22533E8E00C14A5F /* twowayTableViewCell.swift */; };
 		2E27D3C7224C8B42009A0E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3C5224C8B42009A0E1F /* AppDelegate.swift */; };
 		2E27D3C8224C8B42009A0E1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D3C6224C8B42009A0E1F /* ViewController.swift */; };
 		2E27D40D224C8D67009A0E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D3D7224C8D66009A0E1F /* Assets.xcassets */; };
@@ -49,7 +51,6 @@
 		2E27D435224C8D67009A0E1F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E27D402224C8D66009A0E1F /* Info.plist */; };
 		2E27D436224C8D67009A0E1F /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D404224C8D66009A0E1F /* UIImage+Gif.swift */; };
 		2E27D437224C8D67009A0E1F /* TakeMyTravel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D405224C8D66009A0E1F /* TakeMyTravel.xcdatamodeld */; };
-		2E27D438224C8D67009A0E1F /* FlightResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D408224C8D67009A0E1F /* FlightResultViewController.swift */; };
 		2E27D439224C8D67009A0E1F /* FlightSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */; };
 		2E27D43A224C8D67009A0E1F /* onewayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */; };
 		2E27D43B224C8D67009A0E1F /* SearchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E27D40B224C8D67009A0E1F /* SearchCityViewController.swift */; };
@@ -73,8 +74,8 @@
 		2E5F5265224E1991006ACE1E /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5262224E1991006ACE1E /* ArrayExtension.swift */; };
 		2E5F5266224E1992006ACE1E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5263224E1991006ACE1E /* StringExtension.swift */; };
 		2E5F5267224E1992006ACE1E /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5264224E1991006ACE1E /* UIViewExtension.swift */; };
-		2E746CD022521AEE001192F4 /* loadingHotelGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2E746CCF22521AEB001192F4 /* loadingHotelGif.gif */; };
-		2EFCB561224E4F3100C60682 /* twowayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFCB55F224E4F2D00C60682 /* twowayTableViewCell.swift */; };
+		2E8A3E522255CB92000D983D /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A3E512255CB8A000D983D /* AnimatedGIFImageSerialization.m */; };
+		2E8A3E542255D015000D983D /* loadingGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A3E532255CFFA000D983D /* loadingGif.gif */; };
 		8F1BB08B224DE16B00032798 /* FlightResultVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */; };
 		8F1BB0A0224DE72E00032798 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08E224DE72E00032798 /* AFHTTPRequestOperation.m */; };
 		8F1BB0A1224DE72E00032798 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB090224DE72E00032798 /* AFHTTPRequestOperationManager.m */; };
@@ -110,12 +111,15 @@
 		8F1BB0EF224DE99500032798 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0EE224DE99500032798 /* General.swift */; };
 		8F1BB0F1224DEA5F00032798 /* TravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */; };
 		8F1BB0F4224DEA8E00032798 /* LoginPageVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */; };
+		8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD04BA22573EFB00CCD296 /* ShadowView.swift */; };
 		F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1809454A224BAABB00D98F0A /* UniOrient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniOrient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniOrient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E1950B8225337B800C14A5F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		2E1950BA22533E8E00C14A5F /* twowayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = twowayTableViewCell.swift; sourceTree = "<group>"; };
 		2E27D3C5224C8B42009A0E1F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E27D3C6224C8B42009A0E1F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2E27D3D7224C8D66009A0E1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,7 +164,6 @@
 		2E27D403224C8D66009A0E1F /* SwiftGif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftGif.h; sourceTree = "<group>"; };
 		2E27D404224C8D66009A0E1F /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		2E27D406224C8D66009A0E1F /* TakeMyTravel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TakeMyTravel.xcdatamodel; sourceTree = "<group>"; };
-		2E27D408224C8D67009A0E1F /* FlightResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightResultViewController.swift; sourceTree = "<group>"; };
 		2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightSearchViewController.swift; sourceTree = "<group>"; };
 		2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onewayTableViewCell.swift; sourceTree = "<group>"; };
 		2E27D40B224C8D67009A0E1F /* SearchCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCityViewController.swift; sourceTree = "<group>"; };
@@ -185,8 +188,9 @@
 		2E5F5262224E1991006ACE1E /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		2E5F5263224E1991006ACE1E /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		2E5F5264224E1991006ACE1E /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		2E746CCF22521AEB001192F4 /* loadingHotelGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingHotelGif.gif; sourceTree = "<group>"; };
-		2EFCB55F224E4F2D00C60682 /* twowayTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = twowayTableViewCell.swift; path = "../../../../../../Documents/IOS-Rekha/TakeMyTravel/TakeMyTravel/Flight/twowayTableViewCell.swift"; sourceTree = "<group>"; };
+		2E8A3E502255CB8A000D983D /* AnimatedGIFImageSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedGIFImageSerialization.h; sourceTree = "<group>"; };
+		2E8A3E512255CB8A000D983D /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
+		2E8A3E532255CFFA000D983D /* loadingGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingGif.gif; sourceTree = SOURCE_ROOT; };
 		8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.release.xcconfig"; sourceTree = "<group>"; };
 		8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightResultVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB08D224DE72E00032798 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 		8F1BB0EE224DE99500032798 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageVCGoomo.swift; sourceTree = "<group>"; };
+		8FDD04BA22573EFB00CCD296 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -299,6 +304,7 @@
 		2E27D3D6224C8D66009A0E1F /* Common Files */ = {
 			isa = PBXGroup;
 			children = (
+				2E8A3E4F2255CB8A000D983D /* AnimatedGIFImageSerialization */,
 				8F1BB0B0224DE76E00032798 /* FSCalendar */,
 				2E5F5261224E1991006ACE1E /* Extensions */,
 				8F1BB0A9224DE74B00032798 /* Service */,
@@ -309,7 +315,6 @@
 				2E27D3D7224C8D66009A0E1F /* Assets.xcassets */,
 				2E27D45E224C9CAA009A0E1F /* NewAssets.xcassets */,
 				2E27D3D8224C8D66009A0E1F /* ColorsConfig.swift */,
-				2E27D3DA224C8D66009A0E1F /* CustomCalenderViewController.swift */,
 				2E27D3DB224C8D66009A0E1F /* CVCalendar */,
 				2E27D3FC224C8D66009A0E1F /* file1.json */,
 				2E27D3FD224C8D66009A0E1F /* Info.plist */,
@@ -317,6 +322,7 @@
 				2E27D45C224C8F26009A0E1F /* LaunchScreen.storyboard */,
 				2E27D401224C8D66009A0E1F /* SwiftGif */,
 				2E27D405224C8D66009A0E1F /* TakeMyTravel.xcdatamodeld */,
+				8FDD04BA22573EFB00CCD296 /* ShadowView.swift */,
 			);
 			path = "Common Files";
 			sourceTree = "<group>";
@@ -373,12 +379,12 @@
 		2E27D407224C8D67009A0E1F /* Flight */ = {
 			isa = PBXGroup;
 			children = (
-				2E27D408224C8D67009A0E1F /* FlightResultViewController.swift */,
 				2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */,
 				2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */,
+				2E1950BA22533E8E00C14A5F /* twowayTableViewCell.swift */,
 				2E27D40B224C8D67009A0E1F /* SearchCityViewController.swift */,
+				2E27D3DA224C8D66009A0E1F /* CustomCalenderViewController.swift */,
 				8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */,
-				2EFCB55F224E4F2D00C60682 /* twowayTableViewCell.swift */,
 				8F1BB0E1224DE8CC00032798 /* FlightReviewVCGoomo.swift */,
 				8F1BB0E3224DE90A00032798 /* FlightFilterVCGoomo.swift */,
 				8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */,
@@ -389,7 +395,8 @@
 		2E27D43F224C8EB8009A0E1F /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				2E746CCF22521AEB001192F4 /* loadingHotelGif.gif */,
+				2E8A3E532255CFFA000D983D /* loadingGif.gif */,
+				2E1950B8225337B800C14A5F /* placeholder.png */,
 				2E27D440224C8EB8009A0E1F /* 1.jpeg */,
 				2E27D441224C8EB8009A0E1F /* 2.jpeg */,
 				2E27D442224C8EB8009A0E1F /* 3.jpeg */,
@@ -416,6 +423,15 @@
 				2E5F5264224E1991006ACE1E /* UIViewExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2E8A3E4F2255CB8A000D983D /* AnimatedGIFImageSerialization */ = {
+			isa = PBXGroup;
+			children = (
+				2E8A3E502255CB8A000D983D /* AnimatedGIFImageSerialization.h */,
+				2E8A3E512255CB8A000D983D /* AnimatedGIFImageSerialization.m */,
+			);
+			path = AnimatedGIFImageSerialization;
 			sourceTree = "<group>";
 		};
 		441C0E1A3E6CC5FDAF45FF78 /* Pods */ = {
@@ -582,11 +598,12 @@
 				2E27D458224C8EB8009A0E1F /* Logo.png in Resources */,
 				2E27D456224C8EB8009A0E1F /* business_logo.png in Resources */,
 				2E27D451224C8EB8009A0E1F /* aeroplane.png in Resources */,
+				2E1950B9225337C500C14A5F /* placeholder.png in Resources */,
+				2E8A3E542255D015000D983D /* loadingGif.gif in Resources */,
 				2E27D45A224C8EB8009A0E1F /* reverse (4).png in Resources */,
 				2E27D459224C8EB8009A0E1F /* reverse (3).png in Resources */,
 				2E27D40D224C8D67009A0E1F /* Assets.xcassets in Resources */,
 				2E27D457224C8EB8009A0E1F /* left-arrow.png in Resources */,
-				2E746CD022521AEE001192F4 /* loadingHotelGif.gif in Resources */,
 				2E27D435224C8D67009A0E1F /* Info.plist in Resources */,
 				2E27D42F224C8D67009A0E1F /* Info.plist in Resources */,
 				2E27D453224C8EB8009A0E1F /* backgd1.jpeg in Resources */,
@@ -672,9 +689,9 @@
 				8F1BB0D1224DE76E00032798 /* FSCalendar.m in Sources */,
 				8F1BB0DF224DE76E00032798 /* FSCalendarWeekdayView.m in Sources */,
 				8F1BB0D5224DE76E00032798 /* FSCalendarCollectionView.m in Sources */,
+				2E1950BB22533E9100C14A5F /* twowayTableViewCell.swift in Sources */,
 				2E27D41C224C8D67009A0E1F /* CVCalendarView.swift in Sources */,
 				2E27D41E224C8D67009A0E1F /* CVCalendarViewAnimatorDelegate.swift in Sources */,
-				2E27D438224C8D67009A0E1F /* FlightResultViewController.swift in Sources */,
 				2E27D418224C8D67009A0E1F /* CVCalendarMenuViewDelegate.swift in Sources */,
 				2E27D42E224C8D67009A0E1F /* CVWeekdaySymbolType.swift in Sources */,
 				2E27D42C224C8D67009A0E1F /* CVShape.swift in Sources */,
@@ -702,14 +719,15 @@
 				2E27D419224C8D67009A0E1F /* CVCalendarMonthContentViewController.swift in Sources */,
 				2E5F5265224E1991006ACE1E /* ArrayExtension.swift in Sources */,
 				2E27D40E224C8D67009A0E1F /* ColorsConfig.swift in Sources */,
+				8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */,
 				8F1BB0AF224DE74B00032798 /* WebService.swift in Sources */,
 				2E27D427224C8D67009A0E1F /* CVPresent.swift in Sources */,
-				2EFCB561224E4F3100C60682 /* twowayTableViewCell.swift in Sources */,
 				2E27D424224C8D67009A0E1F /* CVCalendarWeekday.swift in Sources */,
 				2E27D410224C8D67009A0E1F /* CustomCalenderViewController.swift in Sources */,
 				2E27D3C7224C8B42009A0E1F /* AppDelegate.swift in Sources */,
 				2E27D428224C8D67009A0E1F /* CVRange.swift in Sources */,
 				2E5F5266224E1992006ACE1E /* StringExtension.swift in Sources */,
+				2E8A3E522255CB92000D983D /* AnimatedGIFImageSerialization.m in Sources */,
 				8F1BB0A3224DE72E00032798 /* AFNetworkReachabilityManager.m in Sources */,
 				8F1BB0D9224DE76E00032798 /* FSCalendarDelegationProxy.m in Sources */,
 				2E27D416224C8D67009A0E1F /* CVCalendarManager.swift in Sources */,
@@ -875,7 +893,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pt.UniOrient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple1/Desktop/UniOrient/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/pranas/Desktop/untitled folder/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -898,7 +916,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.pt.UniOrient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/apple1/Desktop/UniOrient/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/pranas/Desktop/untitled folder/UniOrient/UniOrientRepository/UniOrient/Common Files/UniOrient-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

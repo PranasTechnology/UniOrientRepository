@@ -15,8 +15,6 @@ class FlightReviewVCGoomo: UIViewController {
     
     var selectedStruct : FlightResultAndDetailStruct!
     var providedInputDict = [String:String]()
-    
-    
     @IBOutlet weak var tvContainerView: UIView!
     @IBOutlet weak var myTV: UITableView!
     @IBOutlet weak var detailView: UIView!
@@ -34,8 +32,7 @@ class FlightReviewVCGoomo: UIViewController {
         }else{
             self.continueBtn.isHidden = true
         }
-        
-        
+       
         print("selected Struct = ",self.selectedStruct)
         //        self.amountLbl.text = "MYR " + self.selectedStruct.amount
         
@@ -76,12 +73,17 @@ class FlightReviewVCGoomo: UIViewController {
             
         }
         
+      
         self.myTV.delegate = self
         self.myTV.dataSource = self
         
         
     }
     
+    @IBAction func backBtn(_ sender: Any)
+    {
+       self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -167,8 +169,7 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
             }else{
                 mainCell.detailLbl.text = "No Baggage From Backend"
             }
-            
-            
+         
             return mainCell
         }
             // Row is ExpansionCell
@@ -208,7 +209,6 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
                     }
                     
                 })
-                
                 
                 expansionCell.depTimeLbl.text = rowData.TripDetailsArr[flightIndex].departureTime
                 
@@ -306,10 +306,6 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
                 myArray?.insert(nil, at: index + i)
                 tableView.insertRows(at: [NSIndexPath(row: index + i, section: 0) as IndexPath] , with: .top)
             }
-            
-            
-            
-            
         }
     }
     /*  Contract cell at given index    */

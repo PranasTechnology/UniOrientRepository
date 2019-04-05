@@ -20,7 +20,9 @@ class SearchCityViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-         txtSearchBar.addTarget(self, action: #selector(searchRecordsAsPerText(_ :)), for: .editingChanged)
+        
+        txtSearchBar .becomeFirstResponder()
+        txtSearchBar.addTarget(self, action: #selector(searchRecordsAsPerText(_ :)), for: .editingChanged)
         self.getJSON ()
         //DselectedCityName DselectedCityCode
     }
@@ -61,9 +63,10 @@ class SearchCityViewController: UIViewController, UITableViewDelegate, UITableVi
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
+        let img1 = cell.viewWithTag(1) as! UIImageView
         let label1 = cell.viewWithTag(2) as! UILabel // 1 is tag of first label;
         label1.text = searchedArray1[indexPath.row]
-      //  cell.textLabel?.text = cityName[indexPath.row]
+        img1.image = UIImage (named: "airplane")
         
         return cell
     }

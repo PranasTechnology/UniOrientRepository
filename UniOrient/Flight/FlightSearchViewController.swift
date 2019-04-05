@@ -10,6 +10,7 @@ import UIKit
 
 class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIPickerViewDataSource,UIPickerViewDelegate{
 
+    @IBOutlet weak var nonstopImg: UIImageView!
     var className : [String] = [String]()
     var arrAdult : [String] = [String]()
     var arrChild : [String] = [String]()
@@ -18,8 +19,8 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     var temp1 : String = String()
     var tempPos1 : CGRect = CGRect()
     var tempPos2 : CGRect = CGRect()
-    var isFlipped = false
     var strAdult = "", strChild = "", strInfant : String = ""
+    var isFlipped: Bool = false
     
     @IBOutlet weak var txtDeparture: UITextField!
     @IBOutlet weak var txtArrival: UITextField!
@@ -42,7 +43,13 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var flightView: UIView!
     @IBOutlet weak var hotelView: UIView!
     
-
+    @IBOutlet weak var homeImg: UIImageView!
+    @IBOutlet weak var homeLbl: UILabel!
+    @IBOutlet weak var accountImg: UIImageView!
+    @IBOutlet weak var accountLbl: UILabel!
+    @IBOutlet weak var bookingImg: UIImageView!
+    @IBOutlet weak var bookingLbl: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         classChooseView .isHidden = true
@@ -56,7 +63,8 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         UserDefaults.standard.set("", forKey: "selectedArrDate")
         UserDefaults.standard.set("", forKey: "selectedDeptDay")
         UserDefaults.standard.set("", forKey: "selectedArrDay")
-        UserDefaults.standard.set("twoway", forKey: "wayType")
+       // UserDefaults.standard.set("twoway", forKey: "wayType")
+         UserDefaults.standard.set("oneway", forKey: "wayType")
         classTableView.layer.cornerRadius = 5.0
          travelView.layer.cornerRadius = 5.0
         className = ["Economy Class","Premium Economy Class","Business Class","First Class"]
@@ -66,29 +74,33 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         
         tempPos1 = txtDeparture.frame
         tempPos2 = lblDepartureCity.frame
-   
-        let swipeRight = UISwipeGestureRecognizer(target: self, action:  #selector(swiped))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        self.hotelView.addGestureRecognizer(swipeRight)
+ 
+        ////// Botton Border
+    
+        hotelBtn.layer.borderWidth = 1
+        hotelBtn.layer.borderColor = UIColor.gray.cgColor
+        flightBtn.layer.borderWidth = 1
+        flightBtn.layer.borderColor = UIColor.gray.cgColor
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swiped))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-        self.flightView.addGestureRecognizer(swipeLeft)
+        ///SwipeGesture
+//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+//        swipeLeft.direction = .left
+//        self.hotelView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+        swipeRight.direction = .right
+        self.flightView.addGestureRecognizer(swipeRight)
     }
+//MARK - SWipe Gesture
     
-    @objc  func swiped(_ gesture: UISwipeGestureRecognizer) {
-            if gesture.direction == .left {
-                if (self.tabBarController?.selectedIndex)! < 2
-                { // set here  your total tabs
-                    self.tabBarController?.selectedIndex += 1
-                }
-            } else if gesture.direction == .right {
-                if (self.tabBarController?.selectedIndex)! > 0 {
-                    self.tabBarController?.selectedIndex -= 1
-                }
-            }
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            print("Swipe Right")
         }
-    
+        else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+            print("Swipe Left")
+        }
+}
     override func viewWillAppear(_ animated: Bool)
     {
         let departureCity = (UserDefaults.standard.value(forKey: "DselectedCityName") as! String)
@@ -176,7 +188,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             //headerView.contentView.backgroundColor = .white
-            headerView.textLabel?.textColor = .blue
+            headerView.textLabel?.textColor = WebServicesUrl.appColor1
             
         }
     }
@@ -287,10 +299,11 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     {
         if stopBtn.isSelected == true {
             stopBtn.isSelected = false
-             stopBtn.setImage(UIImage(named: "square.png"), for: .normal)
+            nonstopImg.image = UIImage (named: "square.png")
+         
         }else {
             stopBtn.isSelected = true
-            stopBtn.setImage(UIImage(named: "check-box-with-check-sign (1).png"), for: .selected)
+            nonstopImg.image = UIImage (named: "black-check-box-with-white-check.png")
         }
       
     }
@@ -300,7 +313,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     {
 //          let DictInput = ["Origin":self.originToPass!,"Destination":self.destinationToPass!,"DepartureDate":selectedDepartOnStrToPass!,"Returndate":selectedReturnOnStrToPass!,"WayType":self.onewayBtn.isSelected ? "one":"two","CabinClass":self.classSelectedItem,"AdultCount":self.adultSelectedItem,"ChildCount":self.childrenSelectedItem,"InfantCount":self.infantSelectedItem,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
       
-          let DictInput = ["Origin":"SIN","Destination":"KUL","DepartureDate":"2019-04-15","Returndate":"2019-04-20","WayType":"two","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+        let DictInput = ["Origin":"SIN","Destination":"KUL","DepartureDate":"2019-04-25","Returndate":"2019-04-30","WayType":"one","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
         
         let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "FlightResultVC") as! FlightResultVCGoomo
         ctrl.inputDict = DictInput
@@ -371,33 +384,50 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             lblArrivalCity.textAlignment  = .right
             txtDeparture.placeholder = "Source"
             txtArrival . placeholder = "Destination"
-           
         }
         UIView.commitAnimations()
- 
     }
     
     @IBAction func hotleBtn(_ sender: Any)
     {
-        UIView.transition(with: hotelView,
-                          duration: 0.5,
-                          options: [.transitionFlipFromLeft],
-                          animations: {
-                            self.hotelView.isHidden = false
-                            self.flightView.isHidden = true
-        },
-                          completion: nil)
+        hotelBtn.backgroundColor = WebServicesUrl.appColor2
+        flightBtn.backgroundColor = UIColor.white
+        flightBtn.setTitleColor(.darkGray, for: .normal)
+        hotelBtn.setTitleColor(.white, for: .normal)
+        hotelBtn .setImage(UIImage (named: "resort (2)"), for: UIControl.State.normal)
+        flightBtn .setImage(UIImage (named: "plane"), for: UIControl.State.normal)
     }
     @IBAction func flightBtn(_ sender: Any)
     {
-        UIView.transition(with: flightView,
-                          duration: 0.5,
-                          options: [.transitionFlipFromRight],
-                          animations: {
-                            self.flightView.isHidden = false
-                            self.hotelView.isHidden = true
-        },
-                          completion: nil)
+        flightBtn.backgroundColor = WebServicesUrl.appColor2
+        hotelBtn.backgroundColor = UIColor.white
+        flightBtn.setTitleColor(.white, for: .normal)
+        hotelBtn.setTitleColor(.darkGray, for: .normal)
+        hotelBtn .setImage(UIImage (named: "resort-1"), for: UIControl.State.normal)
+        flightBtn .setImage(UIImage (named: "plane (1)"), for: UIControl.State.normal)
+       
+//        isFlipped = !isFlipped
+//        let cardToFlip = isFlipped ? hotelView : flightView
+//        let bottomCard = isFlipped ? flightView : hotelView
+//                UIView.transition(with: cardToFlip!,
+//                                  duration: 0.5,
+//                                  options: [.transitionFlipFromRight],
+//                                  animations:
+//                    {
+//                        cardToFlip?.isHidden =  true
+//                    },
+//                                  completion: { _ in
+//                                    self.hotelView.bringSubviewToFront(bottomCard!)
+//                                    cardToFlip?.isHidden = false
+//                })
+//        UIView.transition(with: flightView,
+//                          duration: 0.5,
+//                          options: [.transitionFlipFromRight],
+//                          animations: {
+//                            self.flightView.isHidden = false
+//                            self.hotelView.isHidden = true
+//        },
+//                          completion: nil)
     }
     /*
     // MARK: - Navigation
@@ -408,5 +438,36 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+// MARK : Bottom View Action
+    
+    @IBAction func myBookingsBtn(_ sender: Any)
+    {
+        homeImg.image = UIImage (named: "homeGray")
+        homeLbl.textColor = UIColor.darkGray
+        accountImg.image = UIImage (named: "userGray")
+        accountLbl.textColor = UIColor.darkGray
+        bookingImg.image = UIImage (named: "briefcaseRed")
+        bookingLbl.textColor = WebServicesUrl.appColor2
+    }
+    
+    @IBAction func myAccountBtn(_ sender: Any)
+    {
+        homeImg.image = UIImage (named: "homeGray")
+        homeLbl.textColor = UIColor.darkGray
+        accountImg.image = UIImage (named: "userRed")
+        accountLbl.textColor = WebServicesUrl.appColor2
+        bookingImg.image = UIImage (named: "briefcaseGray")
+        bookingLbl.textColor = UIColor.darkGray
+    }
+    
+    @IBAction func homeBtn(_ sender: Any)
+    {
+        homeImg.image = UIImage (named: "homeRed")
+        homeLbl.textColor = WebServicesUrl.appColor2
+        accountImg.image = UIImage (named: "userGray")
+        accountLbl.textColor = UIColor.darkGray
+        bookingImg.image = UIImage (named: "briefcaseGray")
+        bookingLbl.textColor = UIColor.darkGray
+    }
 }
