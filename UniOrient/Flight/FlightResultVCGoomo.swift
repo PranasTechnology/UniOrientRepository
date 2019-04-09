@@ -171,8 +171,16 @@ class FlightResultVCGoomo: UIViewController {
                 
               //  hideLoading()
             self.loadingview.isHidden = true
-            self.onewayView.isHidden = false
-            self.twowayView.isHidden=false
+            if self.inputDict["WayType"]! == "two"
+            {
+                self.onewayView .isHidden = true;
+                self.twowayView .isHidden = false;
+            }
+            else
+            {
+                self.onewayView .isHidden = false;
+                self.twowayView .isHidden = true;
+            }
             
             if success {
                     print("Service call success ..........")

@@ -23,6 +23,7 @@ class FlightReviewVCGoomo: UIViewController {
     var returnDetailsArr = [FlightDetailStruct]()
     
     var myArray : [FinalStruct?]?
+    var myArray1 : [FinalStruct?]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,29 +55,19 @@ class FlightReviewVCGoomo: UIViewController {
         self.detailsArr = selectedStruct.detailArrWithFlightDetailStruct
         let detailStructFinal =  FinalStruct.init(CabinBaggage: selectedStruct.CabinBaggage, CheckInBaggage: selectedStruct.CheckInBaggage, departureDate: selectedStruct.departureDate, arrivalDate: selectedStruct.arrivalDate,flightImgName:selectedStruct.flightImgName,flightImgData:selectedStruct.flightImgData, flightName: selectedStruct.flightName, departureTime: selectedStruct.departureTime, departureAirportCode: selectedStruct.departureAirportCode, duration: selectedStruct.duration, stop: selectedStruct.noOfStops, arrivalTime: selectedStruct.arrivalTime, arrivalAirportCode: selectedStruct.arrivalAirportCode,TripDetailsArr: detailsArr)
         
-        
         self.myArray = [detailStructFinal]
-        
         if selectedStruct.wayType == "two" {
-            
-            //            let flightImgURL = WebServicesUrl.FlightImgURL + selectedStruct.returnFlightImgName + ".gif"
-            //            SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: flightImgURL), options: .highPriority, progress: nil, completed: { (downloadedImg, downloadedData, error, isFinished) in
-            //                if downloadedImg != nil{
-            //                    self.selectedStruct.returnFlightImgData = downloadedData
-            //                }
-            //            })
             
             self.returnDetailsArr = selectedStruct.returnDetailArrWithFlightDetailStruct
             let returnDetailStructFinal = FinalStruct.init(CabinBaggage: "Nothing from DB", CheckInBaggage: "Nothing from DB",departureDate:selectedStruct.returnDepartureDate,arrivalDate:selectedStruct.returnArrivalDate,flightImgName:selectedStruct.returnFlightImgName,flightImgData:nil, flightName: selectedStruct.returnFlightName, departureTime: selectedStruct.returnDepartureTime, departureAirportCode: selectedStruct.returnDepartureAirportCode, duration: selectedStruct.returnDuration, stop: selectedStruct.returnNoofStops, arrivalTime: selectedStruct.returnArrivalTime, arrivalAirportCode: selectedStruct.returnArrivalAirportCode,TripDetailsArr: returnDetailsArr)
             
-            self.myArray?.append(returnDetailStructFinal)
-            
+          //  self.myArray?.append(returnDetailStructFinal)
+           self.myArray1 = [returnDetailStructFinal]
         }
-        
-      
         self.myTV.delegate = self
         self.myTV.dataSource = self
-        
+       print("detailC",self.detailsArr)
+        print("ReturndetailC",self.returnDetailsArr)
         
     }
     
@@ -111,136 +102,83 @@ class FlightReviewVCGoomo: UIViewController {
 
 }
 extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if selectedStruct.wayType == "one" {
+            return 1
+        }
+        else
+        {
+            return  2
+        }
+    }
+ 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let result = tableView.dequeueReusableCell(withIdentifier: "MainCellIDGoomo") as! MainCellClassGoomo
+     
+      if(section == 0)
+      {
+        if let rowData = myArray?[0] {
+            result.depAirportCodeLbl.text = rowData.departureAirportCode
+            result.stopDetailsLbl.text = rowData.stop
+            result.arrivalAirportCodeLbl.text = rowData.arrivalAirportCode
+            result.departureDateLbl.text = rowData.departureDate
+            result.arrivalDateLbl.text = rowData.arrivalDate
+            
+            return result
+        }
+    }
+      else if(section == 1){
+        if let rowData = myArray1?[0]
+        {
+            result.depAirportCodeLbl.text = rowData.departureAirportCode
+            result.stopDetailsLbl.text = rowData.stop
+            result.arrivalAirportCodeLbl.text = rowData.arrivalAirportCode
+            result.departureDateLbl.text = rowData.departureDate
+            result.arrivalDateLbl.text = rowData.arrivalDate
+            return result
+        }
+        }
+        return result
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        /*
-         if let data = destinationData {
-         return data.count
-         } else {
-         return 0
-         } */
-        
-        return myArray!.count
-        
+       if(section == 0)
+       {
+        return self.detailsArr.count
+    }
+        else
+       {
+        return self.returnDetailsArr.count
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // Row is DefaultCell
-        if var rowData = myArray?[indexPath.row] {
-            let mainCell = tableView.dequeueReusableCell(withIdentifier: "MainCellIDGoomo", for: indexPath) as! MainCellClassGoomo
-            
-            if rowData.flightImgData != nil{
-                // This if st. works for oneway.As oneways flightImgData will not be nil.It is passed from FlightResultVC
-                mainCell.flightImgView?.image = UIImage(data: rowData.flightImgData!)
-            }else{
-                // This else works for returnflight.return flightImgData will be nil as we set in viewDidLoad.While tableview loads for first time,this else block will handle nil value of return flightImgData
-                
-                if rowData.flightImgName == "multiairline"{
-                    mainCell.flightImgView?.image = UIImage(named: "multiairline")
-                    rowData.flightImgData = UIImage(named: "multiairline")!.pngData()
-                }else{
-                    let flightImgURLStr = WebServicesUrl.FlightImgURL + rowData.flightImgName! + ".gif"
-                    mainCell.flightImgView?.sd_setImage(with: URL(string: flightImgURLStr), placeholderImage: UIImage(named: "flightGreen"), options: SDWebImageOptions(rawValue: 0), completed: { (downloadedImg, error, cacheType, imageURL) in
-                        if error == nil{
-                            rowData.flightImgData = downloadedImg!.pngData()
-                        }else{
-                            print("Error from SBWebImage Block - FlightReviewVC = ",error!)
-                        }
-                    })
-                }
-                
-                
-            }
-            
-            mainCell.flightNameLbl.text = rowData.flightName
-            mainCell.depTimeLbl.text = rowData.departureTime
-            mainCell.depAirportCodeLbl.text = rowData.departureAirportCode
-            mainCell.durationLbl.text = rowData.duration
-            mainCell.stopDetailsLbl.text = rowData.stop
-            mainCell.arrivalTimeLbl.text = rowData.arrivalTime
-            mainCell.arrivalAirportCodeLbl.text = rowData.arrivalAirportCode
-            
-            mainCell.departureDateLbl.text = rowData.departureDate
-            mainCell.arrivalDateLbl.text = rowData.arrivalDate
-            mainCell.classTypeLbl.text = self.providedInputDict["CabinClass"]!
-            
-            if selectedStruct.wayType == "one" {
-                mainCell.detailLbl.text = "Cabin Baggage : "+rowData.CabinBaggage + ",CheckIn Baggage :" + rowData.CheckInBaggage
-            }else{
-                mainCell.detailLbl.text = "No Baggage From Backend"
-            }
-         
-            return mainCell
+        let result = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath) as! SubCellClassGoomo
+        if (indexPath.section == 0)
+        {
+            result.flightNameLbl.text = self.detailsArr [indexPath.row].marketing
+            result.depAirportCodeLbl.text = self.detailsArr [indexPath.row].fromAirportName
+            result.stopDetailsLbl.text = self.detailsArr [indexPath.row].marketing
+            result.arrivalAirportCodeLbl.text = self.detailsArr [indexPath.row].toAirportName
+            result.departureDateLbl.text = self.detailsArr [indexPath.row].departureDate
+            result.arrivalDateLbl.text = self.detailsArr [indexPath.row].arrivalDate
+            return result
         }
-            // Row is ExpansionCell
-        else{
-            if let rowData = myArray?[getParentCellIndex(expansionIndex: indexPath.row)] {
-                //  Create an ExpansionCell
-                let expansionCell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath) as! SubCellClassGoomo
-                
-                //  Get the index of the parent Cell (containing the data)
-                let parentCellIndex = getParentCellIndex(expansionIndex: indexPath.row)
-                
-                //  Get the index of the flight data (e.g. if there are multiple ExpansionCells
-                let flightIndex = indexPath.row - parentCellIndex - 1
-                
-                //  Set the cell's data
-                /*
-                 expansionCell.expCellLabel1.text = rowData.TripDetailsArr[flightIndex].tripName
-                 expansionCell.expCellLabel2.text = rowData.TripDetailsArr[flightIndex].amount
-                 expansionCell.selectionStyle = .none */
-                
-                /*
-                 expansionCell.flightNameLbl.text = rowData.flightName
-                 expansionCell.depTimeLbl.text = rowData.departureTime
-                 expansionCell.depAirportCodeLbl.text = rowData.departureAirportCode
-                 expansionCell.durationLbl.text = rowData.duration
-                 expansionCell.stopDetailsLbl.text = rowData.stop
-                 expansionCell.arrivalTimeLbl.text = rowData.arrivalTime
-                 expansionCell.arrivalAirportCodeLbl.text = rowData.arrivalAirportCode */
-                
-                expansionCell.flightNameLbl.text = rowData.TripDetailsArr[flightIndex].operating
-                let flightImgURL = WebServicesUrl.FlightImgURL + rowData.TripDetailsArr[flightIndex].marketing + ".gif"
-                expansionCell.flightImgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "flightGreen"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
-                    if error == nil{
-                        print("Image downloaded without error......")
-                    }else{
-                        print("Error from SBWebImage Block = ",error!)
-                    }
-                    
-                })
-                
-                expansionCell.depTimeLbl.text = rowData.TripDetailsArr[flightIndex].departureTime
-                
-                let tempfromAirportCodeStr = rowData.TripDetailsArr[flightIndex].fromAirportName
-                let startInd = tempfromAirportCodeStr?.index(after: (tempfromAirportCodeStr?.lastIndex(of: "("))!)
-                let endInd = tempfromAirportCodeStr?.lastIndex(of: ")")
-                let formattedFromStr = tempfromAirportCodeStr![startInd!..<endInd!]
-                //                                print("Result = ",result)
-                expansionCell.depAirportCodeLbl.text = String(formattedFromStr)
-                
-                
-                //                expansionCell.depAirportCodeLbl.text = rowData.TripDetailsArr[flightIndex].fromAirportName
-                expansionCell.durationLbl.text = rowData.TripDetailsArr[flightIndex].duration
-                expansionCell.stopDetailsLbl.text = rowData.TripDetailsArr[flightIndex].stop
-                expansionCell.arrivalTimeLbl.text = rowData.TripDetailsArr[flightIndex].arrivalTime
-                //                expansionCell.arrivalAirportCodeLbl.text = rowData.TripDetailsArr[flightIndex].toAirportName
-                
-                let tempToAirportCodeStr = rowData.TripDetailsArr[flightIndex].toAirportName
-                let startInde = tempToAirportCodeStr?.index(after: (tempToAirportCodeStr?.lastIndex(of: "("))!)
-                let endInde = tempToAirportCodeStr?.lastIndex(of: ")")
-                let formattedToStr = tempToAirportCodeStr![startInde!..<endInde!]
-                //                                print("Result = ",result)
-                expansionCell.arrivalAirportCodeLbl.text = String(formattedToStr)
-                
-                let tempDepDateArr = rowData.TripDetailsArr[flightIndex].departureDate.components(separatedBy: ",")
-                expansionCell.departureDateLbl.text = tempDepDateArr[1]
-                let tempArrivalDateArr = rowData.TripDetailsArr[flightIndex].arrivalDate.components(separatedBy: ",")
-                expansionCell.arrivalDateLbl.text = tempArrivalDateArr[1]
-                
-                return expansionCell
-            }
+        else if (indexPath.section == 1)
+        {
+            result.flightNameLbl.text = self.returnDetailsArr [indexPath.row].marketing
+            result.depAirportCodeLbl.text = self.returnDetailsArr [indexPath.row].fromAirportName
+            result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].marketing
+            result.arrivalAirportCodeLbl.text = self.returnDetailsArr [indexPath.row].toAirportName
+            result.departureDateLbl.text = self.returnDetailsArr [indexPath.row].departureDate
+            result.arrivalDateLbl.text = self.returnDetailsArr [indexPath.row].arrivalDate
+            return result
         }
+        
         return UITableViewCell()
         
     }

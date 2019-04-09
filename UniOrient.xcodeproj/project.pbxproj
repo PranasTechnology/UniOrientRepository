@@ -111,6 +111,7 @@
 		8F1BB0EF224DE99500032798 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0EE224DE99500032798 /* General.swift */; };
 		8F1BB0F1224DEA5F00032798 /* TravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */; };
 		8F1BB0F4224DEA8E00032798 /* LoginPageVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */; };
+		8FC6E589225CA017002C9D60 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6E588225CA017002C9D60 /* SummaryViewController.swift */; };
 		8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD04BA22573EFB00CCD296 /* ShadowView.swift */; };
 		F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */; };
 /* End PBXBuildFile section */
@@ -253,6 +254,7 @@
 		8F1BB0EE224DE99500032798 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageVCGoomo.swift; sourceTree = "<group>"; };
+		8FC6E588225CA017002C9D60 /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		8FDD04BA22573EFB00CCD296 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -388,6 +390,7 @@
 				8F1BB0E1224DE8CC00032798 /* FlightReviewVCGoomo.swift */,
 				8F1BB0E3224DE90A00032798 /* FlightFilterVCGoomo.swift */,
 				8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */,
+				8FC6E588225CA017002C9D60 /* SummaryViewController.swift */,
 			);
 			path = Flight;
 			sourceTree = "<group>";
@@ -755,6 +758,7 @@
 				2E27D425224C8D67009A0E1F /* CVCalendarWeekView.swift in Sources */,
 				2E27D415224C8D67009A0E1F /* CVCalendarDayViewControlCoordinator.swift in Sources */,
 				2E27D41F224C8D67009A0E1F /* CVCalendarViewAppearance.swift in Sources */,
+				8FC6E589225CA017002C9D60 /* SummaryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
