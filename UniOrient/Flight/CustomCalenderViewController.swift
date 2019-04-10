@@ -16,7 +16,7 @@ class CustomCalenderViewController: UIViewController
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var daysOutSwitch: UISwitch!
-   
+    
     
     private var randomNumberOfDotMarkersForDay = [Int]()
     private var shouldShowDaysOut = true
@@ -68,11 +68,11 @@ class CustomCalenderViewController: UIViewController
     }
     @IBAction func loadPrevious(_ sender: Any)
     {
-         calendarView.loadPreviousView()
+        calendarView.loadPreviousView()
     }
     @IBAction func loadNext(_ sender: Any)
     {
-         calendarView.loadNextView()
+        calendarView.loadNextView()
         
     }
     @IBAction func refreshMonth(sender: AnyObject) {
@@ -161,14 +161,14 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
             strDay = "Saturday"
         }
         selectedDay = dayView
-       
-        let wayType = UserDefaults .standard.value(forKey: "wayType")
-        if (wayType as! String == "oneway")
-        {
-            UserDefaults .standard.set(dayView.date.commonDescription, forKey: "selectedDeptDate")
-            UserDefaults .standard.set(strDay, forKey: "selectedDeptDay")
-            self.navigationController?.popViewController(animated: true)
-        }
+        
+//        let wayType = UserDefaults .standard.value(forKey: "wayType")
+//        if (wayType as! String == "oneway")
+//        {
+//            UserDefaults .standard.set(dayView.date.commonDescription, forKey: "selectedDeptDate")
+//            UserDefaults .standard.set(strDay, forKey: "selectedDeptDay")
+//            self.navigationController?.popViewController(animated: true)
+//        }
         
     }
     
@@ -241,19 +241,19 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
         {
             strDay2 = "Saturday"
         }
-      
+        
         print("\(strDay1),\(strDay2)")
-            UserDefaults .standard.set(startDayView.date.commonDescription, forKey: "selectedDeptDate")
-            UserDefaults .standard.set(strDay1, forKey: "selectedDeptDay")
-            UserDefaults .standard.set(endDayView.date.commonDescription, forKey: "selectedArrDate")
-            UserDefaults .standard.set(strDay2, forKey: "selectedArrDay")
+        UserDefaults .standard.set(startDayView.date.commonDescription, forKey: "selectedDeptDate")
+        UserDefaults .standard.set(strDay1, forKey: "selectedDeptDay")
+        UserDefaults .standard.set(endDayView.date.commonDescription, forKey: "selectedArrDate")
+        UserDefaults .standard.set(strDay2, forKey: "selectedArrDay")
         var deptdate , arrdate : String // = String()
         deptdate = UserDefaults .standard.value(forKey: "selectedDeptDate") as! String
         arrdate = UserDefaults .standard.value(forKey: "selectedArrDate") as! String
         print("\(deptdate)")
         print("\(arrdate)")
     }
-  
+    
     func presentedDateUpdated(_ date: CVDate) {
         if monthLabel.text != date.globalDescription && self.animationFinished {
             let updatedMonthLabel = UILabel()
@@ -377,8 +377,7 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
     
     func dayOfWeekTextColor() -> UIColor { return .white }
     
-    func dayOfWeekBackGroundColor() -> UIColor {
-        return .lightGray
+    func dayOfWeekBackGroundColor() -> UIColor { return .lightGray
         
     }
     
@@ -390,7 +389,7 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
     
     func latestSelectableDate() -> Date {
         var dayComponents = DateComponents()
-        dayComponents.day = 2000
+        dayComponents.day = 70
         let calendar = Calendar(identifier: .gregorian)
         if let lastDate = calendar.date(byAdding: dayComponents, to: Date()) {
             return lastDate

@@ -14,9 +14,7 @@ class FlightResultVCGoomo: UIViewController {
  
 //MARK: - IBOutlet
     @IBOutlet weak var twowayView: UIView!
-    
     @IBOutlet weak var loadingView: UIView!
-    
     @IBOutlet weak var gifImg1: UIImageView!
     @IBOutlet weak var gifImg2: UIImageView!
     @IBOutlet weak var gifImg5: UIImageView!
@@ -34,8 +32,7 @@ class FlightResultVCGoomo: UIViewController {
     @IBOutlet weak var errorLbl: UILabel!
     @IBOutlet weak var dataTVContainerView: UIView!
     @IBOutlet weak var bottomView: UIView!
-  
-    
+    @IBOutlet weak var noResultView: UIView!
     @IBOutlet weak var loadingview: UIView!
     @IBOutlet weak var loadingGifImg: UIImageView!
     @IBOutlet weak var departureBtn: UIButton!
@@ -79,6 +76,7 @@ class FlightResultVCGoomo: UIViewController {
         //        self.filterBtn.isSelected = false
     
          self.loadingview.isHidden = false
+        self.noResultView.isHidden = true
 //         self.onewayView.isHidden = true
 //         self.twowayView.isHidden=true
          loadingGifImg.image = UIImage (named: "loadingGif.gif")
@@ -151,6 +149,13 @@ class FlightResultVCGoomo: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         //        callSearchFlightService(messageDict: self.inputDict)
     }
+    
+    @IBAction func reloadBtn(_ sender: Any) {
+        self .viewDidLoad()
+    }
+    
+    
+    
     
     func callSearchFlightService(messageDict:[String:String]){
         if (Reachability()?.isReachable)! {
@@ -550,7 +555,7 @@ class FlightResultVCGoomo: UIViewController {
                 }
                 else {
          
-                    
+                   self.noResultView.isHidden = false
                     print("No Data for your Search!!! or No Data from Backend!!!")
                     //                    self.dataTV.isHidden = true
                    // self.dataTVContainerView.isHidden = true

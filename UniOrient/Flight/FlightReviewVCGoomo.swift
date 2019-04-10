@@ -28,11 +28,11 @@ class FlightReviewVCGoomo: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if FetchLoginDetails() != nil {
-            self.continueBtn.isHidden = false
-        }else{
-            self.continueBtn.isHidden = true
-        }
+//        if FetchLoginDetails() != nil {
+//            self.continueBtn.isHidden = false
+//        }else{
+//            self.continueBtn.isHidden = true
+//        }
        
         print("selected Struct = ",self.selectedStruct)
         //        self.amountLbl.text = "MYR " + self.selectedStruct.amount
@@ -43,12 +43,12 @@ class FlightReviewVCGoomo: UIViewController {
         let xyz = NSAttributedString(string: self.selectedStruct.amount,attributes:attribute1)
         
         let attribute2 = [NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "#338EDF"),NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)]
-        let abc = NSAttributedString(string: "MYR ", attributes: attribute2)
+        let abc = NSAttributedString(string: "PHP ", attributes: attribute2)
         
         fStr.append(abc)
         //        fStr.append(NSAttributedString(string: "\n"))
         fStr.append(xyz)
-        self.amountLbl.attributedText = fStr
+       // self.amountLbl.attributedText = fStr
         
         self.navigationController?.navigationBar.isHidden = false
         
@@ -122,23 +122,18 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
       if(section == 0)
       {
         if let rowData = myArray?[0] {
-            result.depAirportCodeLbl.text = rowData.departureAirportCode
+            result.depAirportCodeLbl.text = rowData.departureAirportCode + " -> " + rowData.arrivalAirportCode
             result.stopDetailsLbl.text = rowData.stop
-            result.arrivalAirportCodeLbl.text = rowData.arrivalAirportCode
-            result.departureDateLbl.text = rowData.departureDate
-            result.arrivalDateLbl.text = rowData.arrivalDate
-            
+            result.departureDateLbl.text = rowData.departureDate + "," + rowData.arrivalDate
             return result
         }
     }
       else if(section == 1){
         if let rowData = myArray1?[0]
         {
-            result.depAirportCodeLbl.text = rowData.departureAirportCode
+            result.depAirportCodeLbl.text = rowData.departureAirportCode + " -> " + rowData.arrivalAirportCode
             result.stopDetailsLbl.text = rowData.stop
-            result.arrivalAirportCodeLbl.text = rowData.arrivalAirportCode
-            result.departureDateLbl.text = rowData.departureDate
-            result.arrivalDateLbl.text = rowData.arrivalDate
+            result.departureDateLbl.text = rowData.departureDate + " - " + rowData.arrivalDate
             return result
         }
         }
@@ -160,22 +155,93 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
         let result = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath) as! SubCellClassGoomo
         if (indexPath.section == 0)
         {
-            result.flightNameLbl.text = self.detailsArr [indexPath.row].marketing
+            result.flightNameLbl.text = self.detailsArr [indexPath.row].operating
             result.depAirportCodeLbl.text = self.detailsArr [indexPath.row].fromAirportName
             result.stopDetailsLbl.text = self.detailsArr [indexPath.row].marketing
             result.arrivalAirportCodeLbl.text = self.detailsArr [indexPath.row].toAirportName
             result.departureDateLbl.text = self.detailsArr [indexPath.row].departureDate
             result.arrivalDateLbl.text = self.detailsArr [indexPath.row].arrivalDate
+          
+            
+            result.depTimeLbl.text = self.detailsArr [indexPath.row].departureTime
+            let tempfromAirportCodeStr = self.detailsArr [indexPath.row].fromAirportName
+            let startInd = tempfromAirportCodeStr?.index(after: (tempfromAirportCodeStr?.lastIndex(of: "("))!)
+            let endInd = tempfromAirportCodeStr?.lastIndex(of: ")")
+            let formattedFromStr = tempfromAirportCodeStr![startInd!..<endInd!]
+            result.depAirportCodeLbl.text = String(formattedFromStr)
+    
+            result.durationLbl.text = self.detailsArr [indexPath.row].duration
+            result.stopDetailsLbl.text = self.detailsArr [indexPath.row].stop
+            result.arrivalTimeLbl.text = self.detailsArr [indexPath.row].arrivalTime
+       
+            let tempToAirportCodeStr = self.detailsArr [indexPath.row].toAirportName
+            let startInde = tempToAirportCodeStr?.index(after: (tempToAirportCodeStr?.lastIndex(of: "("))!)
+            let endInde = tempToAirportCodeStr?.lastIndex(of: ")")
+            let formattedToStr = tempToAirportCodeStr![startInde!..<endInde!]
+            result.arrivalAirportCodeLbl.text = String(formattedToStr)
+            
+            let tempDepDateArr = self.detailsArr [indexPath.row].departureDate.components(separatedBy: ",")
+            result.departureDateLbl.text = tempDepDateArr[1]
+            let tempArrivalDateArr = self.detailsArr [indexPath.row].arrivalDate.components(separatedBy: ",")
+            result.arrivalDateLbl.text = tempArrivalDateArr[1]
+
+            
+            //Image
+            let flightImgURL = WebServicesUrl.FlightImgURL + self.detailsArr [indexPath.row].marketing + ".gif"
+            result.flightImgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                if error == nil{
+                    print("Image downloaded without error......")
+                }else{
+                    print("Error from SBWebImage Block = ",error!)
+                }
+                
+            })
+
             return result
         }
         else if (indexPath.section == 1)
         {
-            result.flightNameLbl.text = self.returnDetailsArr [indexPath.row].marketing
+            result.flightNameLbl.text = self.returnDetailsArr [indexPath.row].operating
             result.depAirportCodeLbl.text = self.returnDetailsArr [indexPath.row].fromAirportName
             result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].marketing
             result.arrivalAirportCodeLbl.text = self.returnDetailsArr [indexPath.row].toAirportName
             result.departureDateLbl.text = self.returnDetailsArr [indexPath.row].departureDate
             result.arrivalDateLbl.text = self.returnDetailsArr [indexPath.row].arrivalDate
+            
+            result.depTimeLbl.text = self.returnDetailsArr [indexPath.row].departureTime
+            let tempfromAirportCodeStr = self.returnDetailsArr [indexPath.row].fromAirportName
+            let startInd = tempfromAirportCodeStr?.index(after: (tempfromAirportCodeStr?.lastIndex(of: "("))!)
+            let endInd = tempfromAirportCodeStr?.lastIndex(of: ")")
+            let formattedFromStr = tempfromAirportCodeStr![startInd!..<endInd!]
+            result.depAirportCodeLbl.text = String(formattedFromStr)
+            
+            result.durationLbl.text = self.returnDetailsArr [indexPath.row].duration
+            result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].stop
+            result.arrivalTimeLbl.text = self.returnDetailsArr [indexPath.row].arrivalTime
+            
+            let tempToAirportCodeStr = self.returnDetailsArr [indexPath.row].toAirportName
+            let startInde = tempToAirportCodeStr?.index(after: (tempToAirportCodeStr?.lastIndex(of: "("))!)
+            let endInde = tempToAirportCodeStr?.lastIndex(of: ")")
+            let formattedToStr = tempToAirportCodeStr![startInde!..<endInde!]
+            result.arrivalAirportCodeLbl.text = String(formattedToStr)
+            
+            let tempDepDateArr = self.returnDetailsArr [indexPath.row].departureDate.components(separatedBy: ",")
+            result.departureDateLbl.text = tempDepDateArr[1]
+            let tempArrivalDateArr = self.returnDetailsArr [indexPath.row].arrivalDate.components(separatedBy: ",")
+            result.arrivalDateLbl.text = tempArrivalDateArr[1]
+            
+            
+            //Image
+            let flightImgURL = WebServicesUrl.FlightImgURL + self.returnDetailsArr [indexPath.row].marketing + ".gif"
+            result.flightImgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                if error == nil{
+                    print("Image downloaded without error......")
+                }else{
+                    print("Error from SBWebImage Block = ",error!)
+                }
+                
+            })
+
             return result
         }
         

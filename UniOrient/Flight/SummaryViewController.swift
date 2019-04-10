@@ -29,443 +29,502 @@ class SummaryViewController: UIViewController {
 
 }
 ////
-////  FlightReviewVCGoomo.swift
-////  TripArcher
+////  CustomCalenderViewController.swift
+////  TakeMyTravel
 ////
-////  Created by APPLE on 14/03/19.
-////  Copyright © 2019 APPLE. All rights reserved.
+////  Created by apple1 on 07/01/19.
+////  Copyright © 2019 pranas. All rights reserved.
 ////
 //
 //import UIKit
-//import SDWebImage
 //
-//class FlightReviewVCGoomo: UIViewController {
+//class CustomCalenderViewController: UIViewController
+//{
+//    var selectableDate : String = String()
+//    // MARK: - Properties
+//    @IBOutlet weak var calendarView: CVCalendarView!
+//    @IBOutlet weak var menuView: CVCalendarMenuView!
+//    @IBOutlet weak var monthLabel: UILabel!
+//    @IBOutlet weak var daysOutSwitch: UISwitch!
 //
-//    @IBOutlet weak var continueBtn: UIButton!
 //
-//    var selectedStruct : FlightResultAndDetailStruct!
-//    var providedInputDict = [String:String]()
-//    @IBOutlet weak var tvContainerView: UIView!
-//    @IBOutlet weak var myTV: UITableView!
-//    @IBOutlet weak var detailView: UIView!
-//    @IBOutlet weak var amountLbl: UILabel!
-//    var detailsArr = [FlightDetailStruct]()
-//    var returnDetailsArr = [FlightDetailStruct]()
+//    private var randomNumberOfDotMarkersForDay = [Int]()
+//    private var shouldShowDaysOut = true
+//    private var animationFinished = true
+//    private var selectedDay: DayView!
+//    private var currentCalendar: Calendar?
 //
-//    var myArray : [FinalStruct?]?
+//    override func awakeFromNib() {
+//        let timeZoneBias = 480 // (UTC+08:00)
+//        currentCalendar = Calendar(identifier: .gregorian)
+//        currentCalendar?.locale = Locale(identifier: "fr_FR")
+//        if let timeZone = TimeZone(secondsFromGMT: -timeZoneBias * 60) {
+//            currentCalendar?.timeZone = timeZone
+//        }
+//    }
+//
+//    // MARK: - Life cycle
 //
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //
-//        if FetchLoginDetails() != nil {
-//            self.continueBtn.isHidden = false
-//        }else{
-//            self.continueBtn.isHidden = true
+//        if let currentCalendar = currentCalendar {
+//            monthLabel.text = CVDate(date: Date(), calendar: currentCalendar).globalDescription
 //        }
 //
-//        print("selected Struct = ",self.selectedStruct)
-//        //        self.amountLbl.text = "MYR " + self.selectedStruct.amount
-//
-//
-//        let fStr = NSMutableAttributedString()
-//        let attribute1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
-//        let xyz = NSAttributedString(string: self.selectedStruct.amount,attributes:attribute1)
-//
-//        let attribute2 = [NSAttributedString.Key.foregroundColor : hexStringToUIColor(hex: "#338EDF"),NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18)]
-//        let abc = NSAttributedString(string: "MYR ", attributes: attribute2)
-//
-//        fStr.append(abc)
-//        //        fStr.append(NSAttributedString(string: "\n"))
-//        fStr.append(xyz)
-//        self.amountLbl.attributedText = fStr
-//
-//        self.navigationController?.navigationBar.isHidden = false
-//
-//        self.detailsArr = selectedStruct.detailArrWithFlightDetailStruct
-//        let detailStructFinal =  FinalStruct.init(CabinBaggage: selectedStruct.CabinBaggage, CheckInBaggage: selectedStruct.CheckInBaggage, departureDate: selectedStruct.departureDate, arrivalDate: selectedStruct.arrivalDate,flightImgName:selectedStruct.flightImgName,flightImgData:selectedStruct.flightImgData, flightName: selectedStruct.flightName, departureTime: selectedStruct.departureTime, departureAirportCode: selectedStruct.departureAirportCode, duration: selectedStruct.duration, stop: selectedStruct.noOfStops, arrivalTime: selectedStruct.arrivalTime, arrivalAirportCode: selectedStruct.arrivalAirportCode,TripDetailsArr: detailsArr)
-//
-//
-//        self.myArray = [detailStructFinal]
-//
-//        if selectedStruct.wayType == "two" {
-//
-//            //            let flightImgURL = WebServicesUrl.FlightImgURL + selectedStruct.returnFlightImgName + ".gif"
-//            //            SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: flightImgURL), options: .highPriority, progress: nil, completed: { (downloadedImg, downloadedData, error, isFinished) in
-//            //                if downloadedImg != nil{
-//            //                    self.selectedStruct.returnFlightImgData = downloadedData
-//            //                }
-//            //            })
-//
-//            self.returnDetailsArr = selectedStruct.returnDetailArrWithFlightDetailStruct
-//            let returnDetailStructFinal = FinalStruct.init(CabinBaggage: "Nothing from DB", CheckInBaggage: "Nothing from DB",departureDate:selectedStruct.returnDepartureDate,arrivalDate:selectedStruct.returnArrivalDate,flightImgName:selectedStruct.returnFlightImgName,flightImgData:nil, flightName: selectedStruct.returnFlightName, departureTime: selectedStruct.returnDepartureTime, departureAirportCode: selectedStruct.returnDepartureAirportCode, duration: selectedStruct.returnDuration, stop: selectedStruct.returnNoofStops, arrivalTime: selectedStruct.returnArrivalTime, arrivalAirportCode: selectedStruct.returnArrivalAirportCode,TripDetailsArr: returnDetailsArr)
-//
-//            self.myArray?.append(returnDetailStructFinal)
-//
-//        }
-//
-//
-//        self.myTV.delegate = self
-//        self.myTV.dataSource = self
-//
-//
+//        // randomizeDotMarkers()
 //    }
+//    //
+//    //    @IBAction func removeCircleAndDot(sender: AnyObject) {
+//    //        if let dayView = selectedDay {
+//    //            calendarView.contentController.removeCircleLabel(dayView)
+//    //
+//    //            if dayView.date.day < randomNumberOfDotMarkersForDay.count {
+//    //                randomNumberOfDotMarkersForDay[dayView.date.day] = 0
+//    //            }
+//    //
+//    //            calendarView.contentController.refreshPresentedMonth()
+//    //        }
+//    //    }
 //
 //    @IBAction func backBtn(_ sender: Any)
 //    {
 //        self.navigationController?.popViewController(animated: true)
 //    }
-//    @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
+//
+//    @IBAction func doneBtn(_ sender: Any)
+//    {
 //        self.navigationController?.popViewController(animated: true)
 //    }
-//
-//    @IBAction func continueAsGuestBtnTapped(_ sender: UIButton) {
-//        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "TravellerDetailVCGoomoSBID") as! TravellerDetailVCGoomo
-//        ctrl.selectedStruct = self.selectedStruct
-//        ctrl.providedInputDict = self.providedInputDict
-//        self.navigationController?.pushViewController(ctrl, animated: true)
-//    }
-//
-//    @IBAction func continueBtnTapped(_ sender: UIButton) {
-//        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "TravellerDetailVCGoomoSBID") as! TravellerDetailVCGoomo
-//        ctrl.selectedStruct = self.selectedStruct
-//        ctrl.providedInputDict = self.providedInputDict
-//        self.navigationController?.pushViewController(ctrl, animated: true)
-//    }
-//    @IBAction func loginBtnTapped(_ sender: UIButton) {
-//        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "LoginPageVCGoomoSBID") as! LoginPageVCGoomo
-//        ctrl.loginFrom = "FlightReview"
-//        ctrl.delegateVariable = self as! LoginProtocolGoomo
-//        self.navigationController?.pushViewController(ctrl, animated: true)
-//        //        self.navigationController?.present(ctrl, animated: true, completion: nil)
-//    }
-//
-//}
-//extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var cell = tableView.dequeueReusableCell(withIdentifier: "MainCellIDGoomo", for: indexPath as IndexPath) as! MainCellClassGoomo
-//        if selectedStruct.wayType == "one"
-//        {
-//            if indexPath.row == 0
-//            {
-//                cell = tableView.dequeueReusableCell(withIdentifier: "MainCellIDGoomo", for: indexPath as IndexPath) as! MainCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//            else if indexPath.row == 1 {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath as IndexPath) as! SubCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//            else if indexPath.row == 2 {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath as IndexPath) as! SubCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//            else if indexPath.row == 3
-//            {
-//                cell = tableView.dequeueReusableCell(withIdentifier: "MainCellIDGoomo", for: indexPath as IndexPath) as! MainCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//            else if indexPath.row == 4 {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath as IndexPath) as! SubCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//            else if indexPath.row == 5  {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath as IndexPath) as! SubCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//        }
-//        else
-//        {
-//            if indexPath.row == 0
-//            {
-//                cell = tableView.dequeueReusableCell(withIdentifier: "MainCellIDGoomo", for: indexPath as IndexPath) as! MainCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//            else if indexPath.row == 1 {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath as IndexPath) as! SubCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//            else {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath as IndexPath) as! SubCellClassGoomo
-//                //set the data here
-//                return cell
-//            }
-//        }
-//        return cell
-//    }
-//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+//    @IBAction func loadPrevious(_ sender: Any)
 //    {
-//        if selectedStruct.wayType == "one"
-//        {
-//            return 6
-//
-//        }
-//        else
-//        {
-//            return 3
-//        }
+//        calendarView.loadPreviousView()
 //    }
-//    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    //
-//    //        /*
-//    //         if let data = destinationData {
-//    //         return data.count
-//    //         } else {
-//    //         return 0
-//    //         } */
-//    //
-//    //        return myArray!.count
-//    //
-//    //    }
-//    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    //
-//    //        // Row is DefaultCell
-//    ////        if var rowData = myArray?[indexPath.row] {
-//    ////            let mainCell = tableView.dequeueReusableCell(withIdentifier: "MainCellIDGoomo", for: indexPath) as! MainCellClassGoomo
-//    ////
-//    ////            if rowData.flightImgData != nil{
-//    ////                // This if st. works for oneway.As oneways flightImgData will not be nil.It is passed from FlightResultVC
-//    ////                mainCell.flightImgView?.image = UIImage(data: rowData.flightImgData!)
-//    ////            }else{
-//    ////                // This else works for returnflight.return flightImgData will be nil as we set in viewDidLoad.While tableview loads for first time,this else block will handle nil value of return flightImgData
-//    ////
-//    ////                if rowData.flightImgName == "multiairline"{
-//    ////                    mainCell.flightImgView?.image = UIImage(named: "multiairline")
-//    ////                    rowData.flightImgData = UIImage(named: "multiairline")!.pngData()
-//    ////                }else{
-//    ////                    let flightImgURLStr = WebServicesUrl.FlightImgURL + rowData.flightImgName! + ".gif"
-//    ////                    mainCell.flightImgView?.sd_setImage(with: URL(string: flightImgURLStr), placeholderImage: UIImage(named: "flightGreen"), options: SDWebImageOptions(rawValue: 0), completed: { (downloadedImg, error, cacheType, imageURL) in
-//    ////                        if error == nil{
-//    ////                            rowData.flightImgData = downloadedImg!.pngData()
-//    ////                        }else{
-//    ////                            print("Error from SBWebImage Block - FlightReviewVC = ",error!)
-//    ////                        }
-//    ////                    })
-//    ////                }
-//    ////
-//    ////
-//    ////            }
-//    ////
-//    ////            mainCell.flightNameLbl.text = rowData.flightName
-//    ////            mainCell.depTimeLbl.text = rowData.departureTime
-//    ////            mainCell.depAirportCodeLbl.text = rowData.departureAirportCode
-//    ////            mainCell.durationLbl.text = rowData.duration
-//    ////            mainCell.stopDetailsLbl.text = rowData.stop
-//    ////            mainCell.arrivalTimeLbl.text = rowData.arrivalTime
-//    ////            mainCell.arrivalAirportCodeLbl.text = rowData.arrivalAirportCode
-//    ////
-//    ////            mainCell.departureDateLbl.text = rowData.departureDate
-//    ////            mainCell.arrivalDateLbl.text = rowData.arrivalDate
-//    ////            mainCell.classTypeLbl.text = self.providedInputDict["CabinClass"]!
-//    ////
-//    ////            if selectedStruct.wayType == "one" {
-//    ////                mainCell.detailLbl.text = "Cabin Baggage : "+rowData.CabinBaggage + ",CheckIn Baggage :" + rowData.CheckInBaggage
-//    ////            }else{
-//    ////                mainCell.detailLbl.text = "No Baggage From Backend"
-//    ////            }
-//    ////
-//    ////            return mainCell
-//    ////        }
-//    //            // Row is ExpansionCell
-//    //
-//    //            let rowData = myArray?[getParentCellIndex(expansionIndex: indexPath.row)]
-//    //                let expansionCell = tableView.dequeueReusableCell(withIdentifier: "SubCellIDGoomo", for: indexPath) as! SubCellClassGoomo
-//    //
-//    //                //  Get the index of the parent Cell (containing the data)
-//    //                let parentCellIndex = getParentCellIndex(expansionIndex: indexPath.row)
-//    //
-//    //                //  Get the index of the flight data (e.g. if there are multiple ExpansionCells
-//    //                let flightIndex = indexPath.row - parentCellIndex - 1
-//    //
-//    //
-//    //                expansionCell.flightNameLbl.text = rowData!.TripDetailsArr[flightIndex].operating
-//    //                let flightImgURL = WebServicesUrl.FlightImgURL + rowData!.TripDetailsArr[flightIndex].marketing + ".gif"
-//    //                expansionCell.flightImgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "flightGreen"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
-//    //                    if error == nil{
-//    //                        print("Image downloaded without error......")
-//    //                    }else{
-//    //                        print("Error from SBWebImage Block = ",error!)
-//    //                    }
-//    //
-//    //                })
-//    //
-//    //                expansionCell.depTimeLbl.text = rowData!.TripDetailsArr[flightIndex].departureTime
-//    //
-//    //                let tempfromAirportCodeStr = rowData!.TripDetailsArr[flightIndex].fromAirportName
-//    //                let startInd = tempfromAirportCodeStr?.index(after: (tempfromAirportCodeStr?.lastIndex(of: "("))!)
-//    //                let endInd = tempfromAirportCodeStr?.lastIndex(of: ")")
-//    //                let formattedFromStr = tempfromAirportCodeStr![startInd!..<endInd!]
-//    //                //                                print("Result = ",result)
-//    //                expansionCell.depAirportCodeLbl.text = String(formattedFromStr)
-//    //
-//    //
-//    //                //                expansionCell.depAirportCodeLbl.text = rowData.TripDetailsArr[flightIndex].fromAirportName
-//    //        expansionCell.durationLbl.text = rowData!.TripDetailsArr[flightIndex].duration
-//    //                expansionCell.stopDetailsLbl.text = rowData!.TripDetailsArr[flightIndex].stop
-//    //                expansionCell.arrivalTimeLbl.text = rowData!.TripDetailsArr[flightIndex].arrivalTime
-//    //                //                expansionCell.arrivalAirportCodeLbl.text = rowData.TripDetailsArr[flightIndex].toAirportName
-//    //
-//    //                let tempToAirportCodeStr = rowData!.TripDetailsArr[flightIndex].toAirportName
-//    //                let startInde = tempToAirportCodeStr?.index(after: (tempToAirportCodeStr?.lastIndex(of: "("))!)
-//    //                let endInde = tempToAirportCodeStr?.lastIndex(of: ")")
-//    //                let formattedToStr = tempToAirportCodeStr![startInde!..<endInde!]
-//    //                //                                print("Result = ",result)
-//    //                expansionCell.arrivalAirportCodeLbl.text = String(formattedToStr)
-//    //
-//    //                let tempDepDateArr = rowData!.TripDetailsArr[flightIndex].departureDate.components(separatedBy: ",")
-//    //                expansionCell.departureDateLbl.text = tempDepDateArr[1]
-//    //                let tempArrivalDateArr = rowData!.TripDetailsArr[flightIndex].arrivalDate.components(separatedBy: ",")
-//    //                expansionCell.arrivalDateLbl.text = tempArrivalDateArr[1]
-//    //
-//    //                return expansionCell
-//    //
-//    //        return UITableViewCell()
-//    //
-//    //    }
-//    //    private func getParentCellIndex(expansionIndex: Int) -> Int {
-//    //
-//    //        var selectedCell: FinalStruct?
-//    //        var selectedCellIndex = expansionIndex
-//    //
-//    //        while(selectedCell == nil && selectedCellIndex >= 0) {
-//    //            selectedCellIndex -= 1
-//    //            selectedCell = myArray?[selectedCellIndex]
-//    //        }
-//    //
-//    //        return selectedCellIndex
-//    //    }
-//    //
-//    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    //        tableView.deselectRow(at: indexPath, animated: true)
-//    //        //        if let data = myArray?[indexPath.row] {
-//    //
-//    //        if (myArray?[indexPath.row]) != nil {
-//    //
-//    //            // If user clicked last cell, do not try to access cell+1 (out of range)
-//    //            if(indexPath.row + 1 >= (myArray?.count)!) {
-//    //                if myArray?[indexPath.row]?.stop != "0 stop" {
-//    //                    expandCell(tableView: tableView, index: indexPath.row)
-//    //                }else{
-//    //                    print("0 stop..so dont expand...lastcell")
-//    //                }
-//    //
-//    //            }
-//    //            else {
-//    //                // If next cell is not nil, then cell is not expanded
-//    //                if(myArray?[indexPath.row+1] != nil) {
-//    //                    if myArray?[indexPath.row]?.stop != "0 stop" {
-//    //                        expandCell(tableView: tableView, index: indexPath.row)
-//    //                    }else{
-//    //                        print("0 stop..so dont expand...ReturnTrip")
-//    //                    }
-//    //
-//    //                    // Close Cell (remove ExpansionCells)
-//    //                } else {
-//    //                    contractCell(tableView: tableView, index: indexPath.row)
-//    //
-//    //                }
-//    //            }
-//    //        }
-//    //    }
-//    //    /*  Expand cell at given index  */
-//    //    private func expandCell(tableView: UITableView, index: Int) {
-//    //        // Expand Cell (add ExpansionCells
-//    //
-//    //        /*
-//    //         if let flights = destinationData?[index]?.TripDetailsArr {
-//    //         for i in 1...flights.count {
-//    //         destinationData?.insert(nil, at: index + i)
-//    //         tableView.insertRows(at: [NSIndexPath(row: index + i, section: 0) as IndexPath] , with: .top)
-//    //         }
-//    //         }*/
-//    //
-//    //        if let fli = myArray?[index]?.TripDetailsArr {
-//    //            for i in 1...fli.count {
-//    //                myArray?.insert(nil, at: index + i)
-//    //                tableView.insertRows(at: [NSIndexPath(row: index + i, section: 0) as IndexPath] , with: .top)
-//    //            }
-//    //        }
-//    //    }
-//    //    /*  Contract cell at given index    */
-//    //    private func contractCell(tableView: UITableView, index: Int) {
-//    //
-//    //        if let flig = myArray?[index]?.TripDetailsArr {
-//    //            for _ in 1...flig.count {
-//    //                myArray?.remove(at: index+1)
-//    //                tableView.deleteRows(at: [NSIndexPath(row: index+1, section: 0) as IndexPath], with: .top)
-//    //
-//    //            }
-//    //        }
-//    //    }
-//}
+//    @IBAction func loadNext(_ sender: Any)
+//    {
+//        calendarView.loadNextView()
 //
-//class MainCellClassGoomo : UITableViewCell{
-//    @IBOutlet weak var flightImgView: UIImageView?
-//    @IBOutlet weak var flightNameLbl: UILabel!
-//    @IBOutlet weak var depTimeLbl: UILabel!
-//    @IBOutlet weak var depAirportCodeLbl: UILabel!
-//    @IBOutlet weak var durationLbl: UILabel!
-//    @IBOutlet weak var stopDetailsLbl: UILabel!
-//    @IBOutlet weak var arrivalTimeLbl: UILabel!
-//    @IBOutlet weak var arrivalAirportCodeLbl: UILabel!
-//    @IBOutlet weak var amountLbl: UILabel!
+//    }
+//    @IBAction func refreshMonth(sender: AnyObject) {
+//        calendarView.contentController.refreshPresentedMonth()
 //
-//    @IBOutlet weak var refundOrNonRefundLbl: UILabel!
-//    @IBOutlet weak var lineDesignVIew: UIView!
-//    @IBOutlet weak var detailLbl: UILabel!
+//        // randomizeDotMarkers()
+//    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
 //
-//    @IBOutlet weak var classTypeLbl: DesignableLabel!
-//    @IBOutlet weak var departureDateLbl: UILabel!
-//    @IBOutlet weak var arrivalDateLbl: UILabel!
-//}
-//class SubCellClassGoomo : UITableViewCell{
-//    @IBOutlet weak var flightImgView: UIImageView!
-//    @IBOutlet weak var flightNameLbl: UILabel!
-//    @IBOutlet weak var depTimeLbl: UILabel!
-//    @IBOutlet weak var depAirportCodeLbl: UILabel!
-//    @IBOutlet weak var durationLbl: UILabel!
-//    @IBOutlet weak var stopDetailsLbl: UILabel!
-//    @IBOutlet weak var arrivalTimeLbl: UILabel!
-//    @IBOutlet weak var arrivalAirportCodeLbl: UILabel!
-//    @IBOutlet weak var amountLbl: UILabel!
+//        calendarView.commitCalendarViewUpdate()
+//        menuView.commitMenuViewUpdate()
+//    }
 //
-//    @IBOutlet weak var refundOrNonRefundLbl: UILabel!
-//    @IBOutlet weak var lineDesignVIew: UIView!
-//    @IBOutlet weak var detailLbl: UILabel!
-//
-//    @IBOutlet weak var departureDateLbl: UILabel!
-//    @IBOutlet weak var arrivalDateLbl: UILabel!
-//}
-////MARK: - LoginDelegate {
-//extension FlightReviewVCGoomo : LoginProtocolGoomo {
-//
-//    //    func didSelectAirport(selectedAirportStruct: AirportStruct, controller: FlightPlacesVC) {
-//    //        controller.dismiss(animated: true, completion: nil)
-//    //        if fromOrTo == "from" {
-//    //            self.fromTxtField.text = selectedAirportStruct.cityName!
-//    //            self.fromAirportCodeLbl.text = selectedAirportStruct.airportCode!
-//    //            self.selectedOriginStruct = selectedAirportStruct
-//    //        }else{
-//    //            self.toTxtField.text = selectedAirportStruct.cityName!
-//    //            self.toAirportCodeLbl.text = selectedAirportStruct.airportCode!
-//    //            self.selectedDestinationStruct = selectedAirportStruct
-//    //        }
-//    //    }
-//    func didLoggedIn(selectedString: String, controller: LoginPageVCGoomo) {
-//        controller.navigationController?.popViewController(animated: true)
-//        if selectedString == "hideBtns"{
-//            self.continueBtn.isHidden = false
+//    private func randomizeDotMarkers() {
+//        randomNumberOfDotMarkersForDay = [Int]()
+//        for _ in 0...31 {
+//            randomNumberOfDotMarkersForDay.append(Int(arc4random_uniform(3) + 1))
 //        }
 //    }
 //}
-////MARK: - }
+//
+//// MARK: - CVCalendarViewDelegate & CVCalendarMenuViewDelegate
+//
+//extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+//
+//    // MARK: Required methods
+//
+//    func presentationMode() -> CalendarMode { return .monthView }
+//
+//    func firstWeekday() -> Weekday { return .sunday }
+//
+//    // MARK: Optional methods
+//
+//    func calendar() -> Calendar? { return currentCalendar }
+//
+//    func dayOfWeekTextColor(by weekday: Weekday) -> UIColor {
+//        return weekday == .sunday ? UIColor(red: 1.0, green: 0, blue: 0, alpha: 1.0) : UIColor.white
+//    }
+//
+//    func shouldShowWeekdaysOut() -> Bool { return shouldShowDaysOut }
+//
+//    // Defaults to true
+//    func shouldAnimateResizing() -> Bool { return true }
+//
+//    private func shouldSelectDayView(dayView: DayView) -> Bool {
+//        return arc4random_uniform(3) == 0 ? true : false
+//    }
+//
+//    func shouldAutoSelectDayOnMonthChange() -> Bool { return false }
+//
+//    func didSelectDayView(_ dayView: CVCalendarDayView, animationDidFinish: Bool) {
+//        print("SELECTED DATE: \(dayView.date.commonDescription)")
+//        print(Calendar.current.component(.weekday, from: dayView.date.convertedDate()!))
+//        var day : NSInteger = NSInteger()
+//        var strDay : String = String ()
+//        day = Calendar.current.component(.weekday, from: dayView.date.convertedDate()!)
+//        print(day)
+//
+//        if (day == 1)
+//        {
+//            strDay = "Sunday"
+//        }
+//        else  if (day == 2)
+//        {
+//            strDay = "Monday"
+//        }
+//        else  if (day == 3)
+//        {
+//            strDay = "Tuesday"
+//        }
+//        else  if (day == 4)
+//        {
+//            strDay = "Wenesday"
+//        }
+//        else  if (day == 5)
+//        {
+//            strDay = "Thursday"
+//        }
+//        else  if (day == 6)
+//        {
+//            strDay = "Friday"
+//        }
+//        else  if (day == 7)
+//        {
+//            strDay = "Saturday"
+//        }
+//        selectedDay = dayView
+//
+//        let wayType = UserDefaults .standard.value(forKey: "wayType")
+//        if (wayType as! String == "oneway")
+//        {
+//            UserDefaults .standard.set(dayView.date.commonDescription, forKey: "selectedDeptDate")
+//            UserDefaults .standard.set(strDay, forKey: "selectedDeptDay")
+//            self.navigationController?.popViewController(animated: true)
+//        }
+//
+//    }
+//
+//    func shouldSelectRange() -> Bool { return true }
+//
+//    func didSelectRange(from startDayView: DayView, to endDayView: DayView) {
+//        print("RANGE SELECTED: \(startDayView.date.commonDescription) to \(endDayView.date.commonDescription)")
+//
+//        var day1 : NSInteger = NSInteger()
+//        var day2 : NSInteger = NSInteger()
+//        var strDay1 : String = String ()
+//        var strDay2 : String = String ()
+//        day1 = Calendar.current.component(.weekday, from: startDayView.date.convertedDate()!)
+//        day2 = Calendar.current.component(.weekday, from: endDayView.date.convertedDate()!)
+//        print("day1 \(day1) day2 \(day2) ")
+//        if (day1 == 1)
+//        {
+//            strDay1 = "Sunday"
+//        }
+//        else  if (day1 == 2)
+//        {
+//            strDay1 = "Monday"
+//        }
+//        else  if (day1 == 3)
+//        {
+//            strDay1 = "Tuesday"
+//        }
+//        else  if (day1 == 4)
+//        {
+//            strDay1 = "Wenesday"
+//        }
+//        else  if (day1 == 5)
+//        {
+//            strDay1 = "Thursday"
+//        }
+//        else  if (day1 == 6)
+//        {
+//            strDay1 = "Friday"
+//        }
+//        else  if (day1 == 7)
+//        {
+//            strDay1 = "Saturday"
+//        }
+//
+//        if (day2 == 1)
+//        {
+//            strDay2 = "Sunday"
+//        }
+//        else  if (day2 == 2)
+//        {
+//            strDay2 = "Monday"
+//        }
+//        else  if (day2 == 3)
+//        {
+//            strDay2 = "Tuesday"
+//        }
+//        else  if (day2 == 4)
+//        {
+//            strDay2 = "Wenesday"
+//        }
+//        else  if (day2 == 5)
+//        {
+//            strDay2 = "Thursday"
+//        }
+//        else  if (day2 == 6)
+//        {
+//            strDay2 = "Friday"
+//        }
+//        else  if (day2 == 7)
+//        {
+//            strDay2 = "Saturday"
+//        }
+//
+//        print("\(strDay1),\(strDay2)")
+//        UserDefaults .standard.set(startDayView.date.commonDescription, forKey: "selectedDeptDate")
+//        UserDefaults .standard.set(strDay1, forKey: "selectedDeptDay")
+//        UserDefaults .standard.set(endDayView.date.commonDescription, forKey: "selectedArrDate")
+//        UserDefaults .standard.set(strDay2, forKey: "selectedArrDay")
+//        var deptdate , arrdate : String // = String()
+//        deptdate = UserDefaults .standard.value(forKey: "selectedDeptDate") as! String
+//        arrdate = UserDefaults .standard.value(forKey: "selectedArrDate") as! String
+//        print("\(deptdate)")
+//        print("\(arrdate)")
+//    }
+//
+//    func presentedDateUpdated(_ date: CVDate) {
+//        if monthLabel.text != date.globalDescription && self.animationFinished {
+//            let updatedMonthLabel = UILabel()
+//            updatedMonthLabel.textColor = monthLabel.textColor
+//            updatedMonthLabel.font = monthLabel.font
+//            updatedMonthLabel.textAlignment = .center
+//            updatedMonthLabel.text = date.globalDescription
+//            updatedMonthLabel.sizeToFit()
+//            updatedMonthLabel.alpha = 0
+//            updatedMonthLabel.center = self.monthLabel.center
+//
+//            let offset = CGFloat(48)
+//            updatedMonthLabel.transform = CGAffineTransform(translationX: 0, y: offset)
+//            updatedMonthLabel.transform = CGAffineTransform(scaleX: 1, y: 0.1)
+//
+//            UIView.animate(withDuration: 0.35, delay: 0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+//                self.animationFinished = false
+//                self.monthLabel.transform = CGAffineTransform(translationX: 0, y: -offset)
+//                self.monthLabel.transform = CGAffineTransform(scaleX: 1, y: 0.1)
+//                self.monthLabel.alpha = 0
+//                updatedMonthLabel.alpha = 1
+//                updatedMonthLabel.transform = CGAffineTransform.identity
+//
+//            }) { _ in
+//
+//                self.animationFinished = true
+//                self.monthLabel.frame = updatedMonthLabel.frame
+//                self.monthLabel.text = updatedMonthLabel.text
+//                self.monthLabel.transform = CGAffineTransform.identity
+//                self.monthLabel.alpha = 1
+//                updatedMonthLabel.removeFromSuperview()
+//            }
+//
+//            self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
+//        }
+//    }
+//
+//    func topMarker(shouldDisplayOnDayView dayView: CVCalendarDayView) -> Bool { return true }
+//
+//    func weekdaySymbolType() -> WeekdaySymbolType { return .short }
+//
+//    func selectionViewPath() -> ((CGRect) -> (UIBezierPath)) {
+//        return { UIBezierPath(rect: CGRect(x: 0, y: 0, width: $0.width, height: $0.height)) }
+//    }
+//
+//    func shouldShowCustomSingleSelection() -> Bool { return false }
+//
+//    //    func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
+//    //        let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.frame, shape: CVShape.circle)
+//    //        circleView.fillColor = .colorFromCode(0xCCCCCC)
+//    //        return circleView
+//    //    }
+//
+//    //    func preliminaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
+//    //        if (dayView.isCurrentDay) {
+//    //            return true
+//    //        }
+//    //        return false
+//    //    }
+//
+//    //    func supplementaryView(viewOnDayView dayView: DayView) -> UIView {
+//    //
+//    //        dayView.setNeedsLayout()
+//    //        dayView.layoutIfNeeded()
+//    //
+//    //        let π = Double.pi
+//    //
+//    //        let ringLayer = CAShapeLayer()
+//    //        let ringLineWidth: CGFloat = 4.0
+//    //        let ringLineColour = UIColor.blue
+//    //
+//    //        let newView = UIView(frame: dayView.frame)
+//    //
+//    //        let diameter = (min(newView.bounds.width, newView.bounds.height))
+//    //        let radius = diameter / 2.0 - ringLineWidth
+//    //
+//    //        newView.layer.addSublayer(ringLayer)
+//    //
+//    //        ringLayer.fillColor = nil
+//    //        ringLayer.lineWidth = ringLineWidth
+//    //        ringLayer.strokeColor = ringLineColour.cgColor
+//    //
+//    //        let centrePoint = CGPoint(x: newView.bounds.width/2.0, y: newView.bounds.height/2.0)
+//    //        let startAngle = CGFloat(-π/2.0)
+//    //        let endAngle = CGFloat(π * 2.0) + startAngle
+//    //        let ringPath = UIBezierPath(arcCenter: centrePoint,
+//    //                                    radius: radius,
+//    //                                    startAngle: startAngle,
+//    //                                    endAngle: endAngle,
+//    //                                    clockwise: true)
+//    //
+//    //        ringLayer.path = ringPath.cgPath
+//    //        ringLayer.frame = newView.layer.bounds
+//    //
+//    //        return newView
+//    //    }
+//    //
+//    func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
+//        guard let currentCalendar = currentCalendar else { return false }
+//
+//        var components = Manager.componentsForDate(Foundation.Date(), calendar: currentCalendar)
+//
+//        /* For consistency, always show supplementaryView on the 3rd, 13th and 23rd of the current month/year.  This is to check that these expected calendar days are "circled". There was a bug that was circling the wrong dates. A fix was put in for #408 #411.
+//
+//         Other month and years show random days being circled as was done previously in the Demo code.
+//         */
+//        var shouldDisplay = false
+//        if dayView.date.year == components.year &&
+//            dayView.date.month == components.month {
+//
+//            if (dayView.date.day == 3 || dayView.date.day == 13 || dayView.date.day == 23)  {
+//                print("Circle should appear on " + dayView.date.commonDescription)
+//                shouldDisplay = true
+//            }
+//        } else if (Int(arc4random_uniform(3)) == 1) {
+//            shouldDisplay = true
+//        }
+//
+//        return shouldDisplay
+//    }
+//
+//    func dayOfWeekTextColor() -> UIColor { return .white }
+//
+//    func dayOfWeekBackGroundColor() -> UIColor {
+//        return .lightGray
+//
+//    }
+//
+//    func disableScrollingBeforeDate() -> Date { return Date() }
+//
+//    func maxSelectableRange() -> Int { return 365 }//14
+//
+//    func earliestSelectableDate() -> Date { return Date() }
+//
+//    func latestSelectableDate() -> Date {
+//        var dayComponents = DateComponents()
+//        dayComponents.day = 2000
+//        let calendar = Calendar(identifier: .gregorian)
+//        if let lastDate = calendar.date(byAdding: dayComponents, to: Date()) {
+//            return lastDate
+//        }
+//
+//        return Date()
+//    }
+//}
+//
+//
+//// MARK: - CVCalendarViewAppearanceDelegate
+//
+//extension CustomCalenderViewController: CVCalendarViewAppearanceDelegate {
+//
+//    func dayLabelWeekdayDisabledColor() -> UIColor { return .lightGray }
+//
+//    func dayLabelPresentWeekdayInitallyBold() -> Bool { return false }
+//
+//    func spaceBetweenDayViews() -> CGFloat { return 0 }
+//
+//    func dayLabelFont(by weekDay: Weekday, status: CVStatus, present: CVPresent) -> UIFont { return UIFont.systemFont(ofSize: 14) }
+//
+//    func dayLabelColor(by weekDay: Weekday, status: CVStatus, present: CVPresent) -> UIColor? {
+//        switch (weekDay, status, present) {
+//        case (_, .selected, _), (_, .highlighted, _): return ColorsConfig.selectedText
+//        case (.sunday, .in, _): return ColorsConfig.sundayText
+//        case (.sunday, _, _): return ColorsConfig.sundayTextDisabled
+//        case (_, .in, _): return ColorsConfig.text
+//        default: return ColorsConfig.textDisabled
+//        }
+//    }
+//
+//    func dayLabelBackgroundColor(by weekDay: Weekday, status: CVStatus, present: CVPresent) -> UIColor? {
+//        switch (weekDay, status, present) {
+//        case (.sunday, .selected, _), (.sunday, .highlighted, _): return ColorsConfig.sundaySelectionBackground
+//        case (_, .selected, _), (_, .highlighted, _): return ColorsConfig.selectionBackground
+//        default: return nil
+//        }
+//    }
+//}
+//
+//// MARK: - IB Actions
+//
+//extension CustomCalenderViewController {
+//    @IBAction func switchChanged(sender: UISwitch) {
+//        calendarView.changeDaysOutShowingState(shouldShow: sender.isOn)
+//        shouldShowDaysOut = sender.isOn
+//    }
+//
+//    @IBAction func todayMonthView() {
+//        calendarView.toggleCurrentDayView()
+//    }
+//
+//    /// Switch to WeekView mode.
+//    @IBAction func toWeekView(sender: AnyObject) {
+//        calendarView.changeMode(.weekView)
+//    }
+//
+//    /// Switch to MonthView mode.
+//    @IBAction func toMonthView(sender: AnyObject) {
+//        calendarView.changeMode(.monthView)
+//    }
+//
+//    @IBAction func loadPrevious(sender: AnyObject) {
+//        calendarView.loadPreviousView()
+//    }
+//
+//
+//    @IBAction func loadNext(sender: AnyObject) {
+//        calendarView.loadNextView()
+//    }
+//}
+//
+//// MARK: - Convenience API Demo
+//
+//extension CustomCalenderViewController {
+//    func toggleMonthViewWithMonthOffset(offset: Int) {
+//        guard let currentCalendar = currentCalendar else { return }
+//
+//        var components = Manager.componentsForDate(Date(), calendar: currentCalendar) // from today
+//
+//        components.month! += offset
+//
+//        let resultDate = currentCalendar.date(from: components)!
+//
+//        self.calendarView.toggleViewWithDate(resultDate)
+//    }
+//
+//
+//    func didShowNextMonthView(_ date: Date) {
+//        guard let currentCalendar = currentCalendar else { return }
+//
+//        let components = Manager.componentsForDate(date, calendar: currentCalendar) // from today
+//
+//        print("Showing Month: \(components.month!)")
+//    }
+//
+//
+//    func didShowPreviousMonthView(_ date: Date) {
+//        guard let currentCalendar = currentCalendar else { return }
+//
+//        let components = Manager.componentsForDate(date, calendar: currentCalendar) // from today
+//
+//        print("Showing Month: \(components.month!)")
+//    }
+//
+//}

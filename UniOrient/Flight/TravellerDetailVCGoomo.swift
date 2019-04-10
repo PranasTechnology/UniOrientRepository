@@ -136,8 +136,14 @@ class TravellerDetailVCGoomo: UIViewController {
         //        mobileNoTxtField.inputView = shiftTypePicker
         mobileNoTxtField.inputAccessoryView = Toolbar
         //        mobileNoTxtField.tag = 1
+        
+        self.travellerListTV.tableFooterView = self.footerView
     }
     
+    @IBAction func backBtn(_ sender: Any)
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
     @objc func PickDoneAction(_ sender:UIBarButtonItem) {
         self.view.endEditing(true)
     }
@@ -261,12 +267,11 @@ extension TravellerDetailVCGoomo : UITableViewDataSource , UITableViewDelegate {
         if self.viewloadedFlag {
             self.StaticArr.append(self.GrandArr[indexPath.row].firstName)
         }
-        if cell.detailLbl.textColor == UIColor.black {
-            print("Dont change Text Color - TravellerDetailVC")
-        }else{
-            cell.detailLbl.textColor = hexStringToUIColor(hex: "#2E65B0")
-        }
-        
+//        if cell.detailLbl.textColor == UIColor.black {
+//            print("Dont change Text Color - TravellerDetailVC")
+//        }else{
+//            cell.detailLbl.textColor = hexStringToUIColor(hex: "#2E65B0")
+//        }
         
         if indexPath.row == (adultCount+childCount+infantCount) - 1{
             cell.cellBottomContraint.constant = 1
@@ -282,10 +287,10 @@ extension TravellerDetailVCGoomo : UITableViewDataSource , UITableViewDelegate {
         print("Tapped Cell index = \(indexPath.row)")
         
         self.myIndexPath = indexPath
-//        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "SingleTravellerDetailVCGoomoSBID") as! SingleTravellerDetailVCGoomo
-//        ctrl.DelegateVar = self
-//        ctrl.travellerTVIndex = indexPath.row
-//        self.navigationController?.pushViewController(ctrl, animated: true)
+        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "SingleTravellerDetailVCGoomoSBID") as! SingleTravellerDetailVCGoomo
+        ctrl.DelegateVar = self as? SingleTravellerDetailProtocolGoomo
+        ctrl.travellerTVIndex = indexPath.row
+        self.navigationController?.pushViewController(ctrl, animated: true)
     }
 }
 class MyCellClassGoomo : UITableViewCell {

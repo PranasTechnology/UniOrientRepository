@@ -76,6 +76,7 @@
 		2E5F5267224E1992006ACE1E /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5264224E1991006ACE1E /* UIViewExtension.swift */; };
 		2E8A3E522255CB92000D983D /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A3E512255CB8A000D983D /* AnimatedGIFImageSerialization.m */; };
 		2E8A3E542255D015000D983D /* loadingGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A3E532255CFFA000D983D /* loadingGif.gif */; };
+		8F0C9502225DA9D600297EF9 /* noResultImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F0C9501225DA9D300297EF9 /* noResultImg.png */; };
 		8F1BB08B224DE16B00032798 /* FlightResultVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */; };
 		8F1BB0A0224DE72E00032798 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08E224DE72E00032798 /* AFHTTPRequestOperation.m */; };
 		8F1BB0A1224DE72E00032798 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB090224DE72E00032798 /* AFHTTPRequestOperationManager.m */; };
@@ -111,6 +112,11 @@
 		8F1BB0EF224DE99500032798 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0EE224DE99500032798 /* General.swift */; };
 		8F1BB0F1224DEA5F00032798 /* TravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */; };
 		8F1BB0F4224DEA8E00032798 /* LoginPageVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */; };
+		8F464B3A225DFD1E001E4FF7 /* SingleTravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B39225DFD1D001E4FF7 /* SingleTravellerDetailVCGoomo.swift */; };
+		8F464B41225E2220001E4FF7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F464B3C225E221F001E4FF7 /* Info.plist */; };
+		8F464B42225E2220001E4FF7 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B3D225E221F001E4FF7 /* Palette.swift */; };
+		8F464B43225E2220001E4FF7 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B3F225E221F001E4FF7 /* TwicketSegmentedControl.swift */; };
+		8F464B44225E2220001E4FF7 /* UIViewShadowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B40225E221F001E4FF7 /* UIViewShadowExtension.swift */; };
 		8FC6E589225CA017002C9D60 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6E588225CA017002C9D60 /* SummaryViewController.swift */; };
 		8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD04BA22573EFB00CCD296 /* ShadowView.swift */; };
 		F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */; };
@@ -193,6 +199,7 @@
 		2E8A3E512255CB8A000D983D /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
 		2E8A3E532255CFFA000D983D /* loadingGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingGif.gif; sourceTree = SOURCE_ROOT; };
 		8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.release.xcconfig"; sourceTree = "<group>"; };
+		8F0C9501225DA9D300297EF9 /* noResultImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noResultImg.png; sourceTree = "<group>"; };
 		8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightResultVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB08D224DE72E00032798 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		8F1BB08E224DE72E00032798 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -254,6 +261,12 @@
 		8F1BB0EE224DE99500032798 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageVCGoomo.swift; sourceTree = "<group>"; };
+		8F464B39225DFD1D001E4FF7 /* SingleTravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
+		8F464B3C225E221F001E4FF7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F464B3D225E221F001E4FF7 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		8F464B3E225E221F001E4FF7 /* TwicketSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwicketSegmentedControl.h; sourceTree = "<group>"; };
+		8F464B3F225E221F001E4FF7 /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwicketSegmentedControl.swift; sourceTree = "<group>"; };
+		8F464B40225E221F001E4FF7 /* UIViewShadowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewShadowExtension.swift; sourceTree = "<group>"; };
 		8FC6E588225CA017002C9D60 /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		8FDD04BA22573EFB00CCD296 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -306,6 +319,7 @@
 		2E27D3D6224C8D66009A0E1F /* Common Files */ = {
 			isa = PBXGroup;
 			children = (
+				8F464B3B225E221F001E4FF7 /* TwicketSegmentedControl */,
 				2E8A3E4F2255CB8A000D983D /* AnimatedGIFImageSerialization */,
 				8F1BB0B0224DE76E00032798 /* FSCalendar */,
 				2E5F5261224E1991006ACE1E /* Extensions */,
@@ -390,6 +404,7 @@
 				8F1BB0E1224DE8CC00032798 /* FlightReviewVCGoomo.swift */,
 				8F1BB0E3224DE90A00032798 /* FlightFilterVCGoomo.swift */,
 				8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */,
+				8F464B39225DFD1D001E4FF7 /* SingleTravellerDetailVCGoomo.swift */,
 				8FC6E588225CA017002C9D60 /* SummaryViewController.swift */,
 			);
 			path = Flight;
@@ -398,6 +413,7 @@
 		2E27D43F224C8EB8009A0E1F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8F0C9501225DA9D300297EF9 /* noResultImg.png */,
 				2E8A3E532255CFFA000D983D /* loadingGif.gif */,
 				2E1950B8225337B800C14A5F /* placeholder.png */,
 				2E27D440224C8EB8009A0E1F /* 1.jpeg */,
@@ -529,6 +545,18 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		8F464B3B225E221F001E4FF7 /* TwicketSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				8F464B3C225E221F001E4FF7 /* Info.plist */,
+				8F464B3D225E221F001E4FF7 /* Palette.swift */,
+				8F464B3E225E221F001E4FF7 /* TwicketSegmentedControl.h */,
+				8F464B3F225E221F001E4FF7 /* TwicketSegmentedControl.swift */,
+				8F464B40225E221F001E4FF7 /* UIViewShadowExtension.swift */,
+			);
+			path = TwicketSegmentedControl;
+			sourceTree = "<group>";
+		};
 		D32037CDDD1D591AE02BFFBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,6 +645,8 @@
 				2E27D450224C8EB8009A0E1F /* 3.jpeg in Resources */,
 				2E27D454224C8EB8009A0E1F /* backgd2.jpeg in Resources */,
 				2E27D452224C8EB8009A0E1F /* backgd.jpeg in Resources */,
+				8F0C9502225DA9D600297EF9 /* noResultImg.png in Resources */,
+				8F464B41225E2220001E4FF7 /* Info.plist in Resources */,
 				2E27D430224C8D67009A0E1F /* file1.json in Resources */,
 				2E27D431224C8D67009A0E1F /* Info.plist in Resources */,
 				2E27D45D224C8F26009A0E1F /* LaunchScreen.storyboard in Resources */,
@@ -686,6 +716,7 @@
 				2E27D439224C8D67009A0E1F /* FlightSearchViewController.swift in Sources */,
 				2E27D429224C8D67009A0E1F /* CVScrollDirection.swift in Sources */,
 				2E27D42D224C8D67009A0E1F /* CVStatus.swift in Sources */,
+				8F464B43225E2220001E4FF7 /* TwicketSegmentedControl.swift in Sources */,
 				8F1BB0A4224DE72E00032798 /* AFSecurityPolicy.m in Sources */,
 				8F1BB0E4224DE90A00032798 /* FlightFilterVCGoomo.swift in Sources */,
 				8F1BB0D8224DE76E00032798 /* FSCalendarDelegationFactory.m in Sources */,
@@ -693,6 +724,7 @@
 				8F1BB0DF224DE76E00032798 /* FSCalendarWeekdayView.m in Sources */,
 				8F1BB0D5224DE76E00032798 /* FSCalendarCollectionView.m in Sources */,
 				2E1950BB22533E9100C14A5F /* twowayTableViewCell.swift in Sources */,
+				8F464B42225E2220001E4FF7 /* Palette.swift in Sources */,
 				2E27D41C224C8D67009A0E1F /* CVCalendarView.swift in Sources */,
 				2E27D41E224C8D67009A0E1F /* CVCalendarViewAnimatorDelegate.swift in Sources */,
 				2E27D418224C8D67009A0E1F /* CVCalendarMenuViewDelegate.swift in Sources */,
@@ -702,6 +734,7 @@
 				2E27D414224C8D67009A0E1F /* CVCalendarDayView.swift in Sources */,
 				2E27D423224C8D67009A0E1F /* CVCalendarWeekContentViewController.swift in Sources */,
 				8F1BB0EF224DE99500032798 /* General.swift in Sources */,
+				8F464B44225E2220001E4FF7 /* UIViewShadowExtension.swift in Sources */,
 				8F1BB0F4224DEA8E00032798 /* LoginPageVCGoomo.swift in Sources */,
 				8F1BB0D4224DE76E00032798 /* FSCalendarCell.m in Sources */,
 				2E27D426224C8D67009A0E1F /* CVDate.swift in Sources */,
@@ -729,6 +762,7 @@
 				2E27D410224C8D67009A0E1F /* CustomCalenderViewController.swift in Sources */,
 				2E27D3C7224C8B42009A0E1F /* AppDelegate.swift in Sources */,
 				2E27D428224C8D67009A0E1F /* CVRange.swift in Sources */,
+				8F464B3A225DFD1E001E4FF7 /* SingleTravellerDetailVCGoomo.swift in Sources */,
 				2E5F5266224E1992006ACE1E /* StringExtension.swift in Sources */,
 				2E8A3E522255CB92000D983D /* AnimatedGIFImageSerialization.m in Sources */,
 				8F1BB0A3224DE72E00032798 /* AFNetworkReachabilityManager.m in Sources */,

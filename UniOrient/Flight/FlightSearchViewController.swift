@@ -10,6 +10,7 @@ import UIKit
 
 class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIPickerViewDataSource,UIPickerViewDelegate{
 
+    @IBOutlet weak var segmentView: UIView!
     @IBOutlet weak var nonstopImg: UIImageView!
     var className : [String] = [String]()
     var arrAdult : [String] = [String]()
@@ -100,6 +101,17 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         else if gesture.direction == UISwipeGestureRecognizer.Direction.left {
             print("Swipe Left")
         }
+        
+/// Segmented COntrol
+        
+        let titles = ["One Way", "Round Trip", "Multi City"]
+        let frame = CGRect(x: 10, y: segmentView.frame.height/2-20, width: segmentView.frame.width - 20, height: 50)
+        
+        let segmentedControl = TwicketSegmentedControl(frame: frame)
+        segmentedControl.setSegmentItems(titles)
+        segmentedControl.delegate = self as? TwicketSegmentedControlDelegate
+        
+        segmentView.addSubview(segmentedControl)
 }
     override func viewWillAppear(_ animated: Bool)
     {
