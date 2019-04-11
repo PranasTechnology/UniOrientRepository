@@ -11,4 +11,5 @@ target 'UniOrient' do
     pod 'EDStarRating'
     pod 'AACarousel'
     pod 'SwipeableTabBarController'
+    pod 'BetterSegmentedControl', '~> 1.0'
 end

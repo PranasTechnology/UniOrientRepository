@@ -112,6 +112,7 @@
 		8F1BB0EF224DE99500032798 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0EE224DE99500032798 /* General.swift */; };
 		8F1BB0F1224DEA5F00032798 /* TravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */; };
 		8F1BB0F4224DEA8E00032798 /* LoginPageVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */; };
+		8F30A6D1225F691A0095C38E /* ScrollPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F30A6D0225F691A0095C38E /* ScrollPager.swift */; };
 		8F464B3A225DFD1E001E4FF7 /* SingleTravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B39225DFD1D001E4FF7 /* SingleTravellerDetailVCGoomo.swift */; };
 		8F464B41225E2220001E4FF7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F464B3C225E221F001E4FF7 /* Info.plist */; };
 		8F464B42225E2220001E4FF7 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B3D225E221F001E4FF7 /* Palette.swift */; };
@@ -261,6 +262,7 @@
 		8F1BB0EE224DE99500032798 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageVCGoomo.swift; sourceTree = "<group>"; };
+		8F30A6D0225F691A0095C38E /* ScrollPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollPager.swift; sourceTree = "<group>"; };
 		8F464B39225DFD1D001E4FF7 /* SingleTravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
 		8F464B3C225E221F001E4FF7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F464B3D225E221F001E4FF7 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		2E27D3D6224C8D66009A0E1F /* Common Files */ = {
 			isa = PBXGroup;
 			children = (
+				8F30A6D0225F691A0095C38E /* ScrollPager.swift */,
 				8F464B3B225E221F001E4FF7 /* TwicketSegmentedControl */,
 				2E8A3E4F2255CB8A000D983D /* AnimatedGIFImageSerialization */,
 				8F1BB0B0224DE76E00032798 /* FSCalendar */,
@@ -683,8 +686,9 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AACarousel/AACarousel.framework",
+				"${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/EDStarRating/EDStarRating.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeableTabBarController/SwipeableTabBarController.framework",
@@ -692,13 +696,14 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AACarousel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BetterSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EDStarRating.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeableTabBarController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -708,6 +713,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F30A6D1225F691A0095C38E /* ScrollPager.swift in Sources */,
 				2E27D436224C8D67009A0E1F /* UIImage+Gif.swift in Sources */,
 				2E27D412224C8D67009A0E1F /* CVCalendarContentPresentationCoordinator.swift in Sources */,
 				8F1BB0AE224DE74B00032798 /* StructuresAndEnums.swift in Sources */,

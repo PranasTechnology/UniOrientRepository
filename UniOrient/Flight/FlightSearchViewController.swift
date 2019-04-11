@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import BetterSegmentedControl
 
-class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIPickerViewDataSource,UIPickerViewDelegate{
+class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIPickerViewDataSource,UIPickerViewDelegate, ScrollPagerDelegate{
 
     @IBOutlet weak var segmentView: UIView!
     @IBOutlet weak var nonstopImg: UIImageView!
@@ -50,7 +51,12 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var accountLbl: UILabel!
     @IBOutlet weak var bookingImg: UIImageView!
     @IBOutlet weak var bookingLbl: UILabel!
+    @IBOutlet weak var control1: BetterSegmentedControl!
     
+     @IBOutlet var scrollPager: ScrollPager!
+ @IBOutlet weak var flightScrollView: UIScrollView!
+     @IBOutlet weak var hotelScrollView: UIView!
+      @IBOutlet weak var multicityView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         classChooseView .isHidden = true
@@ -78,11 +84,15 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
  
         ////// Botton Border
     
-        hotelBtn.layer.borderWidth = 1
-        hotelBtn.layer.borderColor = UIColor.gray.cgColor
-        flightBtn.layer.borderWidth = 1
-        flightBtn.layer.borderColor = UIColor.gray.cgColor
-        
+//        hotelBtn.layer.borderWidth = 1
+//        hotelBtn.layer.borderColor = UIColor.gray.cgColor
+//        flightBtn.layer.borderWidth = 1
+//        flightBtn.layer.borderColor = UIColor.gray.cgColor
+     
+        /// SegmentControl
+        control1.segments = LabelSegment.segments(withTitles: ["One Way", "Round Trip", "Multi City"],
+                                                  normalFont: UIFont(name: "HelveticaNeue-Light", size: 13.0)!,
+                                                  selectedFont: UIFont(name: "HelveticaNeue-Medium", size: 13.0)!)
         ///SwipeGesture
 //        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
 //        swipeLeft.direction = .left
@@ -91,9 +101,42 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
         swipeRight.direction = .right
         self.flightView.addGestureRecognizer(swipeRight)
+      
+        let firstView = UIScrollView()
+        firstView.backgroundColor = UIColor.white
+        firstView .addSubview(hotelScrollView)
+
+        let secondView = UIView()
+        secondView.backgroundColor = UIColor.white
+        secondView .addSubview(flightView)
+        
+        let thirdView = UIView()
+        thirdView.backgroundColor = UIColor.white
+        thirdView .addSubview(multicityView)
+        
+        scrollPager.delegate = self
+        scrollPager.addSegmentsWithTitlesAndViews(segments: [
+            ("One Way", firstView),
+            ("Round Trip", secondView),
+            ("Multi City", thirdView)
+            ])
+        
+       
     }
-//MARK - SWipe Gesture
     
+    // MARK: - ScrollPagerDelegate -
+    
+    func scrollPager(scrollPager: ScrollPager, changedIndex: Int)
+    {
+        if(changedIndex == 0)
+        {
+            
+        }
+        print("scrollPager index changed: \(changedIndex)")
+    }
+    
+//MARK - SWipe Gesture
+   
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.right {
             print("Swipe Right")
@@ -104,14 +147,14 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         
 /// Segmented COntrol
         
-        let titles = ["One Way", "Round Trip", "Multi City"]
-        let frame = CGRect(x: 10, y: segmentView.frame.height/2-20, width: segmentView.frame.width - 20, height: 50)
-        
-        let segmentedControl = TwicketSegmentedControl(frame: frame)
-        segmentedControl.setSegmentItems(titles)
-        segmentedControl.delegate = self as? TwicketSegmentedControlDelegate
-        
-        segmentView.addSubview(segmentedControl)
+//        let titles = ["One Way", "Round Trip", "Multi City"]
+//        let frame = CGRect(x: 20, y: segmentView.frame.height/2-30, width: segmentView.frame.width - 40, height: 50)
+//
+//        let segmentedControl = TwicketSegmentedControl(frame: frame)
+//        segmentedControl.setSegmentItems(titles)
+//        segmentedControl.delegate = self as? TwicketSegmentedControlDelegate
+//
+//        segmentView.addSubview(segmentedControl)
 }
     override func viewWillAppear(_ animated: Bool)
     {
@@ -168,7 +211,71 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         temp1 = lblDepartureCity.text!
       
     }
+    // MARK: - Action handlers
+    @objc func navigationSegmentedControlValueChanged(_ sender: BetterSegmentedControl) {
+        if sender.index == 0 {
+            print("Turning lights on.")
+            view.backgroundColor = .white
+        }
+        else {
+            print("Turning lights off.")
+            view.backgroundColor = .darkGray
+        }
+    }
     
+    @IBAction func segmentedControl1ValueChanged(_ sender: BetterSegmentedControl) {
+        if(sender.index == 0)
+        {
+            UIView.animate(withDuration: 1.0,
+                           delay: 0.0,
+                           options: [],
+                           animations: {
+                            
+                            self.flightView.backgroundColor = .yellow
+                            //self.blueView.alpha = 0.0
+                            self.flightView.frame.size.width -= self.flightView.frame.size.width
+                            self.flightView.frame.size.height -=  self.flightView.frame.size.height
+                            
+                            //self.blueView.frame.origin.x += 120
+                            self.flightView.frame.origin.x -=  self.flightView.frame.origin.x
+                            self.flightView.frame.origin.y -= self.flightView.frame.origin.y
+            })
+        }
+        else if(sender.index == 1)
+        {
+            UIView.animate(withDuration: 1.0,
+                           delay: 1.0,
+                           options: [],
+                           animations: {
+                            
+                            self.flightView.backgroundColor = .yellow
+                            //self.blueView.alpha = 0.0
+                            self.flightView.frame.size.width -= self.flightView.frame.size.width
+                            self.flightView.frame.size.height -=  self.flightView.frame.size.height
+                            
+                            //self.blueView.frame.origin.x += 120
+                            self.flightView.frame.origin.x -=  self.flightView.frame.origin.x
+                            self.flightView.frame.origin.y -= self.flightView.frame.origin.y
+            })
+        }
+        else if(sender.index == 2)
+        {
+            UIView.animate(withDuration: 1.0,
+                           delay: 1.0,
+                           options: [],
+                           animations: {
+                            
+                            self.flightView.backgroundColor = .yellow
+                            //self.blueView.alpha = 0.0
+                            self.flightView.frame.size.width -= self.flightView.frame.size.width
+                            self.flightView.frame.size.height -=  self.flightView.frame.size.height
+                            
+                            //self.blueView.frame.origin.x += 120
+                            self.flightView.frame.origin.x -=  self.flightView.frame.origin.x
+                            self.flightView.frame.origin.y -= self.flightView.frame.origin.y
+            })
+        }
+    }
 ///////////// tableView DataSource - Delegate Method
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -482,4 +589,6 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         bookingImg.image = UIImage (named: "briefcaseGray")
         bookingLbl.textColor = UIColor.darkGray
     }
+    
+  
 }
