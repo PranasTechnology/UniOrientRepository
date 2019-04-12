@@ -13,8 +13,14 @@ class FlightReviewVCGoomo: UIViewController {
 
     @IBOutlet weak var continueBtn: UIButton!
     
+    @IBOutlet weak var txtTotalAmt: UILabel!
+    @IBOutlet weak var lblTaxAmt: UILabel!
+    @IBOutlet weak var lblFareAmount: UILabel!
+    @IBOutlet var bottomView: UIView!
     var selectedStruct : FlightResultAndDetailStruct!
     var providedInputDict = [String:String]()
+    
+    @IBOutlet weak var tripDetaillbl: UILabel!
     @IBOutlet weak var tvContainerView: UIView!
     @IBOutlet weak var myTV: UITableView!
     @IBOutlet weak var detailView: UIView!
@@ -34,9 +40,10 @@ class FlightReviewVCGoomo: UIViewController {
 //            self.continueBtn.isHidden = true
 //        }
        
+        tripDetaillbl.text = UserDefaults .standard .value(forKey: "toplbl") as! String
         print("selected Struct = ",self.selectedStruct)
-        //        self.amountLbl.text = "MYR " + self.selectedStruct.amount
-        
+        self.lblFareAmount.text = "PHP " + self.selectedStruct.amount
+        self.txtTotalAmt.text = "PHP " + self.selectedStruct.amount
         
         let fStr = NSMutableAttributedString()
         let attribute1 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]
@@ -69,6 +76,7 @@ class FlightReviewVCGoomo: UIViewController {
        print("detailC",self.detailsArr)
         print("ReturndetailC",self.returnDetailsArr)
         
+        self.myTV.tableFooterView = bottomView
     }
     
     @IBAction func backBtn(_ sender: Any)

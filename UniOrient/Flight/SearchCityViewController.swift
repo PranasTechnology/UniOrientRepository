@@ -12,7 +12,7 @@ var cityCode = [String]()
 var searchedArray1 = [String]()
 var searchedArray2 = [String]()
 
-class SearchCityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class SearchCityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtSearchBar: UITextField!
@@ -26,7 +26,10 @@ class SearchCityViewController: UIViewController, UITableViewDelegate, UITableVi
         self.getJSON ()
         //DselectedCityName DselectedCityCode
     }
-    
+    private func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+        textField.resignFirstResponder()
+        return true
+    }
     func getJSON()
     {
         if let path = Bundle.main.path(forResource: "file1", ofType: "json") {

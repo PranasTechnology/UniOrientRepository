@@ -61,7 +61,7 @@ import UIKit
 		didSet { redrawComponents() }
 	}
 
-	@IBInspectable public var selectedFont: UIFont = UIFont.boldSystemFont(ofSize: 13) {
+	@IBInspectable public var selectedFont: UIFont = UIFont.boldSystemFont(ofSize: 15) {
 		didSet { redrawComponents() }
 	}
 	

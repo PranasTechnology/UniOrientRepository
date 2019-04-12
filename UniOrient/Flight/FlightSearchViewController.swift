@@ -13,16 +13,26 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var segmentView: UIView!
     @IBOutlet weak var nonstopImg: UIImageView!
+    
+    @IBOutlet weak var RnonStopImg: UIImageView!
+     var dateFormatter = DateFormatter()
     var className : [String] = [String]()
     var arrAdult : [String] = [String]()
     var arrChild : [String] = [String]()
     var arrInfant : [String] = [String]()
     var temp : String = String()
     var temp1 : String = String()
+    var temps : String = String()
+    var temps1 : String = String()
+    
     var tempPos1 : CGRect = CGRect()
     var tempPos2 : CGRect = CGRect()
+    var tempPos11 : CGRect = CGRect()
+    var tempPos22 : CGRect = CGRect()
     var strAdult = "", strChild = "", strInfant : String = ""
     var isFlipped: Bool = false
+    var wayType : String = String()
+    
     
     @IBOutlet weak var txtDeparture: UITextField!
     @IBOutlet weak var txtArrival: UITextField!
@@ -39,6 +49,8 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var travellerView: UIView!
     @IBOutlet weak var travelView: UIView!
     @IBOutlet weak var stopBtn: UIButton!
+    
+    @IBOutlet weak var RstopBtn: UIButton!
     @IBOutlet weak var hotelBtn: UIButton!
     @IBOutlet weak var flightBtn: UIButton!
     @IBOutlet weak var swapBtn: UIButton!
@@ -54,9 +66,27 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var control1: BetterSegmentedControl!
     
      @IBOutlet var scrollPager: ScrollPager!
- @IBOutlet weak var flightScrollView: UIScrollView!
-     @IBOutlet weak var hotelScrollView: UIView!
-      @IBOutlet weak var multicityView: UIView!
+    
+/////////// RoundTrip Controls
+    
+    @IBOutlet weak var RdepartureCity: UITextField!
+    @IBOutlet weak var lblRdepartureCountry: UILabel!
+    @IBOutlet weak var Rarrivalcity: UITextField!
+    @IBOutlet weak var lblRarrivalCountry: UILabel!
+    
+    @IBOutlet weak var RdepartureDate: UITextField!
+    
+    @IBOutlet weak var lblRdepartureDay: UILabel!
+    @IBOutlet weak var RarrivalDate: UITextField!
+    
+    @IBOutlet weak var lblRarrivalDay: UILabel!
+    
+    @IBOutlet weak var RtxtClass: UITextField!
+    @IBOutlet weak var RtxtTraveller: UITextField!
+    ///////
+    @IBOutlet var roundTripView: UIView!
+    @IBOutlet var onewayView: UIView!
+    @IBOutlet weak var multicityView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         classChooseView .isHidden = true
@@ -71,7 +101,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         UserDefaults.standard.set("", forKey: "selectedDeptDay")
         UserDefaults.standard.set("", forKey: "selectedArrDay")
        // UserDefaults.standard.set("twoway", forKey: "wayType")
-         UserDefaults.standard.set("oneway", forKey: "wayType")
+         UserDefaults.standard.set("one", forKey: "wayType")
         classTableView.layer.cornerRadius = 5.0
          travelView.layer.cornerRadius = 5.0
         className = ["Economy Class","Premium Economy Class","Business Class","First Class"]
@@ -81,7 +111,10 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         
         tempPos1 = txtDeparture.frame
         tempPos2 = lblDepartureCity.frame
- 
+        
+        tempPos11 = RdepartureCity.frame
+        tempPos22 = lblRdepartureCountry.frame
+        wayType="one"
         ////// Botton Border
     
 //        hotelBtn.layer.borderWidth = 1
@@ -90,25 +123,25 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
 //        flightBtn.layer.borderColor = UIColor.gray.cgColor
      
         /// SegmentControl
-        control1.segments = LabelSegment.segments(withTitles: ["One Way", "Round Trip", "Multi City"],
-                                                  normalFont: UIFont(name: "HelveticaNeue-Light", size: 13.0)!,
-                                                  selectedFont: UIFont(name: "HelveticaNeue-Medium", size: 13.0)!)
+        control1.segments = LabelSegment.segments(withTitles: ["One Way", "Round Trip"],
+                                                  normalFont: UIFont(name: "HelveticaNeue-Medium", size: 15.0)!,
+                                                  selectedFont: UIFont(name: "HelveticaNeue-Bold", size: 17.0)!)
         ///SwipeGesture
 //        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
 //        swipeLeft.direction = .left
 //        self.hotelView.addGestureRecognizer(swipeLeft)
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-        swipeRight.direction = .right
-        self.flightView.addGestureRecognizer(swipeRight)
+//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
+//        swipeRight.direction = .right
+//        self.flightView.addGestureRecognizer(swipeRight)
       
-        let firstView = UIScrollView()
+        let firstView = UIView()
         firstView.backgroundColor = UIColor.white
-        firstView .addSubview(hotelScrollView)
+        firstView .addSubview(onewayView)
 
         let secondView = UIView()
         secondView.backgroundColor = UIColor.white
-        secondView .addSubview(flightView)
+        secondView .addSubview(roundTripView)
         
         let thirdView = UIView()
         thirdView.backgroundColor = UIColor.white
@@ -117,11 +150,14 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         scrollPager.delegate = self
         scrollPager.addSegmentsWithTitlesAndViews(segments: [
             ("One Way", firstView),
-            ("Round Trip", secondView),
-            ("Multi City", thirdView)
+            ("Round Trip", secondView)
             ])
         
-       
+   /// call Get Current date function
+        strAdult = "1"
+        strChild = "0"
+        strInfant = "0"
+        self .getCurrentDate()
     }
     
     // MARK: - ScrollPagerDelegate -
@@ -130,9 +166,20 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     {
         if(changedIndex == 0)
         {
-            
+            wayType = "one"
+            UserDefaults .standard .set("one", forKey: "wayType")
         }
-        print("scrollPager index changed: \(changedIndex)")
+        else if(changedIndex == 1)
+        {
+            wayType = "two"
+            UserDefaults .standard .set("two", forKey: "wayType")
+        }
+//        else if(changedIndex == 2)
+//        {
+//            wayType = "multi"
+//            UserDefaults .standard .set("multi", forKey: "wayType")
+//        }
+    
     }
     
 //MARK - SWipe Gesture
@@ -167,48 +214,91 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         let selectedDeptDay = (UserDefaults.standard.value(forKey: "selectedDeptDay") as! String)
         let selectedArrDay = (UserDefaults.standard.value(forKey: "selectedArrDay") as! String)
         print("\(selectedDeptDate),\(selectedArrDate),\(selectedDeptDay),\(selectedArrDay)")
-       if departureCity.isEmpty
-       {
-        txtDeparture .text = "Source"
-       }
-       else{
-            txtDeparture .text = departureCode
-            let mySubstring = String(departureCity.dropLast(5))
-            lblDepartureCity.text = String(mySubstring)
-            var last4 = departureCity.suffix(4)
-            last4 = last4.dropLast(1)
-            txtDeparture .text = String(last4)
-        }
+      
         if arrivalCity.isEmpty
         {
-            txtArrival .text = "Departure"
+//            if(wayType == "one")
+//            {
+//                txtArrival .text = "Departure"
+//            }
+//            else{
+//                Rarrivalcity .text = "Departure"
+//            }
+            
         }
         else{
+            
+            if(wayType == "one")
+        {
             txtArrival .text = arrivalCode
             let mySubstring = String(arrivalCity.dropLast(5))
             lblArrivalCity.text = String(mySubstring)
             var last4 = arrivalCity.suffix(4)
             last4 = last4.dropLast(1)
             txtArrival .text = String(last4)
+            }
+            else{
+                Rarrivalcity .text = arrivalCode
+                let mySubstring = String(arrivalCity.dropLast(5))
+                lblRarrivalCountry.text = String(mySubstring)
+                var last4 = arrivalCity.suffix(4)
+                last4 = last4.dropLast(1)
+                Rarrivalcity .text = String(last4)
+            }
+         
+        }
+        if departureCity.isEmpty
+        {
+         
+        }
+        else{
+            
+            if(wayType == "one")
+            {
+                txtDeparture .text = departureCode
+                let mySubstring = String(departureCity.dropLast(5))
+                lblDepartureCity.text = String(mySubstring)
+                var last4 = departureCity.suffix(4)
+                last4 = last4.dropLast(1)
+                txtDeparture .text = String(last4)
+            }
+            else{
+                RdepartureCity .text = departureCode
+                let mySubstring = String(departureCity.dropLast(5))
+                lblRdepartureCountry.text = String(mySubstring)
+                var last4 = departureCity.suffix(4)
+                last4 = last4.dropLast(1)
+                RdepartureCity .text = String(last4)
+            }
+            
         }
         if selectedDeptDate.isEmpty
         {
            // txtDeparture .text = "Source"
         }
         else{
-            txtDepartureDate .text = selectedDeptDate
-            lblDepartureDay.text = selectedDeptDay
+            if(wayType == "one")
+            {
+                txtDepartureDate .text = selectedDeptDate
+                lblDepartureDay.text = selectedDeptDay
+            }else{
+                RdepartureDate .text = selectedDeptDate
+                lblRdepartureDay.text = selectedDeptDay
+            }
+       
         }
         if selectedArrDate.isEmpty
         {
             // txtDeparture .text = "Source"
         }
         else{
-            txtArrivalDate .text = selectedArrDate
-            lblArrivalDay .text = selectedArrDay
+            RarrivalDate .text = selectedArrDate
+            lblRarrivalDay .text = selectedArrDay
         }
         temp = txtDeparture.text!
         temp1 = lblDepartureCity.text!
+        temps = RdepartureCity.text!
+        temps1 = lblRdepartureCountry.text!
       
     }
     // MARK: - Action handlers
@@ -226,54 +316,6 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func segmentedControl1ValueChanged(_ sender: BetterSegmentedControl) {
         if(sender.index == 0)
         {
-            UIView.animate(withDuration: 1.0,
-                           delay: 0.0,
-                           options: [],
-                           animations: {
-                            
-                            self.flightView.backgroundColor = .yellow
-                            //self.blueView.alpha = 0.0
-                            self.flightView.frame.size.width -= self.flightView.frame.size.width
-                            self.flightView.frame.size.height -=  self.flightView.frame.size.height
-                            
-                            //self.blueView.frame.origin.x += 120
-                            self.flightView.frame.origin.x -=  self.flightView.frame.origin.x
-                            self.flightView.frame.origin.y -= self.flightView.frame.origin.y
-            })
-        }
-        else if(sender.index == 1)
-        {
-            UIView.animate(withDuration: 1.0,
-                           delay: 1.0,
-                           options: [],
-                           animations: {
-                            
-                            self.flightView.backgroundColor = .yellow
-                            //self.blueView.alpha = 0.0
-                            self.flightView.frame.size.width -= self.flightView.frame.size.width
-                            self.flightView.frame.size.height -=  self.flightView.frame.size.height
-                            
-                            //self.blueView.frame.origin.x += 120
-                            self.flightView.frame.origin.x -=  self.flightView.frame.origin.x
-                            self.flightView.frame.origin.y -= self.flightView.frame.origin.y
-            })
-        }
-        else if(sender.index == 2)
-        {
-            UIView.animate(withDuration: 1.0,
-                           delay: 1.0,
-                           options: [],
-                           animations: {
-                            
-                            self.flightView.backgroundColor = .yellow
-                            //self.blueView.alpha = 0.0
-                            self.flightView.frame.size.width -= self.flightView.frame.size.width
-                            self.flightView.frame.size.height -=  self.flightView.frame.size.height
-                            
-                            //self.blueView.frame.origin.x += 120
-                            self.flightView.frame.origin.x -=  self.flightView.frame.origin.x
-                            self.flightView.frame.origin.y -= self.flightView.frame.origin.y
-            })
         }
     }
 ///////////// tableView DataSource - Delegate Method
@@ -298,7 +340,13 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        txtClass . text = className[indexPath.row]
+        if(wayType == "one")
+        {
+            txtClass . text = className[indexPath.row]
+        }else{
+             RtxtClass . text = className[indexPath.row]
+        }
+       
         classChooseView .isHidden = true
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -307,7 +355,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
             //headerView.contentView.backgroundColor = .white
-            headerView.textLabel?.textColor = WebServicesUrl.appColor1
+            headerView.textLabel?.textColor = WebServicesUrl.appColor2
             
         }
     }
@@ -416,14 +464,27 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func nonStopSelectionBtn(_ sender: Any)
     {
-        if stopBtn.isSelected == true {
-            stopBtn.isSelected = false
-            nonstopImg.image = UIImage (named: "square.png")
-         
-        }else {
-            stopBtn.isSelected = true
-            nonstopImg.image = UIImage (named: "black-check-box-with-white-check.png")
+        if(wayType == "one"){
+            if stopBtn.isSelected == true {
+                stopBtn.isSelected = false
+                nonstopImg.image = UIImage (named: "square.png")
+                
+            }else {
+                stopBtn.isSelected = true
+                nonstopImg.image = UIImage (named: "black-check-box-with-white-check.png")
+            }
         }
+        else{
+            if RstopBtn.isSelected == true {
+                RstopBtn.isSelected = false
+                RnonStopImg.image = UIImage (named: "square.png")
+                
+            }else {
+                RstopBtn.isSelected = true
+                RnonStopImg.image = UIImage (named: "black-check-box-with-white-check.png")
+            }
+        }
+       
       
     }
 
@@ -432,7 +493,25 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     {
 //          let DictInput = ["Origin":self.originToPass!,"Destination":self.destinationToPass!,"DepartureDate":selectedDepartOnStrToPass!,"Returndate":selectedReturnOnStrToPass!,"WayType":self.onewayBtn.isSelected ? "one":"two","CabinClass":self.classSelectedItem,"AdultCount":self.adultSelectedItem,"ChildCount":self.childrenSelectedItem,"InfantCount":self.infantSelectedItem,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
       
-        let DictInput = ["Origin":"SIN","Destination":"JFK","DepartureDate":"2019-05-15","Returndate":"2019-05-25","WayType":"two","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+       var DictInput = Dictionary<String, String>()
+        if(wayType == "one")
+        {
+            var departDate : String = String()
+            departDate = convertDateFormater(txtDepartureDate.text!)
+            print("date",departDate)
+            DictInput = ["Origin":txtDeparture.text!,"Destination":txtArrival.text! ,"DepartureDate":departDate,"Returndate":"","WayType":"one","CabinClass":txtClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+        }
+        else{
+            var departDate : String = String()
+            departDate = convertDateFormater(RdepartureDate.text!)
+            print("date",departDate)
+            var arriveDate : String = String()
+            arriveDate = convertDateFormater(RarrivalDate.text!)
+            print("date",arriveDate)
+            
+            DictInput = ["Origin":RdepartureCity.text!,"Destination":Rarrivalcity.text!,"DepartureDate":departDate,"Returndate":arriveDate,"WayType":"two","CabinClass":RtxtClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+        }
+//        DictInput = ["Origin":"SIN","Destination":"JFK","DepartureDate":"2019-05-15","Returndate":"2019-05-25","WayType":"two","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
         
         let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "FlightResultVC") as! FlightResultVCGoomo
         ctrl.inputDict = DictInput
@@ -453,7 +532,15 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         {
             strInfant = "0"
         }
-         txtTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+        if(wayType == "one")
+        {
+              txtTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+        }
+        else
+        {
+             RtxtTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+        }
+       
          travellerView .isHidden = true
     }
     
@@ -477,8 +564,10 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         })
         
         UIView.beginAnimations(nil, context: nil)
+       if(wayType == "one")
+       {
         if button.isSelected == true {
-          //  swapBtn.isSelected = false
+            //  swapBtn.isSelected = false
             txtDeparture.frame = txtArrival.frame
             txtArrival.frame   = tempPos1
             lblDepartureCity.frame = lblArrivalCity.frame
@@ -489,9 +578,9 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             lblArrivalCity.textAlignment  = .left
             txtDeparture.placeholder = "Destination"
             txtArrival . placeholder = "Source"
-
+            
         }else {
-           // swapBtn.isSelected = true
+            // swapBtn.isSelected = true
             txtArrival.frame = txtDeparture .frame
             txtDeparture.frame = tempPos1
             lblArrivalCity.frame = lblDepartureCity.frame
@@ -503,6 +592,37 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             lblArrivalCity.textAlignment  = .right
             txtDeparture.placeholder = "Source"
             txtArrival . placeholder = "Destination"
+        }
+        }
+        else
+       {
+        if button.isSelected == true {
+            //  swapBtn.isSelected = false
+            RdepartureCity.frame = Rarrivalcity.frame
+            Rarrivalcity.frame   = tempPos11
+            lblRdepartureCountry.frame = lblRarrivalCountry.frame
+            lblRarrivalCountry.frame   = tempPos22
+            RdepartureCity.textAlignment = .right
+            Rarrivalcity.textAlignment = .left
+            lblRdepartureCountry.textAlignment = .right
+            lblRarrivalCountry.textAlignment  = .left
+            RdepartureCity.placeholder = "Destination"
+            Rarrivalcity . placeholder = "Source"
+            
+        }else {
+            // swapBtn.isSelected = true
+            Rarrivalcity.frame = RdepartureCity .frame
+            RdepartureCity.frame = tempPos11
+            lblRarrivalCountry.frame = lblRdepartureCountry.frame
+            lblRdepartureCountry.frame = tempPos22
+            
+            RdepartureCity.textAlignment = .left
+            Rarrivalcity.textAlignment = .right
+            lblRdepartureCountry.textAlignment = .left
+            lblRarrivalCountry.textAlignment  = .right
+            RdepartureCity.placeholder = "Source"
+            Rarrivalcity . placeholder = "Destination"
+        }
         }
         UIView.commitAnimations()
     }
@@ -557,7 +677,46 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
     }
     */
-    
+//////Get current date
+    func getCurrentDate()
+    {
+        let date1 = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"//"dd MMM yy"//2019-05-15
+        let result = formatter.string(from: date1)
+        print(result)
+        
+/////getDay
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter.string(from: date)
+        print(dayInWeek)
+        
+/////////get nextdate
+        
+         print(convertNextDate(dateString: result))
+
+//////////
+        
+        txtDepartureDate . text = result
+        lblDepartureDay.text = dayInWeek
+        RdepartureDate . text = result
+        lblRdepartureDay.text = dayInWeek
+        
+//        if(wayType == "one")
+//        {
+//            txtDepartureDate . text = result
+//            lblDepartureDay.text = dayInWeek
+//           // txtArrivalDate.text = "\(String.convertNextDate(result))"
+//        }
+//        else  if(wayType == "two")
+//        {
+//            RdepartureDate . text = result
+//            lblRdepartureDay.text = dayInWeek
+//          //  RarrivalDate.text = "\(String.convertNextDate(result))"
+//        }
+    }
 // MARK : Bottom View Action
     
     @IBAction func myBookingsBtn(_ sender: Any)
@@ -589,6 +748,39 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         bookingImg.image = UIImage (named: "briefcaseGray")
         bookingLbl.textColor = UIColor.darkGray
     }
-    
-  
+    func convertNextDate(dateString : String){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        let myDate = dateFormatter.date(from: dateString)!
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: myDate)
+        let somedateString = dateFormatter.string(from: tomorrow!)
+        print("your next Date is \(somedateString)")
+        RarrivalDate .text = "\(somedateString)"
+///Get next day
+        let isoDate = somedateString
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        dateFormatter1.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        let date2 = dateFormatter1.date(from:isoDate)!
+        print(date2)
+        let dayInWeek1 = dateFormatter.string(from: date2)
+        
+        let date = date2
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter2.string(from: date)
+        print(dayInWeek)
+        
+        print("your next day is \(dayInWeek)")
+        lblRarrivalDay.text = "\(dayInWeek)"
+    }
+    func convertDateFormater(_ date: String) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM,yyyy"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return  dateFormatter.string(from: date!)
+        
+    }
 }

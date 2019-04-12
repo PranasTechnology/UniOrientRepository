@@ -22,4 +22,20 @@ extension String {
         let result =  phoneTest.evaluate(with: self)
         return result
     }
+    func convertNextDate(dateString : String){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yy"//"dd MM yyyy"
+        let myDate = dateFormatter.date(from: dateString)!
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: myDate)
+        let somedateString = dateFormatter.string(from: tomorrow!)
+        print("your next Date is \(somedateString)")
+    }
+    func getDayOfWeek(_ today:String) -> Int? {
+        let formatter  = DateFormatter()
+        formatter.dateFormat = "dd MMM yy"//"yyyy-MM-dd"
+        guard let todayDate = formatter.date(from: today) else { return nil }
+        let myCalendar = Calendar(identifier: .gregorian)
+        let weekDay = myCalendar.component(.weekday, from: todayDate)
+        return weekDay
+    }
 }

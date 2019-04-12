@@ -134,7 +134,15 @@ class FlightResultVCGoomo: UIViewController {
         
         
         //New Format
-//        self.tripDetailSourceLbl.text = self.inputDict["Origin"]!
+       if( self.way == "one" )
+       {
+         self.tripDetailSourceLbl.text = self.inputDict["Origin"]! + " -> " + self.inputDict["Destination"]!
+        }
+       else{
+         self.tripDetailSourceLbl.text = self.inputDict["Origin"]! + " <-> " + self.inputDict["Destination"]!
+        }
+       
+    UserDefaults .standard .set(self.tripDetailSourceLbl.text, forKey: "toplbl")
 //        var passengerStr = "\(self.inputDict["AdultCount"]!) \(adultStr!) "
 //
 //        if Int(self.inputDict["ChildCount"]!)! != 0 {

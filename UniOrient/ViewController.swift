@@ -10,6 +10,12 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var testBtn: UIButton!
     
+    @IBOutlet weak var bookingLbl: UILabel!
+    @IBOutlet weak var bookingImg: UIImageView!
+    @IBOutlet weak var myAccountLbl: UILabel!
+    @IBOutlet weak var userImg: UIImageView!
+    @IBOutlet weak var homeLbl: UILabel!
+    @IBOutlet weak var homeImg: UIImageView!
     @IBOutlet weak var flightView: UIView!
     @IBOutlet weak var hotelView: UIView!
     @IBOutlet weak var lblFLight: UILabel!
@@ -55,7 +61,8 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
-    @IBAction func hotelBtn(_ sender: Any) {
+    @IBAction func hotelBtn(_ sender: Any)
+    {
     }
     
     @IBAction func holidayBtn(_ sender: Any) {
@@ -70,7 +77,12 @@ class ViewController: UIViewController {
     }
     @IBAction func myBookingBtn(_ sender: Any)
     {
-        
+        homeImg.image = UIImage (named: "homeGray")
+        homeLbl.textColor = UIColor.darkGray
+        userImg.image = UIImage (named: "userGray")
+        myAccountLbl.textColor = UIColor.darkGray
+        bookingImg.image = UIImage (named: "briefcaseRed")
+        bookingLbl.textColor = WebServicesUrl.appColor2
     }
 }
 

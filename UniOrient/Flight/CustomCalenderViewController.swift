@@ -162,13 +162,13 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
         }
         selectedDay = dayView
         
-//        let wayType = UserDefaults .standard.value(forKey: "wayType")
-//        if (wayType as! String == "oneway")
-//        {
-//            UserDefaults .standard.set(dayView.date.commonDescription, forKey: "selectedDeptDate")
-//            UserDefaults .standard.set(strDay, forKey: "selectedDeptDay")
-//            self.navigationController?.popViewController(animated: true)
-//        }
+        let wayType = UserDefaults .standard.value(forKey: "wayType")
+        if (wayType as! String == "one")
+        {
+            UserDefaults .standard.set(dayView.date.commonDescription, forKey: "selectedDeptDate")
+            UserDefaults .standard.set(strDay, forKey: "selectedDeptDay")
+            self.navigationController?.popViewController(animated: true)
+        }
         
     }
     
@@ -389,7 +389,7 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
     
     func latestSelectableDate() -> Date {
         var dayComponents = DateComponents()
-        dayComponents.day = 70
+        dayComponents.day = 2000
         let calendar = Calendar(identifier: .gregorian)
         if let lastDate = calendar.date(byAdding: dayComponents, to: Date()) {
             return lastDate
