@@ -42,7 +42,9 @@ class DesignableLabel: UILabel {
 class DesignableTextField : UITextField {
     
 }
-
+protocol YourCellDelegate : class {
+    func didPressButton(_ tag: Int)
+}
 extension UIView {
     
     

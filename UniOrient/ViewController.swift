@@ -69,11 +69,21 @@ class ViewController: UIViewController {
     }
     @IBAction func homeBtn(_ sender: Any)
     {
-        
+        homeImg.image = UIImage (named: "homeRed")
+        homeLbl.textColor = WebServicesUrl.appColor2
+        userImg.image = UIImage (named: "userGray")
+        myAccountLbl.textColor = UIColor.darkGray
+        bookingImg.image = UIImage (named: "briefcaseGray")
+        bookingLbl.textColor = UIColor.darkGray
     }
     @IBAction func myaccountBtn(_ sender: Any)
     {
-        
+        homeImg.image = UIImage (named: "homeGray")
+        homeLbl.textColor = UIColor.darkGray
+        userImg.image = UIImage (named: "userRed")
+        myAccountLbl.textColor = WebServicesUrl.appColor2
+        bookingImg.image = UIImage (named: "briefcaseGray")
+        bookingLbl.textColor = UIColor.darkGray
     }
     @IBAction func myBookingBtn(_ sender: Any)
     {

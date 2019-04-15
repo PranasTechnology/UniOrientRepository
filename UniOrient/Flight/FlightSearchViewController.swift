@@ -9,8 +9,11 @@
 import UIKit
 import BetterSegmentedControl
 
-class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIPickerViewDataSource,UIPickerViewDelegate, ScrollPagerDelegate{
+class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, YourCellDelegate ,UIPickerViewDataSource,UIPickerViewDelegate, ScrollPagerDelegate{
 
+    @IBOutlet weak var multicityTableView: UITableView!
+    
+    @IBOutlet var multiCityBottomView: UIView!
     @IBOutlet weak var segmentView: UIView!
     @IBOutlet weak var nonstopImg: UIImageView!
     
@@ -20,6 +23,15 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     var arrAdult : [String] = [String]()
     var arrChild : [String] = [String]()
     var arrInfant : [String] = [String]()
+    
+    var arrMultiTitle : [String] = [String]()
+    var arrMultiDepartCode : [String] = [String]()
+    var arrMultiDepartCity : [String] = [String]()
+    var arrMultiArriCode : [String] = [String]()
+    var arrMultiArriCity : [String] = [String]()
+    var arrMultiDate : [String] = [String]()
+    var arrMultiDay : [String] = [String]()
+    
     var temp : String = String()
     var temp1 : String = String()
     var temps : String = String()
@@ -105,6 +117,16 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         classTableView.layer.cornerRadius = 5.0
          travelView.layer.cornerRadius = 5.0
         className = ["Economy Class","Premium Economy Class","Business Class","First Class"]
+        arrMultiTitle = ["   Flight 1   ","   Flight 2   ","   Flight 3   "]
+        arrMultiDepartCode = ["Source","Source","Source"]
+        arrMultiDepartCity = ["Select City","Select City","Select City"]
+        arrMultiArriCode = ["Destination","Destination","Destination"]
+        arrMultiArriCity = ["Select City","Select City","Select City"]
+//        [arrFromCityCode addObject:@"Source"];
+//        [arrFromCityName addObject:@"Select City"];
+//        [arrToCityCode addObject:@"Destination"];
+//        [arrToCityName addObject:@"Select City"];
+//
          arrAdult = ["1","2","3","4","5","6","7","8","9","10"]
          arrChild = ["0","1","2","3","4","5","6","7","8","9"]
          arrInfant = ["0","1","2","3","4","5","6","7","8","9"]
@@ -140,17 +162,26 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         firstView .addSubview(onewayView)
 
         let secondView = UIView()
-        secondView.backgroundColor = UIColor.white
+      //  secondView.backgroundColor = UIColor.white
         secondView .addSubview(roundTripView)
         
+    //    multicityView .addSubview(multicityTableView)
         let thirdView = UIView()
-        thirdView.backgroundColor = UIColor.white
+     //   thirdView.backgroundColor = UIColor.white
         thirdView .addSubview(multicityView)
+        
+        let forthView = UIView()
+      //  forthView.backgroundColor = UIColor.white
+//        forthView.delegate = self
+//        forthView.dataSource = self
+        forthView .addSubview(multicityTableView)
         
         scrollPager.delegate = self
         scrollPager.addSegmentsWithTitlesAndViews(segments: [
             ("One Way", firstView),
-            ("Round Trip", secondView)
+            ("Round Trip", secondView),
+             ("Multi City", thirdView),
+              ("dummy View", forthView)
             ])
         
    /// call Get Current date function
@@ -158,6 +189,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         strChild = "0"
         strInfant = "0"
         self .getCurrentDate()
+        multicityTableView.tableFooterView = multiCityBottomView
     }
     
     // MARK: - ScrollPagerDelegate -
@@ -174,11 +206,11 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             wayType = "two"
             UserDefaults .standard .set("two", forKey: "wayType")
         }
-//        else if(changedIndex == 2)
-//        {
-//            wayType = "multi"
-//            UserDefaults .standard .set("multi", forKey: "wayType")
-//        }
+        else if(changedIndex == 2)
+        {
+            wayType = "multi"
+            UserDefaults .standard .set("multi", forKey: "wayType")
+        }
     
     }
     
@@ -237,10 +269,18 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             last4 = last4.dropLast(1)
             txtArrival .text = String(last4)
             }
-            else{
+            else if(wayType == "two"){
                 Rarrivalcity .text = arrivalCode
                 let mySubstring = String(arrivalCity.dropLast(5))
                 lblRarrivalCountry.text = String(mySubstring)
+                var last4 = arrivalCity.suffix(4)
+                last4 = last4.dropLast(1)
+                Rarrivalcity .text = String(last4)
+            }
+            else
+            {
+                let mySubstring = String(arrivalCity.dropLast(5))
+                arrMultiArriCity.insert(String(mySubstring), at: 0)
                 var last4 = arrivalCity.suffix(4)
                 last4 = last4.dropLast(1)
                 Rarrivalcity .text = String(last4)
@@ -326,31 +366,105 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int
     {
-        return className.count
+        if(tableView == multicityTableView)
+        {
+            return arrMultiTitle.count
+        }
+        else{
+            return className.count
+        }
+        
     }
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
-        let label1 = cell.viewWithTag(1) as! UILabel
-        label1.text = className[indexPath.row]
-        
-        return cell
+        if(tableView == multicityTableView)
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
+            
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! multiTableViewCell
+//            cell.cellDelegate = self as YourCellDelegate
+//            cell.departBtn.tag = indexPath.row
+            
+            let title = cell.viewWithTag(1) as! UILabel
+            let departCode = cell.viewWithTag(4) as! UILabel
+            let departCity = cell.viewWithTag(5) as! UILabel
+            let arriCode = cell.viewWithTag(6) as! UILabel
+            let arriCity = cell.viewWithTag(7) as! UILabel
+            let departDate = cell.viewWithTag(8) as! UILabel
+            let departDay = cell.viewWithTag(9) as! UILabel
+            let departBtn = cell.viewWithTag(11) as! UIButton
+            let ArriBtn = cell.viewWithTag(22) as! UIButton
+            let DateBtn = cell.viewWithTag(33) as! UIButton
+
+            title.text = arrMultiTitle[indexPath.row]
+            departCode.text = arrMultiDepartCode[indexPath.row]
+            departCity.text = arrMultiDepartCity[indexPath.row]
+            arriCode.text = arrMultiArriCode[indexPath.row]
+            arriCity.text = arrMultiArriCity[indexPath.row]
+//            departDate.text = arrMultiDate[indexPath.row]
+//            departDay.text = arrMultiDay[indexPath.row]
+//
+            departBtn.addTarget(self, action: #selector(departBtnClicked(sender:)), for: .touchUpInside)
+
+            ArriBtn.addTarget(self, action:#selector(arriBtnClicked(sender:)), for: .touchUpInside)
+            DateBtn.addTarget(self, action:#selector(dateBtnClicked(sender:)), for: .touchUpInside)
+            departBtn.tag = indexPath.row
+            return cell
+        }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
+            let label1 = cell.viewWithTag(1) as! UILabel
+            label1.text = className[indexPath.row]
+            return cell
+        }
+     
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(tableView == multicityTableView)
+        {
+            return 130.0
+        }
+        else
+        {
+            return 50.0
+        }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if(wayType == "one")
+        if(tableView == multicityTableView)
         {
-            txtClass . text = className[indexPath.row]
-        }else{
-             RtxtClass . text = className[indexPath.row]
+            print("HELLO")
         }
+        else if(tableView == classTableView)
+        {
+            if(wayType == "one")
+            {
+                txtClass . text = className[indexPath.row]
+            }else{
+                RtxtClass . text = className[indexPath.row]
+            }
+            
+            classChooseView .isHidden = true
+        }else{
        
-        classChooseView .isHidden = true
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchCityVC") as? SearchCityViewController
+            vc?.selectableCity = "departure"
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+     
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Choose Class"
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        if(tableView == classTableView)
+        {
+            return "Choose Class"
+        }
+        else{
+            return ""
+        }
+        
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
@@ -782,5 +896,29 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return  dateFormatter.string(from: date!)
         
+    }
+    @objc func departBtnClicked(sender: UIButton){
+        let buttonTag = sender.tag
+        print("indexpath",buttonTag)
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchCityVC") as? SearchCityViewController
+        vc?.selectableCity = "departure"
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+   
+    @objc func arriBtnClicked(sender: UIButton)
+    {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchCityVC") as? SearchCityViewController
+        vc?.selectableCity = "arrival"
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    @objc func dateBtnClicked(sender: UIButton)
+    {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CustomCalenderVC") as? CustomCalenderViewController
+        vc?.selectableDate = "departureDate"
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+   
+    func didPressButton(_ tag: Int) {
+        print("I have pressed a button with a tag: \(tag)")
     }
 }
