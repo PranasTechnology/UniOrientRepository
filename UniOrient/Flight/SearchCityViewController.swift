@@ -14,6 +14,7 @@ var searchedArray2 = [String]()
 
 class SearchCityViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
+    @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtSearchBar: UITextField!
     var selectableCity: String = String()
@@ -21,14 +22,25 @@ class SearchCityViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        txtSearchBar .becomeFirstResponder()
+        if selectableCity == "arrival"
+        {
+            lblTitle.text = "Arriving Airport"
+        }
+        else{
+             lblTitle.text = "Departing Airport"
+        }
+       // txtSearchBar .becomeFirstResponder()
         txtSearchBar.addTarget(self, action: #selector(searchRecordsAsPerText(_ :)), for: .editingChanged)
         self.getJSON ()
         //DselectedCityName DselectedCityCode
     }
-    private func textFieldShouldReturn(textField: UITextField!) -> Bool {   //delegate method
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.becomeFirstResponder()
     }
     func getJSON()
     {
@@ -46,6 +58,8 @@ class SearchCityViewController: UIViewController, UITableViewDelegate, UITableVi
                     print(airports[0])
                     searchedArray1 = cityName
                     searchedArray2 = cityCode
+                    searchedArray1 = Array(Set(searchedArray1))
+                    searchedArray2 = Array(Set(searchedArray2))
                     tableView.reloadData()
                 }
             } catch {
@@ -103,10 +117,12 @@ class SearchCityViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 if range != nil {
                     searchedArray1.append(strCountry)
+                   searchedArray1 = Array(Set(searchedArray1))
                 }
             }
         } else {
             searchedArray1 = cityName
+            searchedArray1 = Array(Set(searchedArray1))
         }
    
         print(searchedArray1.count)

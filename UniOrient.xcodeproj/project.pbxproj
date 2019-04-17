@@ -119,8 +119,11 @@
 		8F464B42225E2220001E4FF7 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B3D225E221F001E4FF7 /* Palette.swift */; };
 		8F464B43225E2220001E4FF7 /* TwicketSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B3F225E221F001E4FF7 /* TwicketSegmentedControl.swift */; };
 		8F464B44225E2220001E4FF7 /* UIViewShadowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B40225E221F001E4FF7 /* UIViewShadowExtension.swift */; };
+		8F4A480D2265ED010010DC84 /* OneWayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4A480C2265ED010010DC84 /* OneWayViewController.swift */; };
+		8F4A480F2265ED9B0010DC84 /* MultiCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4A480E2265ED9B0010DC84 /* MultiCityViewController.swift */; };
 		8FC6E589225CA017002C9D60 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6E588225CA017002C9D60 /* SummaryViewController.swift */; };
 		8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD04BA22573EFB00CCD296 /* ShadowView.swift */; };
+		8FF8087E2266E0BE00019444 /* RoundTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */; };
 		F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */; };
 /* End PBXBuildFile section */
 
@@ -271,8 +274,11 @@
 		8F464B3E225E221F001E4FF7 /* TwicketSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwicketSegmentedControl.h; sourceTree = "<group>"; };
 		8F464B3F225E221F001E4FF7 /* TwicketSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwicketSegmentedControl.swift; sourceTree = "<group>"; };
 		8F464B40225E221F001E4FF7 /* UIViewShadowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewShadowExtension.swift; sourceTree = "<group>"; };
+		8F4A480C2265ED010010DC84 /* OneWayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneWayViewController.swift; sourceTree = "<group>"; };
+		8F4A480E2265ED9B0010DC84 /* MultiCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiCityViewController.swift; sourceTree = "<group>"; };
 		8FC6E588225CA017002C9D60 /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		8FDD04BA22573EFB00CCD296 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTripViewController.swift; sourceTree = "<group>"; };
 		CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -401,6 +407,9 @@
 			isa = PBXGroup;
 			children = (
 				2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */,
+				8F4A480C2265ED010010DC84 /* OneWayViewController.swift */,
+				8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */,
+				8F4A480E2265ED9B0010DC84 /* MultiCityViewController.swift */,
 				8F1ECE7D22645DE200E989E7 /* multiTableViewCell.swift */,
 				2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */,
 				2E1950BA22533E8E00C14A5F /* twowayTableViewCell.swift */,
@@ -691,18 +700,16 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UniOrient/Pods-UniOrient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AACarousel/AACarousel.framework",
-				"${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/EDStarRating/EDStarRating.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeableTabBarController/SwipeableTabBarController.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeMenuViewController/SwipeMenuViewController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AACarousel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BetterSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EDStarRating.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeableTabBarController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeMenuViewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -752,6 +759,7 @@
 				8F1BB08B224DE16B00032798 /* FlightResultVCGoomo.swift in Sources */,
 				2E27D3C8224C8B42009A0E1F /* ViewController.swift in Sources */,
 				8F1BB0A7224DE72E00032798 /* AFURLResponseSerialization.m in Sources */,
+				8FF8087E2266E0BE00019444 /* RoundTripViewController.swift in Sources */,
 				8F1BB0D3224DE76E00032798 /* FSCalendarCalculator.m in Sources */,
 				2E27D421224C8D67009A0E1F /* CVCalendarViewDelegate.swift in Sources */,
 				8F1BB0D6224DE76E00032798 /* FSCalendarCollectionViewLayout.m in Sources */,
@@ -767,10 +775,12 @@
 				8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */,
 				8F1BB0AF224DE74B00032798 /* WebService.swift in Sources */,
 				2E27D427224C8D67009A0E1F /* CVPresent.swift in Sources */,
+				8F4A480F2265ED9B0010DC84 /* MultiCityViewController.swift in Sources */,
 				2E27D424224C8D67009A0E1F /* CVCalendarWeekday.swift in Sources */,
 				2E27D410224C8D67009A0E1F /* CustomCalenderViewController.swift in Sources */,
 				2E27D3C7224C8B42009A0E1F /* AppDelegate.swift in Sources */,
 				2E27D428224C8D67009A0E1F /* CVRange.swift in Sources */,
+				8F4A480D2265ED010010DC84 /* OneWayViewController.swift in Sources */,
 				8F464B3A225DFD1E001E4FF7 /* SingleTravellerDetailVCGoomo.swift in Sources */,
 				2E5F5266224E1992006ACE1E /* StringExtension.swift in Sources */,
 				2E8A3E522255CB92000D983D /* AnimatedGIFImageSerialization.m in Sources */,

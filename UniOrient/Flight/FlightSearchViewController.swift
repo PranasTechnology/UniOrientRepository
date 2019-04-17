@@ -7,10 +7,25 @@
 //
 
 import UIKit
-import BetterSegmentedControl
 
-class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, YourCellDelegate ,UIPickerViewDataSource,UIPickerViewDelegate, ScrollPagerDelegate{
 
+class FlightSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource ,UIPickerViewDataSource,UIPickerViewDelegate
+{
+//////// swipe Menu
+    
+    
+    @IBOutlet weak var onewayScroll: UIScrollView!
+    
+    @IBOutlet weak var roundTripScroll: UIScrollView!
+    
+    @IBOutlet weak var multiCityBtn: UIButton!
+    @IBOutlet weak var roundTripBtn: UIButton!
+    
+    @IBOutlet weak var onewayBtn: UIButton!
+  
+    
+////////
+    
     @IBOutlet weak var multicityTableView: UITableView!
     
     @IBOutlet var multiCityBottomView: UIView!
@@ -37,6 +52,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     var temps : String = String()
     var temps1 : String = String()
     
+    var multiChoose : String = String()
     var tempPos1 : CGRect = CGRect()
     var tempPos2 : CGRect = CGRect()
     var tempPos11 : CGRect = CGRect()
@@ -44,8 +60,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     var strAdult = "", strChild = "", strInfant : String = ""
     var isFlipped: Bool = false
     var wayType : String = String()
-    
-    
+    var index : Int = 0
     @IBOutlet weak var txtDeparture: UITextField!
     @IBOutlet weak var txtArrival: UITextField!
     @IBOutlet weak var lblDepartureCity: UILabel!
@@ -75,7 +90,6 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var accountLbl: UILabel!
     @IBOutlet weak var bookingImg: UIImageView!
     @IBOutlet weak var bookingLbl: UILabel!
-    @IBOutlet weak var control1: BetterSegmentedControl!
     
      @IBOutlet var scrollPager: ScrollPager!
     
@@ -85,25 +99,36 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var lblRdepartureCountry: UILabel!
     @IBOutlet weak var Rarrivalcity: UITextField!
     @IBOutlet weak var lblRarrivalCountry: UILabel!
-    
     @IBOutlet weak var RdepartureDate: UITextField!
-    
     @IBOutlet weak var lblRdepartureDay: UILabel!
     @IBOutlet weak var RarrivalDate: UITextField!
-    
     @IBOutlet weak var lblRarrivalDay: UILabel!
-    
     @IBOutlet weak var RtxtClass: UITextField!
     @IBOutlet weak var RtxtTraveller: UITextField!
     ///////
     @IBOutlet var roundTripView: UIView!
     @IBOutlet var onewayView: UIView!
     @IBOutlet weak var multicityView: UIView!
+    @IBOutlet weak var multiNonstopImg: UIImageView!
+    @IBOutlet weak var multiTraveller: UITextField!
+    
+    @IBOutlet weak var multiStopBtn: UIButton!
+    @IBOutlet weak var txtMultiClass: UITextField!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        onewayBtn.layer.cornerRadius = 10.0
+        onewayBtn.clipsToBounds = true
+        
+        roundTripBtn.layer.cornerRadius = 10.0
+        roundTripBtn.clipsToBounds = true
+        
+        multiCityBtn.layer.cornerRadius = 10.0
+        multiCityBtn.clipsToBounds = true
+        
         classChooseView .isHidden = true
          travellerView .isHidden = true
-     
+
         UserDefaults.standard.set("", forKey: "DselectedCityName")
         UserDefaults.standard.set("", forKey: "DselectedCityCode")
         UserDefaults.standard.set("", forKey: "AselectedCityName")
@@ -113,7 +138,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         UserDefaults.standard.set("", forKey: "selectedDeptDay")
         UserDefaults.standard.set("", forKey: "selectedArrDay")
        // UserDefaults.standard.set("twoway", forKey: "wayType")
-         UserDefaults.standard.set("one", forKey: "wayType")
+         UserDefaults.standard.set("two", forKey: "wayType")
         classTableView.layer.cornerRadius = 5.0
          travelView.layer.cornerRadius = 5.0
         className = ["Economy Class","Premium Economy Class","Business Class","First Class"]
@@ -122,6 +147,9 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         arrMultiDepartCity = ["Select City","Select City","Select City"]
         arrMultiArriCode = ["Destination","Destination","Destination"]
         arrMultiArriCity = ["Select City","Select City","Select City"]
+        arrMultiDate = ["Date","Date","Date"]
+        arrMultiDay = ["Day","Day","Day"]
+        
 //        [arrFromCityCode addObject:@"Source"];
 //        [arrFromCityName addObject:@"Select City"];
 //        [arrToCityCode addObject:@"Destination"];
@@ -130,68 +158,40 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
          arrAdult = ["1","2","3","4","5","6","7","8","9","10"]
          arrChild = ["0","1","2","3","4","5","6","7","8","9"]
          arrInfant = ["0","1","2","3","4","5","6","7","8","9"]
-        
+
         tempPos1 = txtDeparture.frame
         tempPos2 = lblDepartureCity.frame
-        
+
         tempPos11 = RdepartureCity.frame
         tempPos22 = lblRdepartureCountry.frame
-        wayType="one"
+        wayType="two"
         ////// Botton Border
-    
+
 //        hotelBtn.layer.borderWidth = 1
 //        hotelBtn.layer.borderColor = UIColor.gray.cgColor
 //        flightBtn.layer.borderWidth = 1
 //        flightBtn.layer.borderColor = UIColor.gray.cgColor
-     
-        /// SegmentControl
-        control1.segments = LabelSegment.segments(withTitles: ["One Way", "Round Trip"],
-                                                  normalFont: UIFont(name: "HelveticaNeue-Medium", size: 15.0)!,
-                                                  selectedFont: UIFont(name: "HelveticaNeue-Bold", size: 17.0)!)
-        ///SwipeGesture
-//        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-//        swipeLeft.direction = .left
-//        self.hotelView.addGestureRecognizer(swipeLeft)
-        
-//        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.handleGesture(gesture:)))
-//        swipeRight.direction = .right
-//        self.flightView.addGestureRecognizer(swipeRight)
-      
-        let firstView = UIView()
-        firstView.backgroundColor = UIColor.white
-        firstView .addSubview(onewayView)
 
-        let secondView = UIView()
-      //  secondView.backgroundColor = UIColor.white
-        secondView .addSubview(roundTripView)
-        
-    //    multicityView .addSubview(multicityTableView)
-        let thirdView = UIView()
-     //   thirdView.backgroundColor = UIColor.white
-        thirdView .addSubview(multicityView)
-        
-        let forthView = UIView()
-      //  forthView.backgroundColor = UIColor.white
-//        forthView.delegate = self
-//        forthView.dataSource = self
-        forthView .addSubview(multicityTableView)
-        
-        scrollPager.delegate = self
-        scrollPager.addSegmentsWithTitlesAndViews(segments: [
-            ("One Way", firstView),
-            ("Round Trip", secondView),
-             ("Multi City", thirdView),
-              ("dummy View", forthView)
-            ])
-        
+
    /// call Get Current date function
         strAdult = "1"
         strChild = "0"
         strInfant = "0"
         self .getCurrentDate()
         multicityTableView.tableFooterView = multiCityBottomView
+
+
+// //// New COde
+//        let imageView = UIImageView()
+//        imageView.frame = CGRect(x: 30, y: 20, width: self.view.frame.width-60, height: 50)
+//        imageView.image = UIImage (named: "Logo.png")
+//        self.view.addSubview(imageView)
+//
+        // MARK: - Scroll menu setup
+        
+       
     }
-    
+  
     // MARK: - ScrollPagerDelegate -
     
     func scrollPager(scrollPager: ScrollPager, changedIndex: Int)
@@ -246,7 +246,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         let selectedDeptDay = (UserDefaults.standard.value(forKey: "selectedDeptDay") as! String)
         let selectedArrDay = (UserDefaults.standard.value(forKey: "selectedArrDay") as! String)
         print("\(selectedDeptDate),\(selectedArrDate),\(selectedDeptDay),\(selectedArrDay)")
-      
+
         if arrivalCity.isEmpty
         {
 //            if(wayType == "one")
@@ -256,10 +256,10 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
 //            else{
 //                Rarrivalcity .text = "Departure"
 //            }
-            
+
         }
         else{
-            
+
             if(wayType == "one")
         {
             txtArrival .text = arrivalCode
@@ -279,20 +279,37 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             }
             else
             {
-                let mySubstring = String(arrivalCity.dropLast(5))
-                arrMultiArriCity.insert(String(mySubstring), at: 0)
-                var last4 = arrivalCity.suffix(4)
-                last4 = last4.dropLast(1)
-                Rarrivalcity .text = String(last4)
+                if(multiChoose == "arrive")
+                {
+                    let mySubstring = String(arrivalCity.dropLast(5))
+                    var last4 = arrivalCity.suffix(4)
+                    last4 = last4.dropLast(1)
+                    if(index == 0)
+                    {
+                        arrMultiArriCity.insert(String(mySubstring), at: 0)
+                        arrMultiArriCode.insert(String(last4), at: 0)
+                    }
+                    else if(index == 1)
+                    {
+                        arrMultiArriCity.insert(String(mySubstring), at: 1)
+                        arrMultiArriCode.insert(String(last4), at: 1)
+                    }
+                    else if(index == 2)
+                    {
+                        arrMultiArriCity.insert(String(mySubstring), at: 2)
+                        arrMultiArriCode.insert(String(last4), at: 2)
+                    }
+                    multicityTableView .reloadData()
+                }
+
             }
-         
         }
         if departureCity.isEmpty
         {
-         
+
         }
         else{
-            
+
             if(wayType == "one")
             {
                 txtDeparture .text = departureCode
@@ -302,7 +319,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
                 last4 = last4.dropLast(1)
                 txtDeparture .text = String(last4)
             }
-            else{
+            else if(wayType == "two"){
                 RdepartureCity .text = departureCode
                 let mySubstring = String(departureCity.dropLast(5))
                 lblRdepartureCountry.text = String(mySubstring)
@@ -310,7 +327,32 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
                 last4 = last4.dropLast(1)
                 RdepartureCity .text = String(last4)
             }
-            
+            else
+            {
+                if(multiChoose == "depart")
+                {
+                    let mySubstring = String(departureCity.dropLast(5))
+                    var last4 = departureCity.suffix(4)
+                    last4 = last4.dropLast(1)
+                    if(index == 0)
+                    {
+                        arrMultiDepartCity.insert(String(mySubstring), at: 0)
+                        arrMultiDepartCode.insert(String(last4), at: 0)
+                    }
+                    else if(index == 1)
+                    {
+                        arrMultiDepartCity.insert(String(mySubstring), at: 1)
+                        arrMultiDepartCode.insert(String(last4), at: 1)
+                    }
+                    else if(index == 2)
+                    {
+                        arrMultiDepartCity.insert(String(mySubstring), at: 2)
+                        arrMultiDepartCode.insert(String(last4), at: 2)
+                    }
+                    multicityTableView .reloadData()
+                }
+            }
+
         }
         if selectedDeptDate.isEmpty
         {
@@ -321,11 +363,29 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             {
                 txtDepartureDate .text = selectedDeptDate
                 lblDepartureDay.text = selectedDeptDay
-            }else{
+            }else if(wayType == "two")
+            {
                 RdepartureDate .text = selectedDeptDate
                 lblRdepartureDay.text = selectedDeptDay
+            }else{
+                if(index == 0)
+                {
+                    arrMultiDate.insert(String(selectedDeptDate), at: 0)
+                    arrMultiDay.insert(String(selectedDeptDay), at: 0)
+                }
+                else if(index == 1)
+                {
+                    arrMultiDate.insert(String(selectedDeptDate), at: 1)
+                    arrMultiDay.insert(String(selectedDeptDay), at: 1)
+                }
+                else if(index == 2)
+                {
+                    arrMultiDate.insert(String(selectedDeptDate), at: 2)
+                    arrMultiDay.insert(String(selectedDeptDay), at: 2)
+                }
+                multicityTableView .reloadData()
             }
-       
+
         }
         if selectedArrDate.isEmpty
         {
@@ -339,25 +399,9 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         temp1 = lblDepartureCity.text!
         temps = RdepartureCity.text!
         temps1 = lblRdepartureCountry.text!
-      
+
     }
-    // MARK: - Action handlers
-    @objc func navigationSegmentedControlValueChanged(_ sender: BetterSegmentedControl) {
-        if sender.index == 0 {
-            print("Turning lights on.")
-            view.backgroundColor = .white
-        }
-        else {
-            print("Turning lights off.")
-            view.backgroundColor = .darkGray
-        }
-    }
-    
-    @IBAction func segmentedControl1ValueChanged(_ sender: BetterSegmentedControl) {
-        if(sender.index == 0)
-        {
-        }
-    }
+ 
 ///////////// tableView DataSource - Delegate Method
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -381,11 +425,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         if(tableView == multicityTableView)
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
-            
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! multiTableViewCell
-//            cell.cellDelegate = self as YourCellDelegate
-//            cell.departBtn.tag = indexPath.row
-            
+       
             let title = cell.viewWithTag(1) as! UILabel
             let departCode = cell.viewWithTag(4) as! UILabel
             let departCity = cell.viewWithTag(5) as! UILabel
@@ -402,14 +442,13 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             departCity.text = arrMultiDepartCity[indexPath.row]
             arriCode.text = arrMultiArriCode[indexPath.row]
             arriCity.text = arrMultiArriCity[indexPath.row]
-//            departDate.text = arrMultiDate[indexPath.row]
-//            departDay.text = arrMultiDay[indexPath.row]
-//
-            departBtn.addTarget(self, action: #selector(departBtnClicked(sender:)), for: .touchUpInside)
+            departDate.text = arrMultiDate[indexPath.row]
+            departDay.text = arrMultiDay[indexPath.row]
 
+            departBtn.addTarget(self, action: #selector(departBtnClicked(sender:)), for: .touchUpInside)
             ArriBtn.addTarget(self, action:#selector(arriBtnClicked(sender:)), for: .touchUpInside)
             DateBtn.addTarget(self, action:#selector(dateBtnClicked(sender:)), for: .touchUpInside)
-            departBtn.tag = indexPath.row
+          //  departBtn.tag = indexPath.row
             return cell
         }
         else
@@ -442,8 +481,11 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             if(wayType == "one")
             {
                 txtClass . text = className[indexPath.row]
-            }else{
+            }else if(wayType == "two")
+            {
                 RtxtClass . text = className[indexPath.row]
+            }else{
+                  txtMultiClass . text = className[indexPath.row]
             }
             
             classChooseView .isHidden = true
@@ -588,7 +630,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
                 nonstopImg.image = UIImage (named: "black-check-box-with-white-check.png")
             }
         }
-        else{
+        else if(wayType == "two"){
             if RstopBtn.isSelected == true {
                 RstopBtn.isSelected = false
                 RnonStopImg.image = UIImage (named: "square.png")
@@ -598,7 +640,17 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
                 RnonStopImg.image = UIImage (named: "black-check-box-with-white-check.png")
             }
         }
-       
+       else
+        {
+            if multiStopBtn.isSelected == true {
+                multiStopBtn.isSelected = false
+                multiNonstopImg.image = UIImage (named: "square.png")
+                
+            }else {
+                multiStopBtn.isSelected = true
+                multiNonstopImg.image = UIImage (named: "black-check-box-with-white-check.png")
+            }
+        }
       
     }
 
@@ -650,9 +702,13 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         {
               txtTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
         }
-        else
+        else if(wayType == "two")
         {
              RtxtTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+        }
+        else
+        {
+              multiTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
         }
        
          travellerView .isHidden = true
@@ -791,46 +847,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
     }
     */
-//////Get current date
-    func getCurrentDate()
-    {
-        let date1 = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"//"dd MMM yy"//2019-05-15
-        let result = formatter.string(from: date1)
-        print(result)
-        
-/////getDay
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        let dayInWeek = dateFormatter.string(from: date)
-        print(dayInWeek)
-        
-/////////get nextdate
-        
-         print(convertNextDate(dateString: result))
 
-//////////
-        
-        txtDepartureDate . text = result
-        lblDepartureDay.text = dayInWeek
-        RdepartureDate . text = result
-        lblRdepartureDay.text = dayInWeek
-        
-//        if(wayType == "one")
-//        {
-//            txtDepartureDate . text = result
-//            lblDepartureDay.text = dayInWeek
-//           // txtArrivalDate.text = "\(String.convertNextDate(result))"
-//        }
-//        else  if(wayType == "two")
-//        {
-//            RdepartureDate . text = result
-//            lblRdepartureDay.text = dayInWeek
-//          //  RarrivalDate.text = "\(String.convertNextDate(result))"
-//        }
-    }
 // MARK : Bottom View Action
     
     @IBAction func myBookingsBtn(_ sender: Any)
@@ -862,14 +879,58 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         bookingImg.image = UIImage (named: "briefcaseGray")
         bookingLbl.textColor = UIColor.darkGray
     }
+    
+    //////Get current date
+    func getCurrentDate()
+    {
+        let date1 = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"//"dd MMM yy"//2019-05-15
+        let result = formatter.string(from: date1)
+        print(result)
+        
+        /////getDay
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter.string(from: date)
+        print(dayInWeek)
+        
+        /////////get nextdate
+        
+        print(convertNextDate(dateString: result))
+        
+        //////////
+        
+        txtDepartureDate . text = result
+        lblDepartureDay.text = dayInWeek
+        RdepartureDate . text = result
+        lblRdepartureDay.text = dayInWeek
+        arrMultiDate .insert(result, at: 0)
+        arrMultiDay .insert(dayInWeek, at: 0)
+         multicityTableView .reloadData()
+        //        if(wayType == "one")
+        //        {
+        //            txtDepartureDate . text = result
+        //            lblDepartureDay.text = dayInWeek
+        //           // txtArrivalDate.text = "\(String.convertNextDate(result))"
+        //        }
+        //        else  if(wayType == "two")
+        //        {
+        //            RdepartureDate . text = result
+        //            lblRdepartureDay.text = dayInWeek
+        //          //  RarrivalDate.text = "\(String.convertNextDate(result))"
+        //        }
+    }
     func convertNextDate(dateString : String){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
         let myDate = dateFormatter.date(from: dateString)!
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: myDate)
         let somedateString = dateFormatter.string(from: tomorrow!)
-        print("your next Date is \(somedateString)")
-        RarrivalDate .text = "\(somedateString)"
+        print("your next Date is2 \(somedateString)")
+      
+        
 ///Get next day
         let isoDate = somedateString
         let dateFormatter1 = DateFormatter()
@@ -887,6 +948,44 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         
         print("your next day is \(dayInWeek)")
         lblRarrivalDay.text = "\(dayInWeek)"
+        RarrivalDate .text = "\(somedateString)"
+        arrMultiDay .insert("\(dayInWeek)", at: 0)
+        arrMultiDate .insert("\(somedateString)", at: 0)
+       multicityTableView .reloadData()
+       print(convertNextDate1(dateString: somedateString))
+    }
+    
+    
+    func convertNextDate1(dateString : String){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        let myDate = dateFormatter.date(from: dateString)!
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: myDate)
+        let somedateString = dateFormatter.string(from: tomorrow!)
+        print("your next Date is3 \(somedateString)")
+        RarrivalDate .text = "\(somedateString)"
+        arrMultiDate .insert("\(somedateString)", at: 1)
+        
+        
+        ///Get next day
+        let isoDate = somedateString
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        dateFormatter1.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        let date2 = dateFormatter1.date(from:isoDate)!
+        print(date2)
+        let dayInWeek1 = dateFormatter.string(from: date2)
+        
+        let date = date2
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter2.string(from: date)
+        print(dayInWeek)
+        
+        print("your next day is \(dayInWeek)")
+        lblRarrivalDay.text = "\(dayInWeek)"
+        arrMultiDay .insert("\(dayInWeek)", at: 1)
+        multicityTableView .reloadData()
     }
     func convertDateFormater(_ date: String) -> String
     {
@@ -898,8 +997,12 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         
     }
     @objc func departBtnClicked(sender: UIButton){
-        let buttonTag = sender.tag
-        print("indexpath",buttonTag)
+   
+        multiChoose = "depart"
+        let buttonPosition:CGPoint = sender.convert(CGPoint.zero, to:self.multicityTableView)
+        let indexPath = self.multicityTableView.indexPathForRow(at: buttonPosition)
+        index = indexPath!.row
+        print("index",index)
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchCityVC") as? SearchCityViewController
         vc?.selectableCity = "departure"
         self.navigationController?.pushViewController(vc!, animated: true)
@@ -907,12 +1010,21 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
    
     @objc func arriBtnClicked(sender: UIButton)
     {
+        multiChoose = "arrive"
+        let buttonPosition:CGPoint = sender.convert(CGPoint.zero, to:self.multicityTableView)
+        let indexPath = self.multicityTableView.indexPathForRow(at: buttonPosition)
+        index = indexPath!.row
+        print("index",index)
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchCityVC") as? SearchCityViewController
         vc?.selectableCity = "arrival"
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     @objc func dateBtnClicked(sender: UIButton)
     {
+        let buttonPosition:CGPoint = sender.convert(CGPoint.zero, to:self.multicityTableView)
+        let indexPath = self.multicityTableView.indexPathForRow(at: buttonPosition)
+        index = indexPath!.row
+        print("index",index)
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CustomCalenderVC") as? CustomCalenderViewController
         vc?.selectableDate = "departureDate"
         self.navigationController?.pushViewController(vc!, animated: true)
@@ -920,5 +1032,55 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
    
     func didPressButton(_ tag: Int) {
         print("I have pressed a button with a tag: \(tag)")
+    }
+    
+ 
+    @IBAction func onewayBtn(_ sender: Any)
+    {
+        wayType = "one"
+        UserDefaults .standard .set("one", forKey: "wayType")
+   
+        multicityTableView.isHidden = true
+        onewayScroll.isHidden = false
+        roundTripScroll.isHidden = true
+        onewayBtn.setTitleColor(.white, for: .normal)
+        roundTripBtn.setTitleColor(.darkGray, for: .normal)
+        multiCityBtn.setTitleColor(.darkGray, for: .normal)
+        
+        onewayBtn.backgroundColor = WebServicesUrl.appColor2
+        roundTripBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
+        multiCityBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
+    }
+    
+    @IBAction func rondTRipBtn(_ sender: Any)
+    {
+        wayType = "two"
+        UserDefaults .standard .set("two", forKey: "wayType")
+   
+        multicityTableView.isHidden = true
+        onewayScroll.isHidden = true
+        roundTripScroll.isHidden = false
+        onewayBtn.setTitleColor(.darkGray, for: .normal)
+        roundTripBtn.setTitleColor(.white, for: .normal)
+        multiCityBtn.setTitleColor(.darkGray, for: .normal)
+        roundTripBtn.backgroundColor = WebServicesUrl.appColor2
+        onewayBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
+        multiCityBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
+    }
+    
+    @IBAction func multiCityBtn(_ sender: Any)
+    {
+        wayType = "multi"
+        UserDefaults .standard .set("multi", forKey: "wayType")
+
+        multicityTableView.isHidden = false
+        onewayScroll.isHidden = true
+        roundTripScroll.isHidden = true
+        onewayBtn.setTitleColor(.darkGray, for: .normal)
+        roundTripBtn.setTitleColor(.darkGray, for: .normal)
+        multiCityBtn.setTitleColor(.white, for: .normal)
+        multiCityBtn.backgroundColor = WebServicesUrl.appColor2
+        onewayBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
+        roundTripBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
     }
 }

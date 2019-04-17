@@ -10,6 +10,5 @@ target 'UniOrient' do
     pod 'SDWebImage', '~> 4.0'
     pod 'EDStarRating'
     pod 'AACarousel'
-    pod 'SwipeableTabBarController'
-    pod 'BetterSegmentedControl', '~> 1.0'
+  pod 'SwipeMenuViewController'
 end

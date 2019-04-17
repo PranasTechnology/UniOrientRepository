@@ -45,15 +45,15 @@ class ViewController: UIViewController {
 //        hotelView.isUserInteractionEnabled = true
     }
 
-    @objc func handleTap1(_ sender: UITapGestureRecognizer) {
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
-        self.navigationController?.pushViewController(vc!, animated: true)
-    }
-  
-    @objc func handleTap2(_ sender: UITapGestureRecognizer) {
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
-        self.navigationController?.pushViewController(vc!, animated: true)
-    }
+//    @objc func handleTap1(_ sender: UITapGestureRecognizer) {
+//        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
+//        self.navigationController?.pushViewController(vc!, animated: true)
+//    }
+//
+//    @objc func handleTap2(_ sender: UITapGestureRecognizer) {
+//        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
+//        self.navigationController?.pushViewController(vc!, animated: true)
+//    }
     
     @IBAction func flightBtn(_ sender: Any)
     {
