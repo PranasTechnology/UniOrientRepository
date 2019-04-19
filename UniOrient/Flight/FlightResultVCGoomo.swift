@@ -13,6 +13,9 @@ import QuartzCore
 class FlightResultVCGoomo: UIViewController {
  
 //MARK: - IBOutlet
+    
+    @IBOutlet weak var multicityTableview: UITableView!
+    @IBOutlet weak var multicityView: UIView!
     @IBOutlet weak var twowayView: UIView!
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var gifImg1: UIImageView!
@@ -44,7 +47,7 @@ class FlightResultVCGoomo: UIViewController {
     
     
 //MARK: - variable Declaration
-    
+    var strURL : String = String()
     var arrToDisplay = [FlightResultAndDetailStruct]()
     var arrToSort = [FlightResultAndDetailStruct]()
     var tripDetailDateFormatter = DateFormatter()
@@ -54,6 +57,7 @@ class FlightResultVCGoomo: UIViewController {
     var inputDict = [String:String]()
     var flightResultArr = [[String:AnyObject]]()
     var flightDetailsArr = [[String:AnyObject]]()
+    var flightMultiDetailsArr = [[String:AnyObject]]()
     var flightResultAndDetailsArr = [FlightResultAndDetailStruct]()
     var flightDetailsReturnArr = [[String:AnyObject]]()
     var way : String!
@@ -84,11 +88,17 @@ class FlightResultVCGoomo: UIViewController {
         {
             self.onewayView .isHidden = true;
             self.twowayView .isHidden = false;
+            self.multicityView .isHidden = true;
         }
-        else
+        else if self.inputDict["WayType"]! == "one"
         {
             self.onewayView .isHidden = false;
             self.twowayView .isHidden = true;
+            self.multicityView .isHidden = true;
+        }else{
+            self.onewayView .isHidden = true;
+            self.twowayView .isHidden = true;
+            self.multicityView .isHidden = false;
         }
         self.navigationController?.navigationBar.isHidden = false
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -103,15 +113,34 @@ class FlightResultVCGoomo: UIViewController {
         convertStrToDateDF.dateFormat = "yyyy-MM-dd"
         tripDetailDateFormatter.dateFormat = "dd MMM"
         
-        let stringConvertedToDate = convertStrToDateDF.date(from: self.inputDict["DepartureDate"]!)
-        let departureDateStr = tripDetailDateFormatter.string(from: stringConvertedToDate!)
         
-        if self.way == "one"{
+        if self.way == "one"
+        {
+            let stringConvertedToDate = convertStrToDateDF.date(from: self.inputDict["DepartureDate"]!)
+            let departureDateStr = tripDetailDateFormatter.string(from: stringConvertedToDate!)
             self.tripDateDetailLbl.text = departureDateStr + " , One way"
-        }else{
-            let stringConvertedToDate = convertStrToDateDF.date(from: self.inputDict["Returndate"]!)
-            let returnStr = tripDetailDateFormatter.string(from: stringConvertedToDate!)
+        }
+        else if self.way == "two"
+        {
+            let stringConvertedToDate = convertStrToDateDF.date(from: self.inputDict["DepartureDate"]!)
+            let departureDateStr = tripDetailDateFormatter.string(from: stringConvertedToDate!)
+          
+            let stringConvertedToDate1 = convertStrToDateDF.date(from: self.inputDict["Returndate"]!)
+            let returnStr = tripDetailDateFormatter.string(from: stringConvertedToDate1!)
             self.tripDateDetailLbl.text = departureDateStr + " - " + returnStr + ",Return Trip"
+        }
+        else
+        {
+            let stringConvertedToDate = convertStrToDateDF.date(from: self.inputDict["DepartureDate1"]!)
+            let departureDateStr = tripDetailDateFormatter.string(from: stringConvertedToDate!)
+            
+            let stringConvertedToDate1 = convertStrToDateDF.date(from: self.inputDict["DepartureDate2"]!)
+            let departureDateStr1 = tripDetailDateFormatter.string(from: stringConvertedToDate1!)
+            
+            let stringConvertedToDate2 = convertStrToDateDF.date(from: self.inputDict["DepartureDate3"]!)
+            let departureDateStr2 = tripDetailDateFormatter.string(from: stringConvertedToDate2!)
+            
+            self.tripDateDetailLbl.text = departureDateStr + " - " + departureDateStr1 + " - " + departureDateStr2  + ", Multi City"
         }
         
         var adultStr,childStr,infantStr : String!
@@ -138,9 +167,14 @@ class FlightResultVCGoomo: UIViewController {
        {
          self.tripDetailSourceLbl.text = self.inputDict["Origin"]! + " -> " + self.inputDict["Destination"]!
         }
-       else{
+       else if( self.way == "two" ){
          self.tripDetailSourceLbl.text = self.inputDict["Origin"]! + " <-> " + self.inputDict["Destination"]!
         }
+       else
+       {
+         self.tripDetailSourceLbl.text = self.inputDict["Origin1"]! + " -> " + self.inputDict["Origin2"]! + " -> " + self.inputDict["Origin3"]!
+        }
+        
        
     UserDefaults .standard .set(self.tripDetailSourceLbl.text, forKey: "toplbl")
 //        var passengerStr = "\(self.inputDict["AdultCount"]!) \(adultStr!) "
@@ -180,7 +214,14 @@ class FlightResultVCGoomo: UIViewController {
              print(abc)
              }
              } */
-         WebService().HTTP_POST_WebServiceMethod_Flight(mainURL:WebServicesUrl.FlightServiceUrl,suffix: WebServicesUrl.FlightResult, parameterDict: messageDict) { (ResponceDict, success) in
+          if( self.way == "multi" )
+          {
+                strURL = WebServicesUrl.FlightMultiResult
+          }
+          else{
+                strURL = WebServicesUrl.FlightResult
+            }
+            WebService().HTTP_POST_WebServiceMethod_Flight(mainURL:WebServicesUrl.FlightServiceUrl,suffix: strURL, parameterDict: messageDict) { (ResponceDict, success) in
                 
               //  hideLoading()
             self.loadingview.isHidden = true
@@ -204,12 +245,19 @@ class FlightResultVCGoomo: UIViewController {
                     //                print("The ResponseDict finally =",ResponceDict!)
                     
                     let responce = ResponceDict as! [String:AnyObject]
+                print("result",responce)
                     //                    if let responce = ResponceDict {
                     self.flightResultArr = responce["FlightResult"] as! [[String:AnyObject]]
                     self.flightDetailsArr = responce["Flightdetails"] as! [[String:AnyObject]]
+             
                     if responce.keys.contains("FlightdetailsReturn"){
                         self.flightDetailsReturnArr = responce["FlightdetailsReturn"] as! [[String : AnyObject]]
+                        
                     }
+                if responce.keys.contains("FlightdetailsReturnMulti"){
+                    self.flightMultiDetailsArr = responce["FlightdetailsReturnMulti"] as! [[String : AnyObject]]
+                    
+                }
                     
                     self.flightResultAndDetailsArr.removeAll()
                     for aResultDict in self.flightResultArr{
@@ -273,10 +321,8 @@ class FlightResultVCGoomo: UIViewController {
                         //Flight Name
                         if aResultAndDetailStruct.detailArrWithFlightDetailStruct.count > 1 {
                             
-                            
                             aResultAndDetailStruct.isMultiAirlineAvailable = false
                             let lastStruct = aResultAndDetailStruct.detailArrWithFlightDetailStruct.last
-                            
                             
                             for i in 0..<aResultAndDetailStruct.detailArrWithFlightDetailStruct.count {
                                 if i == aResultAndDetailStruct.detailArrWithFlightDetailStruct.count-1 {
@@ -421,8 +467,37 @@ class FlightResultVCGoomo: UIViewController {
                                 }
                             }
                         }
+   /////MultiDetails
+                        //Flight Details Return
+                        if responce.keys.contains("FlightdetailsReturnMulti"){
+                            for aDetailDict in self.flightMultiDetailsArr {
+                                if "\(aDetailDict["FlightId"]!)" == "\(aResultDict["FlightId"]!)"{
+                                    var aDetailStruct = FlightDetailStruct()
+                                    aDetailStruct.flightNumber = "\(aDetailDict["flightNumber"]!)"
+                                    aDetailStruct.departureDate = "\(aDetailDict["departuredate"]!)"
+                                    aDetailStruct.departureTime = "\(aDetailDict["departuretime"]!)"
+                                    aDetailStruct.arrivalDate = "\(aDetailDict["arrivaldate"]!)"
+                                    aDetailStruct.arrivalTime = "\(aDetailDict["arrivaltime"]!)"
+                                    
+                                    aDetailStruct.marketing = "\(aDetailDict["marketing"]!)"
+                                    aDetailStruct.operating = "\(aDetailDict["operating"]!)"
+                                    aDetailStruct.duration = "\(aDetailDict["duration"]!)"
+                                    aDetailStruct.fromAirportName = "\(aDetailDict["FromAirportName"]!)"
+                                    aDetailStruct.toAirportName = "\(aDetailDict["ToAirportName"]!)"
+                                    
+                                    aDetailStruct.departureDateTime = "\(aDetailDict["DepartureDateTime"]!)"
+                                    aDetailStruct.arrivalDateTime = "\(aDetailDict["ArrivalDateTime"]!)"
+                                    
+                                    aDetailStruct.stop = "\(aDetailDict["stop"]!)"
+                                    aDetailStruct.fromCity = "\(aDetailDict["fromcity"]!)"
+                                    aDetailStruct.toCity = "\(aDetailDict["tocity"]!)"
+                                aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.append(aDetailStruct)
+                                    
+                                }
+                            }
+                        }
                         
-                        if self.way == "two" {
+                        if self.way == "two" || self.way == "multi" {
                             //Return Flight Name
                             if aResultAndDetailStruct.returnDetailArrWithFlightDetailStruct.count > 1 {
                                 //                                    aResultAndDetailStruct.returnFlightName = "Multi Airlines"
@@ -547,15 +622,134 @@ class FlightResultVCGoomo: UIViewController {
                             aResultAndDetailStruct.returnArrivalAirportCode = String(formattedStrforAirportCode)
                         }
              self.flightResultAndDetailsArr.append(aResultAndDetailStruct)
+                        
+                        
+                        if self.way == "multi" {
+                            //Return Flight Name
+                            if aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count > 1 {
+                                //                                    aResultAndDetailStruct.returnFlightName = "Multi Airlines"
+                                aResultAndDetailStruct.isMulticityMultiAirlineAvailable = false
+                                let lastStructRet = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.last
+                                
+                                for i in 0..<aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count {
+                                    if i == aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count-1 {
+                                        print("Return This is Last Item")
+                                    }else{
+                                        if aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[i].marketing != lastStructRet?.marketing{
+                                            aResultAndDetailStruct.isMulticityMultiAirlineAvailable = true
+                                            break
+                                        }
+                                    }
+                                }
+                                
+                                if aResultAndDetailStruct.isMulticityMultiAirlineAvailable{
+                                    print("Return Multiple Exists...")
+                                    aResultAndDetailStruct.multiFlightName = "Multi Airlines"
+                                    aResultAndDetailStruct.multiFlightImgName = "multiairline"
+                                }else{
+                                    print("Return Multiple Exists...But All are same")
+                                    aResultAndDetailStruct.multiFlightName = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.last?.operating
+                                    aResultAndDetailStruct.multiFlightImgName = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.last?.marketing
+                                }
+                     
+                            }else if aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count == 1 {
+                                aResultAndDetailStruct.multiFlightName = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[0].operating
+                                aResultAndDetailStruct.multiFlightImgName = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[0].marketing
+                            }else{
+                                aResultAndDetailStruct.multiFlightName = "0 flight"
+                                aResultAndDetailStruct.multiFlightImgName = "No Flight"
+                            }
+               
+                            //Return Depature Time
+                            aResultAndDetailStruct.multiDepartureTime = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.first?.departureTime
+                            
+                            //Return Depature Date
+                            let tempReturnDepDateArr = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.first?.departureDate.components(separatedBy: ",")
+                            aResultAndDetailStruct.multiDepartureDate = tempReturnDepDateArr![1]
+                            
+                            //Return Departure Airport Code
+                            let firstAirportCodeStr = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.first?.fromAirportName
+                            let startIndReturn = firstAirportCodeStr?.index(after: (firstAirportCodeStr?.lastIndex(of: "(")!)!)
+                            let endIndReturn = firstAirportCodeStr?.lastIndex(of: ")")
+                            let formattedStrReturn = firstAirportCodeStr![startIndReturn!..<endIndReturn!]
+                            aResultAndDetailStruct.multiDepartureAirportCode = String(formattedStrReturn)
+                            
+                            //Return Duration
+                            var sumOfIndividualFlightDurationInSecReturn = 0
+                            var layoverArrReturn = [Int]()
+                            var startReturn : String!
+                            var endReturn : String!
+                            
+                            for i in 0..<aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count {
+                                
+                                let arr = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[i].duration.components(separatedBy: ":")
+                                let hr = arr[0].trimmingCharacters(in: .whitespaces).dropLast()
+                                let min = arr[1].trimmingCharacters(in: .whitespaces).dropLast()
+                                
+                                let hourSec = Int(hr)! * 3600
+                                let minSec = Int(min)! * 60
+                                let totalSec = hourSec + minSec
+                                
+                                sumOfIndividualFlightDurationInSecReturn += totalSec
+                                
+                                
+                                if (i%2) == 0 {  // 0 modulo 2 = 0,     1 modulo 2 = 1 ,    2 modulo 2 = 0
+                                    if i == 0 {
+                                        startReturn = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[i].arrivalDateTime
+                                    }else{
+                                        endReturn = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[i].departureDateTime
+                                        layoverArrReturn.append(self.calculateSecondsFrom(dateTime1: startReturn, dateTime2: endReturn))
+                                        startReturn = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[i].arrivalDateTime
+                                    }
+                                }else {
+                                    endReturn = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[i].departureDateTime
+                                    layoverArrReturn.append(self.calculateSecondsFrom(dateTime1: startReturn, dateTime2: endReturn))
+                                    startReturn = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct[i].arrivalDateTime
+                                }
+                            }
+                            
+                            let sumofOverlaysReturn = layoverArrReturn.reduce(0, {$0 + $1})
+                            
+                            let totalDurationInSecReturn = sumOfIndividualFlightDurationInSecReturn + sumofOverlaysReturn
+                            
+                            let numberOfHoReturn: Int = totalDurationInSecReturn / 3600
+                            let numberOfMinReturn: Int = (totalDurationInSecReturn % 3600) / 60
+                            let durationForReturnFlight = "\(numberOfHoReturn)h \(numberOfMinReturn)m"
+                            aResultAndDetailStruct.multiDuration = durationForReturnFlight
+                            
+                            //Return stop
+                            if (aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count - 1) > 1 {
+                                aResultAndDetailStruct.multiNoofStops = "\(aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count - 1) stops"
+                            }else{
+                                aResultAndDetailStruct.multiNoofStops = "\(aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.count - 1) stop"
+                            }
+                            
+                            //Return Arrival Time
+                            aResultAndDetailStruct.multiArrivalTime = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.last?.arrivalTime
+                            
+                            //Return Arrival Date
+                            let tempReturnArrDateArr = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.last?.arrivalDate.components(separatedBy: ",")
+                            aResultAndDetailStruct.multiArrivalDate = tempReturnArrDateArr![1]
+                            
+                            //Return Arrival Airport Code
+                            let lastAirportCodeStrForReturnArrival = aResultAndDetailStruct.multiDetailArrWithFlightDetailStruct.last?.toAirportName
+                            let startIndexforAirportCode = lastAirportCodeStrForReturnArrival?.index(after: (lastAirportCodeStrForReturnArrival?.lastIndex(of: "("))!)
+                            let endIndexforAirportCode = lastAirportCodeStrForReturnArrival?.lastIndex(of: ")")
+                            let formattedStrforAirportCode = lastAirportCodeStrForReturnArrival![startIndexforAirportCode!..<endIndexforAirportCode!]
+                            aResultAndDetailStruct.multiArrivalAirportCode = String(formattedStrforAirportCode)
+                        }
+                        self.flightResultAndDetailsArr.append(aResultAndDetailStruct)
                     }
                     self.arrToDisplay = self.flightResultAndDetailsArr
                     if self.inputDict["WayType"]! == "two"
                     {
                        self.twowayTableView.reloadData()
-                    }else{
+                    }else if self.inputDict["WayType"]! == "one"{
                        self.dataTV.reloadData()
                     }
-                
+                else{
+                    self.multicityTableview .reloadData()
+                }
                    
                     print("flightResultAndDetailsArr count :",self.flightResultAndDetailsArr.count)
                     //                    }
@@ -691,8 +885,11 @@ class FlightResultVCGoomo: UIViewController {
         if self.inputDict["WayType"]! == "two"
         {
             self.twowayTableView.reloadData()
-        }else{
+        }else if self.inputDict["WayType"]! == "one"{
             self.dataTV.reloadData()
+        }
+        else{
+            self.multicityTableview .reloadData()
         }
     }
     
@@ -729,8 +926,12 @@ class FlightResultVCGoomo: UIViewController {
         if self.inputDict["WayType"]! == "two"
         {
             self.twowayTableView.reloadData()
-        }else{
+        }
+        else if self.inputDict["WayType"]! == "one"{
             self.dataTV.reloadData()
+        }
+        else{
+            self.multicityTableview .reloadData()
         }
     }
     @IBAction func priceBtnTapped(_ sender: UIButton) {
@@ -774,8 +975,10 @@ class FlightResultVCGoomo: UIViewController {
         if self.inputDict["WayType"]! == "two"
         {
             self.twowayTableView.reloadData()
-        }else{
+        }else if self.inputDict["WayType"]! == "one"{
             self.dataTV.reloadData()
+        } else {
+            self.multicityTableview .reloadData()
         }
     }
     override func didReceiveMemoryWarning() {
@@ -833,7 +1036,7 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         cell.mainView.layer.masksToBounds = false
         cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
         cell.mainView.layer.shadowOpacity = 0.5
-        cell.mainView.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.mainView.layer.shadowOffset = CGSize(width: 0.5, height: 1)
         cell.mainView.layer.shadowRadius = 0.5
         
         let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
@@ -866,23 +1069,21 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         cell.departCode.text = self.arrToDisplay[indexPath.row].departureAirportCode
         cell.duration.text = self.arrToDisplay[indexPath.row].duration
         cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
-       
         cell.amount.text = self.arrToDisplay[indexPath.row].amount!;
 
         return cell
         
        }
 //Return - Twoway
-       else
+       else if(self.inputDict["WayType"]! == "two")
        {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! twowayTableViewCell
-        
         cell.mainView.layer.masksToBounds = false
         cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
         cell.mainView.layer.shadowOpacity = 0.5
         cell.mainView.layer.shadowOffset = CGSize(width: -1, height: 1)
-        cell.mainView.layer.shadowRadius = 1
+        cell.mainView.layer.shadowRadius = 0.5
         
       
         let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
@@ -959,12 +1160,133 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         return cell
        
         }
+       else{
+
+        let cell = tableView.dequeueReusableCell(withIdentifier:"multiCell", for: indexPath) as! multiTableViewCell
+
+        cell.mainView.layer.masksToBounds = false
+        cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
+        cell.mainView.layer.shadowOpacity = 0.75
+        cell.mainView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        cell.mainView.layer.shadowRadius = 1.0
+        cell.mainView.layer.cornerRadius = 2.0
+
+
+        let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
+
+        print("ImgURL",flightImgURL)
+
+        /* or
+         let flightImgURL = WebServicesUrl.FlightImgURL + self.flightResultAndDetailsArr[indexPath.row].flightImgName */
+
+        // if self.arrToDisplay[indexPath.row].flightImgName == "multiairline" {
+        cell.flightImg.image = UIImage(named: "multiairline")
+        cell.flightName.text = self.arrToDisplay[indexPath.row].flightName
+        //            self.arrToDisplay[indexPath.row].flightImgData = UIImage(named: "multiairline")!.pngData(UIImage(named: "multiairline")!.pngDatan
+
+        cell.flightName.text = self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].operating
+
+        if self.arrToDisplay[indexPath.row].flightImgData != nil {
+            cell.flightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].flightImgData!)
+        }else{
+            cell.flightImg.sd_setShowActivityIndicatorView(true)
+            cell.flightImg.sd_setIndicatorStyle(.gray)
+            cell.flightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                if error == nil{
+                    self.arrToDisplay[indexPath.row].flightImgData = downloadedImage!.pngData()
+                }else{
+                    print("Error from SBWebImage Block = ",error!)
+                }
+
+            })
+
+
+        }
+
+        //        }
+
+        cell.departTime.text = self.arrToDisplay[indexPath.row].departureTime.appending(" - ") .appending(self.arrToDisplay[indexPath.row].arrivalTime)
+        cell.lblRefundable.text = self.arrToDisplay[indexPath.row].departureAirportCode
+        cell.duration.text = self.arrToDisplay[indexPath.row].duration.appending(" | ").appending(self.arrToDisplay[indexPath.row].noOfStops)
+        // cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
+
+        cell.amount.text = self.arrToDisplay[indexPath.row].amount!;
+
+        ////Return
+
+        cell.reflightImg.image = UIImage(named: "multiairline")
+        cell.reflightName.text = self.arrToDisplay[indexPath.row].returnFlightName
+        //            self.arrToDisplay[indexPath.row].flightImgData = UIImage(named: "multiairline")!.pngData(UIImage(named: "multiairline")!.pngDatan
+
+        cell.reflightName.text = self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].operating
+
+        if self.arrToDisplay[indexPath.row].returnFlightImgData != nil {
+            cell.reflightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].returnFlightImgData!)
+        }else{
+            cell.reflightImg.sd_setShowActivityIndicatorView(true)
+            cell.reflightImg.sd_setIndicatorStyle(.gray)
+            cell.reflightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                if error == nil{
+                    self.arrToDisplay[indexPath.row].returnFlightImgData = downloadedImage!.pngData()
+                }else{
+                    print("Error from SBWebImage Block = ",error!)
+                }
+
+            })
+        }
+        //        }
+
+        print(self.arrToDisplay[indexPath.row].returnDepartureTime)
+        print(self.arrToDisplay[indexPath.row].returnArrivalTime)
+        
+       cell.reDepartTime.text = self.arrToDisplay[indexPath.row].returnDepartureTime.appending(" - ") .appending(self.arrToDisplay[indexPath.row].returnArrivalTime)
+        cell.reRefundable.text = self.arrToDisplay[indexPath.row].returnDepartureAirportCode
+        cell.reDuration.text = self.arrToDisplay[indexPath.row].returnDuration.appending(" | ").appending(self.arrToDisplay[indexPath.row].returnNoofStops)
+        // cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
+
+///Multi
+        
+        cell.multiflightImg.image = UIImage(named: "multiairline")
+        cell.multiflightName.text = self.arrToDisplay[indexPath.row].multiFlightName
+        //            self.arrToDisplay[indexPath.row].flightImgData = UIImage(named: "multiairline")!.pngData(UIImage(named: "multiairline")!.pngDatan
+        
+        cell.multiflightName.text = self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].operating
+        
+        if self.arrToDisplay[indexPath.row].multiFlightImgData != nil {
+            cell.multiflightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].multiFlightImgData!)
+        }else{
+            cell.multiflightImg.sd_setShowActivityIndicatorView(true)
+            cell.multiflightImg.sd_setIndicatorStyle(.gray)
+            cell.multiflightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                if error == nil{
+                    self.arrToDisplay[indexPath.row].multiFlightImgData = downloadedImage!.pngData()
+                }else{
+                    print("Error from SBWebImage Block = ",error!)
+                }
+                
+            })
+            
+        }
+        
+        //        }
+        print(self.arrToDisplay[indexPath.row].multiDepartureTime)
+        print(self.arrToDisplay[indexPath.row].multiArrivalTime)
+        print(self.arrToDisplay[indexPath.row].multiDuration)
+        print(self.arrToDisplay[indexPath.row].multiNoofStops)
+        
+//        cell.multidepartTime.text = self.arrToDisplay[indexPath.row].multiDepartureTime.appending(" - ") .appending(self.arrToDisplay[indexPath.row].multiArrivalTime)
+//        cell.multilblRefundable.text = self.arrToDisplay[indexPath.row].multiDepartureAirportCode
+//        cell.multiduration.text = self.arrToDisplay[indexPath.row].multiDuration.appending(" | ").appending(self.arrToDisplay[indexPath.row].multiNoofStops)
+//
+        // cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
+
+        return cell
+        }
      
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         var structToSend : FlightResultAndDetailStruct!
         
         /*
@@ -1293,8 +1615,11 @@ extension FlightResultVCGoomo : FlightFilterDelegateGoomo {
         if self.inputDict["WayType"]! == "two"
         {
             self.twowayTableView.reloadData()
-        }else{
+        }else if self.inputDict["WayType"]! == "one"{
             self.dataTV.reloadData()
+        }
+        else{
+            self.multicityTableview .reloadData()
         }
         if self.filteredArr.count == 0 {
            

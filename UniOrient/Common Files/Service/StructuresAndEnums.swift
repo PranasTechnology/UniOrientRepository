@@ -132,10 +132,28 @@ struct FlightResultAndDetailStruct {
     var returnArrivalAirportCode : String!
     
     var isReturnMultiAirlineAvailable : Bool!
+ 
+
+///For MultiCity
+    //for returning
+    //    var returnFlightID : String!
+    var multiDepartureDate : String!
+    var multiArrivalDate : String!
+    
+    var multiFlightImgName : String!
+    var multiFlightImgData : Data!
+    var multiFlightName : String!
+    var multiDepartureTime : String!
+    var multiDepartureAirportCode : String!
+    var multiDuration : String!
+    var multiNoofStops : String!
+    var multiArrivalTime :String!
+    var multiArrivalAirportCode : String!
+    
+    var isMulticityMultiAirlineAvailable : Bool!
     var returnDetailArrWithFlightDetailStruct = [FlightDetailStruct]()
-    
+    var multiDetailArrWithFlightDetailStruct = [FlightDetailStruct]()
     var isSelected : Bool = false // This flag is for Filter Operation
-    
 }
 struct FlightDetailStruct {
     var flightImgName : String!

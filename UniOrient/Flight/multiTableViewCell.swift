@@ -2,7 +2,7 @@
 //  multiTableViewCell.swift
 //  UniOrient
 //
-//  Created by Pranas on 15/04/19.
+//  Created by Pranas on 19/04/19.
 //  Copyright © 2019 APPLE. All rights reserved.
 //
 
@@ -10,23 +10,27 @@ import UIKit
 
 class multiTableViewCell: UITableViewCell {
 
-    var cellDelegate: YourCellDelegate?
-    @IBOutlet weak var departBtn: UIButton!
-  
-    // connect the button from your cell with this method
-    @IBAction func departBtnPressed(_ sender: UIButton) {
-        cellDelegate?.didPressButton(sender.tag)
-    }
-    @IBOutlet weak var arriBtn: UIButton!
-    // connect the button from your cell with this method
-    @IBAction func arriBtnPressed(_ sender: UIButton) {
-       // cellDelegate?.didPressButton(sender.tag)
-    }
-    @IBOutlet weak var departDateBtn: UIButton!
-    // connect the button from your cell with this method
-    @IBAction func departDateBtnPressed(_ sender: UIButton) {
-      //  cellDelegate?.didPressButton(sender.tag)
-    }
+    @IBOutlet weak var flightName: UILabel!
+    @IBOutlet weak var lblRefundable: UILabel!
+    @IBOutlet weak var flightImg: UIImageView!
+    @IBOutlet weak var departTime: UILabel!
+    @IBOutlet weak var duration: UILabel!
+    
+    @IBOutlet weak var reflightName: UILabel!
+    @IBOutlet weak var reRefundable: UILabel!
+    @IBOutlet weak var reDuration: UILabel!
+    @IBOutlet weak var reDepartTime: UILabel!
+    @IBOutlet weak var reflightImg: UIImageView!
+    
+    @IBOutlet weak var multiflightName: UILabel!
+    @IBOutlet weak var multilblRefundable: UILabel!
+    @IBOutlet weak var multiflightImg: UIImageView!
+    @IBOutlet weak var multidepartTime: UILabel!
+    @IBOutlet weak var multiduration: UILabel!
+    
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var amount: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

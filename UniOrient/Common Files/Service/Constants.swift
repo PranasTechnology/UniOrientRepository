@@ -18,6 +18,7 @@ struct WebServicesUrl{
     //Flight
     static let FlightServiceUrl = "http://mobileapi.shioktrip.com/FlightService.asmx"
     static let FlightResult = "FlightResult"
+    static let FlightMultiResult = "FlightResultMultiWay"
     static let FlightImgURL = "https://www.shioktrip.com/Airline_Images/"
     
     //Hotel

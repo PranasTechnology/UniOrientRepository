@@ -112,7 +112,6 @@
 		8F1BB0EF224DE99500032798 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0EE224DE99500032798 /* General.swift */; };
 		8F1BB0F1224DEA5F00032798 /* TravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */; };
 		8F1BB0F4224DEA8E00032798 /* LoginPageVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */; };
-		8F1ECE7E22645DE300E989E7 /* multiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1ECE7D22645DE200E989E7 /* multiTableViewCell.swift */; };
 		8F30A6D1225F691A0095C38E /* ScrollPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F30A6D0225F691A0095C38E /* ScrollPager.swift */; };
 		8F464B3A225DFD1E001E4FF7 /* SingleTravellerDetailVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B39225DFD1D001E4FF7 /* SingleTravellerDetailVCGoomo.swift */; };
 		8F464B41225E2220001E4FF7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F464B3C225E221F001E4FF7 /* Info.plist */; };
@@ -124,6 +123,7 @@
 		8FC6E589225CA017002C9D60 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6E588225CA017002C9D60 /* SummaryViewController.swift */; };
 		8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD04BA22573EFB00CCD296 /* ShadowView.swift */; };
 		8FF8087E2266E0BE00019444 /* RoundTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */; };
+		8FFC3C7D2269AA2200164C40 /* multiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFC3C7C2269AA2200164C40 /* multiTableViewCell.swift */; };
 		F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */; };
 /* End PBXBuildFile section */
 
@@ -266,7 +266,6 @@
 		8F1BB0EE224DE99500032798 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		8F1BB0F0224DEA5F00032798 /* TravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB0F3224DEA8E00032798 /* LoginPageVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPageVCGoomo.swift; sourceTree = "<group>"; };
-		8F1ECE7D22645DE200E989E7 /* multiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = multiTableViewCell.swift; sourceTree = "<group>"; };
 		8F30A6D0225F691A0095C38E /* ScrollPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollPager.swift; sourceTree = "<group>"; };
 		8F464B39225DFD1D001E4FF7 /* SingleTravellerDetailVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTravellerDetailVCGoomo.swift; sourceTree = "<group>"; };
 		8F464B3C225E221F001E4FF7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -279,6 +278,7 @@
 		8FC6E588225CA017002C9D60 /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		8FDD04BA22573EFB00CCD296 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTripViewController.swift; sourceTree = "<group>"; };
+		8FFC3C7C2269AA2200164C40 /* multiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = multiTableViewCell.swift; sourceTree = "<group>"; };
 		CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -410,9 +410,9 @@
 				8F4A480C2265ED010010DC84 /* OneWayViewController.swift */,
 				8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */,
 				8F4A480E2265ED9B0010DC84 /* MultiCityViewController.swift */,
-				8F1ECE7D22645DE200E989E7 /* multiTableViewCell.swift */,
 				2E27D40A224C8D67009A0E1F /* onewayTableViewCell.swift */,
 				2E1950BA22533E8E00C14A5F /* twowayTableViewCell.swift */,
+				8FFC3C7C2269AA2200164C40 /* multiTableViewCell.swift */,
 				2E27D40B224C8D67009A0E1F /* SearchCityViewController.swift */,
 				2E27D3DA224C8D66009A0E1F /* CustomCalenderViewController.swift */,
 				8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */,
@@ -740,6 +740,7 @@
 				8F1BB0DF224DE76E00032798 /* FSCalendarWeekdayView.m in Sources */,
 				8F1BB0D5224DE76E00032798 /* FSCalendarCollectionView.m in Sources */,
 				2E1950BB22533E9100C14A5F /* twowayTableViewCell.swift in Sources */,
+				8FFC3C7D2269AA2200164C40 /* multiTableViewCell.swift in Sources */,
 				8F464B42225E2220001E4FF7 /* Palette.swift in Sources */,
 				2E27D41C224C8D67009A0E1F /* CVCalendarView.swift in Sources */,
 				2E27D41E224C8D67009A0E1F /* CVCalendarViewAnimatorDelegate.swift in Sources */,
@@ -797,7 +798,6 @@
 				2E27D41D224C8D67009A0E1F /* CVCalendarViewAnimator.swift in Sources */,
 				8F1BB0A2224DE72E00032798 /* AFHTTPSessionManager.m in Sources */,
 				8F1BB0DD224DE76E00032798 /* FSCalendarStickyHeader.m in Sources */,
-				8F1ECE7E22645DE300E989E7 /* multiTableViewCell.swift in Sources */,
 				8F1BB0DA224DE76E00032798 /* FSCalendarExtensions.m in Sources */,
 				2E27D422224C8D67009A0E1F /* CVCalendarViewPresentationMode.swift in Sources */,
 				8F1BB0DE224DE76E00032798 /* FSCalendarTransitionCoordinator.m in Sources */,
