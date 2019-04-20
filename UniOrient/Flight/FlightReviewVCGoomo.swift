@@ -269,38 +269,38 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
         return selectedCellIndex
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        //        if let data = myArray?[indexPath.row] {
-        
-        if (myArray?[indexPath.row]) != nil {
-            
-            // If user clicked last cell, do not try to access cell+1 (out of range)
-            if(indexPath.row + 1 >= (myArray?.count)!) {
-                if myArray?[indexPath.row]?.stop != "0 stop" {
-                    expandCell(tableView: tableView, index: indexPath.row)
-                }else{
-                    print("0 stop..so dont expand...lastcell")
-                }
-                
-            }
-            else {
-                // If next cell is not nil, then cell is not expanded
-                if(myArray?[indexPath.row+1] != nil) {
-                    if myArray?[indexPath.row]?.stop != "0 stop" {
-                        expandCell(tableView: tableView, index: indexPath.row)
-                    }else{
-                        print("0 stop..so dont expand...ReturnTrip")
-                    }
-                    
-                    // Close Cell (remove ExpansionCells)
-                } else {
-                    contractCell(tableView: tableView, index: indexPath.row)
-                    
-                }
-            }
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        //        if let data = myArray?[indexPath.row] {
+//
+//        if (myArray?[indexPath.row]) != nil {
+//
+//            // If user clicked last cell, do not try to access cell+1 (out of range)
+//            if(indexPath.row + 1 >= (myArray?.count)!) {
+//                if myArray?[indexPath.row]?.stop != "0 stop" {
+//                    expandCell(tableView: tableView, index: indexPath.row)
+//                }else{
+//                    print("0 stop..so dont expand...lastcell")
+//                }
+//
+//            }
+//            else {
+//                // If next cell is not nil, then cell is not expanded
+//                if(myArray?[indexPath.row+1] != nil) {
+//                    if myArray?[indexPath.row]?.stop != "0 stop" {
+//                        expandCell(tableView: tableView, index: indexPath.row)
+//                    }else{
+//                        print("0 stop..so dont expand...ReturnTrip")
+//                    }
+//
+//                    // Close Cell (remove ExpansionCells)
+//                } else {
+//                    contractCell(tableView: tableView, index: indexPath.row)
+//
+//                }
+//            }
+//        }
+//    }
     /*  Expand cell at given index  */
     private func expandCell(tableView: UITableView, index: Int) {
         // Expand Cell (add ExpansionCells

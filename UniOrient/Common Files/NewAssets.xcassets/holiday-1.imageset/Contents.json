@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "resort.png",
+      "filename" : "holiday.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "resort-1.png",
+      "filename" : "holiday-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "resort-2.png",
+      "filename" : "holiday-2.png",
       "scale" : "3x"
     }
   ],

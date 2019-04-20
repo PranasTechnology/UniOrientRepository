@@ -18,36 +18,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="x9n-3B-dJJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Hdi-rf-rbv">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="business_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="gWQ-SK-jID">
-                                <rect key="frame" x="87" y="20" width="200" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="n2m-8p-5hL">
+                                <rect key="frame" x="16" y="48" width="343" height="73"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Cgg-1E-1iM"/>
-                                    <constraint firstAttribute="width" constant="200" id="Rvu-Il-hF4"/>
+                                    <constraint firstAttribute="height" constant="73" id="f7h-ew-3Fn"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gWQ-SK-jID" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="QW7-7o-Sw4"/>
-                            <constraint firstItem="x9n-3B-dJJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZLg-Vj-kx4"/>
-                            <constraint firstItem="x9n-3B-dJJ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="csd-hC-Mub"/>
-                            <constraint firstItem="x9n-3B-dJJ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="eLB-23-Sv4"/>
-                            <constraint firstItem="x9n-3B-dJJ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nqD-7F-e81"/>
-                            <constraint firstItem="gWQ-SK-jID" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="x22-Td-lFT"/>
+                            <constraint firstItem="n2m-8p-5hL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Go7-5X-Jd7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n2m-8p-5hL" secondAttribute="trailing" constant="16" id="NaX-UG-xN1"/>
+                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ZSD-yl-i90"/>
+                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="eSa-vc-RTD"/>
+                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kL5-8Y-OiE"/>
+                            <constraint firstItem="n2m-8p-5hL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="28" id="lgP-Y1-iSK"/>
+                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uI5-7O-kHi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="310"/>
+            <point key="canvasLocation" x="124" y="309.89505247376314"/>
         </scene>
     </scenes>
     <resources>
-        <image name="1.jpeg" width="500" height="611"/>
-        <image name="business_logo.png" width="400" height="400"/>
+        <image name="3.jpeg" width="500" height="814"/>
+        <image name="Logo.png" width="314" height="65"/>
     </resources>
 </document>

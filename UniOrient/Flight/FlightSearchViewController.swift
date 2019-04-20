@@ -113,13 +113,13 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        onewayBtn.layer.cornerRadius = 10.0
+        onewayBtn.layer.cornerRadius = 5.0
         onewayBtn.clipsToBounds = true
         
-        roundTripBtn.layer.cornerRadius = 10.0
+        roundTripBtn.layer.cornerRadius = 5.0
         roundTripBtn.clipsToBounds = true
         
-        multiCityBtn.layer.cornerRadius = 10.0
+        multiCityBtn.layer.cornerRadius = 5.0
         multiCityBtn.clipsToBounds = true
         
         classChooseView .isHidden = true
@@ -422,7 +422,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
        
-            let title = cell.viewWithTag(1) as! UILabel
+        //    let title = cell.viewWithTag(1) as! UILabel
             let departCode = cell.viewWithTag(4) as! UILabel
             let departCity = cell.viewWithTag(5) as! UILabel
             let arriCode = cell.viewWithTag(6) as! UILabel
@@ -433,7 +433,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             let ArriBtn = cell.viewWithTag(22) as! UIButton
             let DateBtn = cell.viewWithTag(33) as! UIButton
 
-            title.text = arrMultiTitle[indexPath.row]
+          //  title.text = arrMultiTitle[indexPath.row]
             departCode.text = arrMultiDepartCode[indexPath.row]
             departCity.text = arrMultiDepartCity[indexPath.row]
             arriCode.text = arrMultiArriCode[indexPath.row]
@@ -459,7 +459,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(tableView == multicityTableView)
         {
-            return 130.0
+            return 110.0
         }
         else
         {
@@ -1058,7 +1058,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         roundTripBtn.setTitleColor(.darkGray, for: .normal)
         multiCityBtn.setTitleColor(.darkGray, for: .normal)
         
-        onewayBtn.backgroundColor = WebServicesUrl.appColor2
+        onewayBtn.backgroundColor = WebServicesUrl.appColor1
         roundTripBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
         multiCityBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
     }
@@ -1074,7 +1074,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         onewayBtn.setTitleColor(.darkGray, for: .normal)
         roundTripBtn.setTitleColor(.white, for: .normal)
         multiCityBtn.setTitleColor(.darkGray, for: .normal)
-        roundTripBtn.backgroundColor = WebServicesUrl.appColor2
+        roundTripBtn.backgroundColor = WebServicesUrl.appColor1
         onewayBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
         multiCityBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
     }
@@ -1090,7 +1090,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         onewayBtn.setTitleColor(.darkGray, for: .normal)
         roundTripBtn.setTitleColor(.darkGray, for: .normal)
         multiCityBtn.setTitleColor(.white, for: .normal)
-        multiCityBtn.backgroundColor = WebServicesUrl.appColor2
+        multiCityBtn.backgroundColor = WebServicesUrl.appColor1
         onewayBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
         roundTripBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
     }
