@@ -110,7 +110,7 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
     func calendar() -> Calendar? { return currentCalendar }
     
     func dayOfWeekTextColor(by weekday: Weekday) -> UIColor {
-        return weekday == .sunday ? UIColor(red: 1.0, green: 0, blue: 0, alpha: 1.0) : UIColor.white
+        return weekday == .sunday ? UIColor(red: 1.0, green: 0, blue: 0, alpha: 1.0) : UIColor.black
     }
     
     func shouldShowWeekdaysOut() -> Bool { return shouldShowDaysOut }
@@ -375,9 +375,9 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
         return shouldDisplay
     }
     
-    func dayOfWeekTextColor() -> UIColor { return .white }
+    func dayOfWeekTextColor() -> UIColor { return .black }
     
-    func dayOfWeekBackGroundColor() -> UIColor { return .lightGray
+    func dayOfWeekBackGroundColor() -> UIColor { return .white
         
     }
     

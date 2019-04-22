@@ -38,7 +38,6 @@ public final class CVCalendarWeekContentViewController: CVCalendarContentViewCon
         monthViews[previous] = getPreviousMonth(presentedMonthView.date)
         monthViews[presented] = presentedMonthView
         monthViews[following] = getFollowingMonth(presentedMonthView.date)
-
         presentedMonthView.mapDayViews { dayView in
             let calendar = self.calendarView.delegate?.calendar?() ?? Calendar.current
             if self.matchedDays(dayView.date, CVDate(date: date, calendar: calendar)) {
@@ -80,7 +79,6 @@ public final class CVCalendarWeekContentViewController: CVCalendarContentViewCon
         var weekViewFrame = weekView.frame
         weekViewFrame.origin.x = weekViewFrame.width * CGFloat(indexOfIdentifier(identifier))
         weekView.frame = weekViewFrame
-
         weekViews[identifier] = weekView
 
         if animatable {

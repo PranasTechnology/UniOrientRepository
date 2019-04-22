@@ -252,7 +252,7 @@ extension CVCalendarDayView {
                 let appearance = self.calendarView.appearance
                 let height = CGFloat(0.5)
                 let layer = CALayer()
-                layer.borderColor = (appearance?.delegate?.topMarkerColor?() ?? .gray).cgColor
+                layer.borderColor = (appearance?.delegate?.topMarkerColor?() ?? .clear).cgColor
                 layer.borderWidth = height
                 layer.frame = CGRect(x: 0, y: 1, width: self.frame.width, height: height)
                 

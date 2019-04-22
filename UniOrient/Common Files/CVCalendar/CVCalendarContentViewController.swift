@@ -49,7 +49,7 @@ open class CVCalendarContentViewController: UIViewController {
 
         scrollView.contentSize = CGSize(width: frame.width * 3, height: frame.height)
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = true
         scrollView.layer.masksToBounds = true
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
