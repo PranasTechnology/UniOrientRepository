@@ -14,6 +14,12 @@ class FlightResultVCGoomo: UIViewController {
  
 //MARK: - IBOutlet
     
+    @IBOutlet weak var gif1: UIImageView!
+     @IBOutlet weak var gif2: UIImageView!
+     @IBOutlet weak var gif3: UIImageView!
+     @IBOutlet weak var gif4: UIImageView!
+  @IBOutlet weak var gif5: UIImageView!
+    
     @IBOutlet weak var multicityTableview: UITableView!
     @IBOutlet weak var multicityView: UIView!
     @IBOutlet weak var twowayView: UIView!
@@ -83,7 +89,13 @@ class FlightResultVCGoomo: UIViewController {
         self.noResultView.isHidden = true
 //         self.onewayView.isHidden = true
 //         self.twowayView.isHidden=true
-         loadingGifImg.image = UIImage (named: "loadingGif.gif")
+         loadingGifImg.image = UIImage (named: "gifFlight.png")//"loadingGif.gif")
+         gif1.image = UIImage (named: "loadingHotelGif.gif")
+        gif2.image = UIImage (named: "loadingHotelGif.gif")
+        gif3.image = UIImage (named: "loadingHotelGif.gif")
+        gif4.image = UIImage (named: "loadingHotelGif.gif")
+        gif5.image = UIImage (named: "loadingHotelGif.gif")
+        
         if self.inputDict["WayType"]! == "two"
         {
             self.onewayView .isHidden = true;
@@ -221,6 +233,7 @@ class FlightResultVCGoomo: UIViewController {
           else{
                 strURL = WebServicesUrl.FlightResult
             }
+         
             WebService().HTTP_POST_WebServiceMethod_Flight(mainURL:WebServicesUrl.FlightServiceUrl,suffix: strURL, parameterDict: messageDict) { (ResponceDict, success) in
                 
               //  hideLoading()
@@ -252,11 +265,9 @@ class FlightResultVCGoomo: UIViewController {
              
                     if responce.keys.contains("FlightdetailsReturn"){
                         self.flightDetailsReturnArr = responce["FlightdetailsReturn"] as! [[String : AnyObject]]
-                        
                     }
                 if responce.keys.contains("FlightdetailsReturnMulti"){
                     self.flightMultiDetailsArr = responce["FlightdetailsReturnMulti"] as! [[String : AnyObject]]
-                    
                 }
                     
                     self.flightResultAndDetailsArr.removeAll()
@@ -435,9 +446,7 @@ class FlightResultVCGoomo: UIViewController {
                         aResultAndDetailStruct.arrivalAirportCode = String(formattedStrforAirportCode)
                         
                         // ------ end of oneway ----
-                        
-                        
-                        
+                     
                         //Flight Details Return
                         if responce.keys.contains("FlightdetailsReturn"){
                             for aDetailDict in self.flightDetailsReturnArr {
@@ -1033,12 +1042,12 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
        {
            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! onewayTableViewCell
         
-        cell.mainView.layer.masksToBounds = false
-        cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
-        cell.mainView.layer.shadowOpacity = 0.5
-        cell.mainView.layer.shadowOffset = CGSize(width: 0.5, height: 1)
-        cell.mainView.layer.shadowRadius = 0.5
-        
+//        cell.mainView.layer.masksToBounds = false
+//        cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
+//        cell.mainView.layer.shadowOpacity = 0.5
+//        cell.mainView.layer.shadowOffset = CGSize(width: 0.5, height: 1)
+//        cell.mainView.layer.shadowRadius = 0.5
+//
         let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
   
 //        if self.arrToDisplay[indexPath.row].flightImgName == "multiairline" {
@@ -1050,8 +1059,8 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
             if self.arrToDisplay[indexPath.row].flightImgData != nil {
                 cell.flightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].flightImgData!)
             }else{
-                cell.flightImg.sd_setShowActivityIndicatorView(true)
-                cell.flightImg.sd_setIndicatorStyle(.gray)
+              //  cell.flightImg.sd_setShowActivityIndicatorView(true)
+              //  cell.flightImg.sd_setIndicatorStyle(.gray)
                 cell.flightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                     if error == nil{
                         self.arrToDisplay[indexPath.row].flightImgData = downloadedImage!.pngData()
@@ -1079,11 +1088,11 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
        {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! twowayTableViewCell
-        cell.mainView.layer.masksToBounds = false
-        cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
-        cell.mainView.layer.shadowOpacity = 0.5
-        cell.mainView.layer.shadowOffset = CGSize(width: -1, height: 1)
-        cell.mainView.layer.shadowRadius = 0.5
+//        cell.mainView.layer.masksToBounds = false
+//        cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
+//        cell.mainView.layer.shadowOpacity = 0.5
+//        cell.mainView.layer.shadowOffset = CGSize(width: -1, height: 1)
+//        cell.mainView.layer.shadowRadius = 0.5
         
       
         let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
@@ -1103,8 +1112,8 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
             if self.arrToDisplay[indexPath.row].flightImgData != nil {
                 cell.flightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].flightImgData!)
             }else{
-            cell.flightImg.sd_setShowActivityIndicatorView(true)
-                cell.flightImg.sd_setIndicatorStyle(.gray)
+          //  cell.flightImg.sd_setShowActivityIndicatorView(true)
+          //      cell.flightImg.sd_setIndicatorStyle(.gray)
                 cell.flightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                     if error == nil{
                         self.arrToDisplay[indexPath.row].flightImgData = downloadedImage!.pngData()
@@ -1137,8 +1146,8 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         if self.arrToDisplay[indexPath.row].returnFlightImgData != nil {
             cell.reflightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].returnFlightImgData!)
         }else{
-            cell.reflightImg.sd_setShowActivityIndicatorView(true)
-            cell.reflightImg.sd_setIndicatorStyle(.gray)
+          //  cell.reflightImg.sd_setShowActivityIndicatorView(true)
+         //   cell.reflightImg.sd_setIndicatorStyle(.gray)
             cell.reflightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                 if error == nil{
                     self.arrToDisplay[indexPath.row].returnFlightImgData = downloadedImage!.pngData()
@@ -1164,12 +1173,12 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
 
         let cell = tableView.dequeueReusableCell(withIdentifier:"multiCell", for: indexPath) as! multiTableViewCell
 
-        cell.mainView.layer.masksToBounds = false
-        cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
-        cell.mainView.layer.shadowOpacity = 0.75
-        cell.mainView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        cell.mainView.layer.shadowRadius = 1.0
-        cell.mainView.layer.cornerRadius = 2.0
+//        cell.mainView.layer.masksToBounds = false
+//        cell.mainView.layer.shadowColor = UIColor.darkGray.cgColor
+//        cell.mainView.layer.shadowOpacity = 0.75
+//        cell.mainView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+//        cell.mainView.layer.shadowRadius = 1.0
+//        cell.mainView.layer.cornerRadius = 2.0
 
 
         let flightImgURL = WebServicesUrl.FlightImgURL + self.arrToDisplay[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
@@ -1189,8 +1198,8 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         if self.arrToDisplay[indexPath.row].flightImgData != nil {
             cell.flightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].flightImgData!)
         }else{
-            cell.flightImg.sd_setShowActivityIndicatorView(true)
-            cell.flightImg.sd_setIndicatorStyle(.gray)
+           // cell.flightImg.sd_setShowActivityIndicatorView(true)
+         //   cell.flightImg.sd_setIndicatorStyle(.gray)
             cell.flightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                 if error == nil{
                     self.arrToDisplay[indexPath.row].flightImgData = downloadedImage!.pngData()
@@ -1223,8 +1232,8 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         if self.arrToDisplay[indexPath.row].returnFlightImgData != nil {
             cell.reflightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].returnFlightImgData!)
         }else{
-            cell.reflightImg.sd_setShowActivityIndicatorView(true)
-            cell.reflightImg.sd_setIndicatorStyle(.gray)
+        //    cell.reflightImg.sd_setShowActivityIndicatorView(true)
+        //    cell.reflightImg.sd_setIndicatorStyle(.gray)
             cell.reflightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                 if error == nil{
                     self.arrToDisplay[indexPath.row].returnFlightImgData = downloadedImage!.pngData()
@@ -1255,8 +1264,8 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         if self.arrToDisplay[indexPath.row].multiFlightImgData != nil {
             cell.multiflightImg.image = UIImage(data: self.arrToDisplay[indexPath.row].multiFlightImgData!)
         }else{
-            cell.multiflightImg.sd_setShowActivityIndicatorView(true)
-            cell.multiflightImg.sd_setIndicatorStyle(.gray)
+         //   cell.multiflightImg.sd_setShowActivityIndicatorView(true)
+         //   cell.multiflightImg.sd_setIndicatorStyle(.gray)
             cell.multiflightImg.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                 if error == nil{
                     self.arrToDisplay[indexPath.row].multiFlightImgData = downloadedImage!.pngData()

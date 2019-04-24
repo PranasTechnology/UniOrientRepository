@@ -34,7 +34,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     var arrAdult : [String] = [String]()
     var arrChild : [String] = [String]()
     var arrInfant : [String] = [String]()
-    
+    var DictInputs = Dictionary<String, String>()
     var arrMultiTitle : [String] = [String]()
     var arrMultiDepartCode : [String] = [String]()
     var arrMultiDepartCity : [String] = [String]()
@@ -91,6 +91,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     
 /////////// RoundTrip Controls
     
+    @IBOutlet weak var bckLabel: UILabel!
     @IBOutlet weak var RdepartureCity: UITextField!
     @IBOutlet weak var lblRdepartureCountry: UILabel!
     @IBOutlet weak var Rarrivalcity: UITextField!
@@ -113,6 +114,10 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         
         super.viewDidLoad()
+    
+        bckLabel.layer.cornerRadius = 5
+        bckLabel.clipsToBounds = true
+        
         onewayBtn.layer.cornerRadius = 5.0
         onewayBtn.clipsToBounds = true
         
@@ -123,7 +128,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         multiCityBtn.clipsToBounds = true
         
         classChooseView .isHidden = true
-         travellerView .isHidden = true
+        travellerView .isHidden = true
 
         UserDefaults.standard.set("", forKey: "DselectedCityName")
         UserDefaults.standard.set("", forKey: "DselectedCityCode")
@@ -173,6 +178,9 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         strAdult = "1"
         strChild = "0"
         strInfant = "0"
+ 
+        DictInputs = ["adultCnt":strAdult,"childCnt":strChild ,"infantCnt":strInfant,"class":"Business"]
+            
         self .getCurrentDate()
         multicityTableView.tableFooterView = multiCityBottomView
 
@@ -233,6 +241,20 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
 }
     override func viewWillAppear(_ animated: Bool)
     {
+        
+        if(wayType == "one")
+        {
+            txtTraveller . text = DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child," + DictInputs["infantCnt"]! + " Infant "
+        }
+        else if(wayType == "two")
+        {
+            RtxtTraveller . text =  DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child, " + DictInputs["infantCnt"]! + " Infant "
+        }
+        else
+        {
+            multiTraveller . text = DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child, " + DictInputs["infantCnt"]! + " Infant "
+        }
+        
         let departureCity = (UserDefaults.standard.value(forKey: "DselectedCityName") as! String)
         let departureCode = (UserDefaults.standard.value(forKey: "DselectedCityCode") as! String)
         let arrivalCity = (UserDefaults.standard.value(forKey: "AselectedCityName") as! String)
@@ -606,12 +628,20 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func travellerChooseBtn(_ sender: Any)
     {
-         travellerView .isHidden = false
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "passengerVC") as? PassengerViewController
+        vc?.selectableTraveller = wayType
+        self.navigationController?.pushViewController(vc!, animated: true)
+      
+         //travellerView .isHidden = false
+    
     }
     
     @IBAction func classCHooseBtn(_ sender: Any)
     {
-        classChooseView .isHidden = false
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "passengerVC") as? PassengerViewController
+        vc?.selectableTraveller = wayType
+        self.navigationController?.pushViewController(vc!, animated: true)
+      //  classChooseView .isHidden = false
     }
     
     @IBAction func nonStopSelectionBtn(_ sender: Any)
@@ -687,7 +717,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             
 //            DictInput = ["Origin1":arrMultiDepartCode[0],"DepartureDate1":departDate1,"Origin2":arrMultiDepartCode[1],"DepartureDate2":departDate2,"Origin3":arrMultiDepartCode[2],"DepartureDate3":departDate3,"WayType":"multi","CabinClass":txtMultiClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON","WayCount":"3"]
         }
-//        @"%@FlightResultMultiWay?Origin1=%@&Destination1=%@&DepartureDate1=%@&Origin2=%@&Destination2=%@&DepartureDate2=%@&Origin3=%@&Destination3=%@&DepartureDate3=%@&WayType=%@&NonStop=&CabinClass=%@&AdultCount=%@&ChildCount=%@&InfantCount=%@&SeniorCount=%@&PreferredCarrier=%@&PromotionalPlanType=%@&SearchSessionid=%@&moduleid=%@&ParentAccountId=%@&ChildAccountId=%@&ApiName=%@&ReqType=%@&WayCount=3",
+
 //        DictInput = ["Origin":"SIN","Destination":"JFK","DepartureDate":"2019-05-15","Returndate":"2019-05-25","WayType":"two","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
         
         let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "FlightResultVC") as! FlightResultVCGoomo
@@ -719,7 +749,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         }
         else
         {
-              multiTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+            multiTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
         }
        
          travellerView .isHidden = true
@@ -896,7 +926,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     {
         let date1 = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"//"dd MMM yy"//2019-05-15
+        formatter.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"//"dd MMM yy"//2019-05-15
         let result = formatter.string(from: date1)
         print(result)
         
@@ -935,7 +965,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     }
     func convertNextDate(dateString : String){
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        dateFormatter.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"
         let myDate = dateFormatter.date(from: dateString)!
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: myDate)
         let somedateString = dateFormatter.string(from: tomorrow!)
@@ -945,7 +975,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
 ///Get next day
         let isoDate = somedateString
         let dateFormatter1 = DateFormatter()
-        dateFormatter1.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        dateFormatter1.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"
         dateFormatter1.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         let date2 = dateFormatter1.date(from:isoDate)!
         print(date2)
@@ -969,7 +999,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     func convertNextDate1(dateString : String){
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        dateFormatter.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"
         let myDate = dateFormatter.date(from: dateString)!
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: myDate)
         let somedateString = dateFormatter.string(from: tomorrow!)
@@ -981,7 +1011,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         ///Get next day
         let isoDate = somedateString
         let dateFormatter1 = DateFormatter()
-        dateFormatter1.dateFormat = "dd MMM,yyyy"//"YYYY-MM-dd"
+        dateFormatter1.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"
         dateFormatter1.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
         let date2 = dateFormatter1.date(from:isoDate)!
         print(date2)
@@ -1001,7 +1031,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     func convertDateFormater(_ date: String) -> String
     {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM,yyyy"
+        dateFormatter.dateFormat = "dd MMMM,yyyy"
         let date = dateFormatter.date(from: date)
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return  dateFormatter.string(from: date!)
@@ -1038,6 +1068,10 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         print("index",index)
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CustomCalenderVC") as? CustomCalenderViewController
         vc?.selectableDate = "departureDate"
+        vc?.selectdDate1 = arrMultiDate[0] + "+" + arrMultiDay[0]
+         vc?.selectdDate2 = arrMultiDate[1] + "+" + arrMultiDay[1]
+         vc?.selectdDate3 = arrMultiDate[2] + "+" + arrMultiDay[2]
+        vc?.selectedIndex = "\(index)"
         self.navigationController?.pushViewController(vc!, animated: true)
     }
    

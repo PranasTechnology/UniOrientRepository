@@ -18,25 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="Hdi-rf-rbv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="n2m-8p-5hL">
-                                <rect key="frame" x="16" y="48" width="343" height="73"/>
+                                <rect key="frame" x="16" y="307" width="343" height="73"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="73" id="f7h-ew-3Fn"/>
+                                    <constraint firstAttribute="height" constant="73" id="89x-Rg-KQI"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="n2m-8p-5hL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Go7-5X-Jd7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n2m-8p-5hL" secondAttribute="trailing" constant="16" id="NaX-UG-xN1"/>
-                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ZSD-yl-i90"/>
-                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="eSa-vc-RTD"/>
-                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kL5-8Y-OiE"/>
-                            <constraint firstItem="n2m-8p-5hL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="28" id="lgP-Y1-iSK"/>
-                            <constraint firstItem="Hdi-rf-rbv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uI5-7O-kHi"/>
+                            <constraint firstItem="n2m-8p-5hL" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="9nQ-Ol-3cJ"/>
+                            <constraint firstItem="n2m-8p-5hL" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="SbC-hc-lfJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="n2m-8p-5hL" secondAttribute="trailing" constant="16" id="rKl-2x-M5f"/>
+                            <constraint firstItem="n2m-8p-5hL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vZg-8U-pIF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -47,7 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3.jpeg" width="500" height="814"/>
         <image name="Logo.png" width="314" height="65"/>
     </resources>
 </document>

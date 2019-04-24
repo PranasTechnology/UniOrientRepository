@@ -12,20 +12,16 @@ class WebService {
     
     func HTTP_POST_WebServiceMethod_Flight(mainURL:String,suffix : String , parameterDict : [String:String],completion:@escaping (_ Data:Any,_ IsSuccess:Bool) -> ())
     {
-        
-        
+    
         var parameters = ""
         for (key,value) in parameterDict {
             parameters.append(key + "=" + value + "&")
         }
         parameters.remove(at: parameters.index(parameters.endIndex, offsetBy: -1))
         let soapLenth = String(parameters.count)
-        
-        
-        
+    
         let theUrlString = mainURL + "/" + suffix
         let theURL = URL(string: theUrlString)
-        
         
         var mutableR = URLRequest.init(url: theURL!)
         mutableR.httpMethod = "POST"
@@ -37,9 +33,7 @@ class WebService {
         
         
         let manager = AFHTTPRequestOperation(request: mutableR as URLRequest)
-        
         manager.setCompletionBlockWithSuccess({ (operation : AFHTTPRequestOperation, responseObject : Any) -> Void in
-            
             let responseData = responseObject as! Data
             let stringFromData = String(data: responseData, encoding: .utf8)
             
@@ -220,10 +214,5 @@ class WebService {
         
         manager.start()
     }
-    
-   
-
-   
-
-
+ 
 }

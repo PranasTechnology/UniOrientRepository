@@ -11,11 +11,41 @@ import UIKit
 class CustomCalenderViewController: UIViewController
 {
     var selectableDate : String = String()
+    var selectdDate1 : String = String()
+     var selectdDate2 : String = String()
+     var selectdDate3 : String = String()
+    var selectedIndex : String = String()
     // MARK: - Properties
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var daysOutSwitch: UISwitch!
+    
+    @IBOutlet weak var onewayView: UIView!
+    @IBOutlet weak var twowayView: UIView!
+    @IBOutlet weak var twowayDepartDate: UILabel!
+    
+    @IBOutlet weak var twowayDepartDay: UILabel!
+    
+    @IBOutlet weak var twowayArrivDate: UILabel!
+    
+    @IBOutlet weak var twowayArrivDay: UILabel!
+    
+    @IBOutlet weak var multicityView: UIView!
+    @IBOutlet weak var onewayDepartDay: UILabel!
+    @IBOutlet weak var onewayDaprtDate: UILabel!
+    
+    @IBOutlet weak var depart1Date: UILabel!
+    
+    @IBOutlet weak var depart1Day: UILabel!
+    
+    @IBOutlet weak var depart2Date: UILabel!
+    
+    @IBOutlet weak var depart2day: UILabel!
+    
+    @IBOutlet weak var depart3Date: UILabel!
+    
+    @IBOutlet weak var depart3Day: UILabel!
     
     
     private var randomNumberOfDotMarkersForDay = [Int]()
@@ -37,12 +67,46 @@ class CustomCalenderViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         let wayType = UserDefaults .standard.value(forKey: "wayType")
+          if (wayType as! String == "one")
+          {
+            self.onewayView .isHidden = false
+            self.twowayView.isHidden = true
+             self.multicityView.isHidden = true
+        }
+        else if (wayType as! String == "two")
+          {
+            self.onewayView .isHidden = true
+            self.twowayView.isHidden = false
+             self.multicityView.isHidden = true
+        }
+          else{
+            self.onewayView .isHidden = true
+            self.twowayView.isHidden = true
+            self.multicityView.isHidden = false
+          
+            let date1 : String = selectdDate1
+            var arrDate1 : [String] = date1 .components(separatedBy: "+")
+            depart1Date.text = arrDate1[0]
+            depart1Day.text = arrDate1[1]
         
+            let date2 : String = selectdDate2
+            var arrDate2 : [String] = date2 .components(separatedBy: "+")
+            depart2Date.text = arrDate2[0]
+            depart2day.text = arrDate2[1]
+            
+            let date3 : String = selectdDate3
+            var arrDate3 : [String] = date3 .components(separatedBy: "+")
+            depart3Date.text = arrDate3[0]
+            depart3Day.text = arrDate3[1]
+            
+        }
         if let currentCalendar = currentCalendar {
             monthLabel.text = CVDate(date: Date(), calendar: currentCalendar).globalDescription
         }
         
-        // randomizeDotMarkers()
+        getCurrentDate()
+        randomizeDotMarkers()
     }
     //
     //    @IBAction func removeCircleAndDot(sender: AnyObject) {
@@ -162,19 +226,49 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
         }
         selectedDay = dayView
         
+        onewayDaprtDate.text = dayView.date.commonDescription
+        onewayDepartDay.text = strDay
+        
+        if selectedIndex == "0"
+        {
+            depart1Date.text = dayView.date.commonDescription
+            depart1Day.text = strDay
+        }
+        else  if selectedIndex == "1"
+        {
+            depart2Date.text = dayView.date.commonDescription
+            depart2day.text = strDay
+        }else
+        {
+            depart3Date.text = dayView.date.commonDescription
+            depart3Day.text = strDay
+        }
+        
         let wayType = UserDefaults .standard.value(forKey: "wayType")
-        if (wayType as! String == "one")
+        if (wayType as! String == "one") || (wayType as! String == "multi")
         {
             UserDefaults .standard.set(dayView.date.commonDescription, forKey: "selectedDeptDate")
             UserDefaults .standard.set(strDay, forKey: "selectedDeptDay")
-            self.navigationController?.popViewController(animated: true)
+           
         }
-        
     }
     
-    func shouldSelectRange() -> Bool { return true }
+    func shouldSelectRange() -> Bool
+    {
+        let wayType = UserDefaults .standard.value(forKey: "wayType")
+        if (wayType as! String == "two")
+        {
+             return true
+        }
+        else{
+             return false
+        }
+   
+    }
     
-    func didSelectRange(from startDayView: DayView, to endDayView: DayView) {
+    func didSelectRange(from startDayView: DayView, to endDayView: DayView)
+    {
+        
         print("RANGE SELECTED: \(startDayView.date.commonDescription) to \(endDayView.date.commonDescription)")
         
         var day1 : NSInteger = NSInteger()
@@ -243,7 +337,12 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
         }
         
         print("\(strDay1),\(strDay2)")
-        UserDefaults .standard.set(startDayView.date.commonDescription, forKey: "selectedDeptDate")
+        twowayDepartDate.text = startDayView.date.commonDescription
+        twowayDepartDay.text = strDay1
+        twowayArrivDate.text = endDayView.date.commonDescription
+        twowayArrivDay.text = strDay2
+        
+    UserDefaults .standard.set(startDayView.date.commonDescription, forKey: "selectedDeptDate")
         UserDefaults .standard.set(strDay1, forKey: "selectedDeptDay")
         UserDefaults .standard.set(endDayView.date.commonDescription, forKey: "selectedArrDate")
         UserDefaults .standard.set(strDay2, forKey: "selectedArrDay")
@@ -383,7 +482,20 @@ extension CustomCalenderViewController: CVCalendarViewDelegate, CVCalendarMenuVi
     
     func disableScrollingBeforeDate() -> Date { return Date() }
     
-    func maxSelectableRange() -> Int { return 365 }//14
+    func maxSelectableRange() -> Int
+    {
+        let wayType = UserDefaults .standard.value(forKey: "wayType")
+        if (wayType as! String == "multi")
+        {
+         return 365
+        }
+        else
+        {
+          return 365
+        }
+       
+        
+    }//14
     
     func earliestSelectableDate() -> Date { return Date() }
     
@@ -495,5 +607,68 @@ extension CustomCalenderViewController {
         
         print("Showing Month: \(components.month!)")
     }
+   
+    
+    //////new code
+//////Get current date
+    func getCurrentDate()
+    {
+        let date1 = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"//"dd MMM yy"//2019-05-15
+        let result = formatter.string(from: date1)
+        print(result)
+        
+        /////getDay
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter.string(from: date)
+        print(dayInWeek)
+        
+        /////////get nextdate
+        
+        print(convertNextDate(dateString: result))
+        
+        //////////
+        
+        onewayDaprtDate . text = result
+        onewayDepartDay.text = dayInWeek
+        twowayDepartDate . text = result
+        twowayDepartDay.text = dayInWeek
+        twowayArrivDate . text = result
+        twowayArrivDay.text = dayInWeek
+  
+    }
+    func convertNextDate(dateString : String){
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"
+        let myDate = dateFormatter.date(from: dateString)!
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: myDate)
+        let somedateString = dateFormatter.string(from: tomorrow!)
+        print("your next Date is2 \(somedateString)")
+        
+        
+        ///Get next day
+        let isoDate = somedateString
+        let dateFormatter1 = DateFormatter()
+        dateFormatter1.dateFormat = "dd MMMM,yyyy"//"YYYY-MM-dd"
+        dateFormatter1.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        let date2 = dateFormatter1.date(from:isoDate)!
+        print(date2)
+        let dayInWeek1 = dateFormatter.string(from: date2)
+        
+        let date = date2
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "EEEE"
+        let dayInWeek = dateFormatter2.string(from: date)
+        print(dayInWeek)
+        
+        print("your next day is \(dayInWeek)")
+        twowayArrivDay.text = "\(dayInWeek)"
+        twowayArrivDate .text = "\(somedateString)"
+     
+    }
+    
     
 }

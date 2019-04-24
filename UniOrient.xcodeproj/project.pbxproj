@@ -120,9 +120,13 @@
 		8F464B44225E2220001E4FF7 /* UIViewShadowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F464B40225E221F001E4FF7 /* UIViewShadowExtension.swift */; };
 		8F4A480D2265ED010010DC84 /* OneWayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4A480C2265ED010010DC84 /* OneWayViewController.swift */; };
 		8F4A480F2265ED9B0010DC84 /* MultiCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F4A480E2265ED9B0010DC84 /* MultiCityViewController.swift */; };
+		8FB91BAD227061C70054D10A /* loadingHotelGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8FB91BAC227061C40054D10A /* loadingHotelGif.gif */; };
+		8FB91BAF227078290054D10A /* gifFlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB91BAE227078220054D10A /* gifFlight.png */; };
 		8FC6E589225CA017002C9D60 /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC6E588225CA017002C9D60 /* SummaryViewController.swift */; };
 		8FDD04BB22573EFB00CCD296 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD04BA22573EFB00CCD296 /* ShadowView.swift */; };
 		8FF8087E2266E0BE00019444 /* RoundTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */; };
+		8FFA4045226ED101006A755C /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFA4044226ED101006A755C /* File.swift */; };
+		8FFA40CA226EEB65006A755C /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFA40C9226EEB65006A755C /* PassengerViewController.swift */; };
 		8FFC3C7D2269AA2200164C40 /* multiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFC3C7C2269AA2200164C40 /* multiTableViewCell.swift */; };
 		F1C68B65D7C5A39EF0873397 /* Pods_UniOrient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E70546DC3668C9B22E0EEB /* Pods_UniOrient.framework */; };
 /* End PBXBuildFile section */
@@ -275,9 +279,13 @@
 		8F464B40225E221F001E4FF7 /* UIViewShadowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewShadowExtension.swift; sourceTree = "<group>"; };
 		8F4A480C2265ED010010DC84 /* OneWayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneWayViewController.swift; sourceTree = "<group>"; };
 		8F4A480E2265ED9B0010DC84 /* MultiCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiCityViewController.swift; sourceTree = "<group>"; };
+		8FB91BAC227061C40054D10A /* loadingHotelGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingHotelGif.gif; sourceTree = "<group>"; };
+		8FB91BAE227078220054D10A /* gifFlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gifFlight.png; sourceTree = "<group>"; };
 		8FC6E588225CA017002C9D60 /* SummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewController.swift; sourceTree = "<group>"; };
 		8FDD04BA22573EFB00CCD296 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundTripViewController.swift; sourceTree = "<group>"; };
+		8FFA4044226ED101006A755C /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		8FFA40C9226EEB65006A755C /* PassengerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerViewController.swift; sourceTree = "<group>"; };
 		8FFC3C7C2269AA2200164C40 /* multiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = multiTableViewCell.swift; sourceTree = "<group>"; };
 		CF3F7A9001F3F8B2E196ACFD /* Pods-UniOrient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -407,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				2E27D409224C8D67009A0E1F /* FlightSearchViewController.swift */,
+				8FFA40C9226EEB65006A755C /* PassengerViewController.swift */,
 				8F4A480C2265ED010010DC84 /* OneWayViewController.swift */,
 				8FF8087D2266E0BE00019444 /* RoundTripViewController.swift */,
 				8F4A480E2265ED9B0010DC84 /* MultiCityViewController.swift */,
@@ -428,6 +437,8 @@
 		2E27D43F224C8EB8009A0E1F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8FB91BAC227061C40054D10A /* loadingHotelGif.gif */,
+				8FB91BAE227078220054D10A /* gifFlight.png */,
 				8F0C9501225DA9D300297EF9 /* noResultImg.png */,
 				2E8A3E532255CFFA000D983D /* loadingGif.gif */,
 				2E1950B8225337B800C14A5F /* placeholder.png */,
@@ -509,6 +520,7 @@
 				8F1BB0AA224DE74B00032798 /* Constants.swift */,
 				8F1BB0AB224DE74B00032798 /* StructuresAndEnums.swift */,
 				8F1BB0AC224DE74B00032798 /* WebService.swift */,
+				8FFA4044226ED101006A755C /* File.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -649,6 +661,7 @@
 				2E27D45A224C8EB8009A0E1F /* reverse (4).png in Resources */,
 				2E27D459224C8EB8009A0E1F /* reverse (3).png in Resources */,
 				2E27D40D224C8D67009A0E1F /* Assets.xcassets in Resources */,
+				8FB91BAF227078290054D10A /* gifFlight.png in Resources */,
 				2E27D457224C8EB8009A0E1F /* left-arrow.png in Resources */,
 				2E27D435224C8D67009A0E1F /* Info.plist in Resources */,
 				2E27D42F224C8D67009A0E1F /* Info.plist in Resources */,
@@ -668,6 +681,7 @@
 				2E27D44F224C8EB8009A0E1F /* 2.jpeg in Resources */,
 				2E27D45F224C9CAA009A0E1F /* NewAssets.xcassets in Resources */,
 				2E27D455224C8EB8009A0E1F /* black-check-box-with-white-check.png in Resources */,
+				8FB91BAD227061C70054D10A /* loadingHotelGif.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +760,7 @@
 				2E27D41E224C8D67009A0E1F /* CVCalendarViewAnimatorDelegate.swift in Sources */,
 				2E27D418224C8D67009A0E1F /* CVCalendarMenuViewDelegate.swift in Sources */,
 				2E27D42E224C8D67009A0E1F /* CVWeekdaySymbolType.swift in Sources */,
+				8FFA4045226ED101006A755C /* File.swift in Sources */,
 				2E27D42C224C8D67009A0E1F /* CVShape.swift in Sources */,
 				2E27D42A224C8D67009A0E1F /* CVSelectionType.swift in Sources */,
 				2E27D414224C8D67009A0E1F /* CVCalendarDayView.swift in Sources */,
@@ -769,6 +784,7 @@
 				8F1BB0ED224DE97000032798 /* Reachability.swift in Sources */,
 				8F1BB0D7224DE76E00032798 /* FSCalendarConstants.m in Sources */,
 				2E27D41B224C8D67009A0E1F /* CVCalendarTouchController.swift in Sources */,
+				8FFA40CA226EEB65006A755C /* PassengerViewController.swift in Sources */,
 				2E27D43B224C8D67009A0E1F /* SearchCityViewController.swift in Sources */,
 				2E27D419224C8D67009A0E1F /* CVCalendarMonthContentViewController.swift in Sources */,
 				2E5F5265224E1991006ACE1E /* ArrayExtension.swift in Sources */,

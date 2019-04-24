@@ -121,7 +121,7 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
     }
  
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
+        return 60.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -165,7 +165,7 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
         {
             result.flightNameLbl.text = self.detailsArr [indexPath.row].operating
             result.depAirportCodeLbl.text = self.detailsArr [indexPath.row].fromAirportName
-            result.stopDetailsLbl.text = self.detailsArr [indexPath.row].marketing
+           // result.stopDetailsLbl.text = self.detailsArr [indexPath.row].marketing
             result.arrivalAirportCodeLbl.text = self.detailsArr [indexPath.row].toAirportName
             result.departureDateLbl.text = self.detailsArr [indexPath.row].departureDate
             result.arrivalDateLbl.text = self.detailsArr [indexPath.row].arrivalDate
@@ -179,7 +179,7 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
             result.depAirportCodeLbl.text = String(formattedFromStr)
     
             result.durationLbl.text = self.detailsArr [indexPath.row].duration
-            result.stopDetailsLbl.text = self.detailsArr [indexPath.row].stop
+          //  result.stopDetailsLbl.text = self.detailsArr [indexPath.row].stop
             result.arrivalTimeLbl.text = self.detailsArr [indexPath.row].arrivalTime
        
             let tempToAirportCodeStr = self.detailsArr [indexPath.row].toAirportName
@@ -211,7 +211,7 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
         {
             result.flightNameLbl.text = self.returnDetailsArr [indexPath.row].operating
             result.depAirportCodeLbl.text = self.returnDetailsArr [indexPath.row].fromAirportName
-            result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].marketing
+        //    result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].marketing
             result.arrivalAirportCodeLbl.text = self.returnDetailsArr [indexPath.row].toAirportName
             result.departureDateLbl.text = self.returnDetailsArr [indexPath.row].departureDate
             result.arrivalDateLbl.text = self.returnDetailsArr [indexPath.row].arrivalDate
@@ -224,7 +224,7 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
             result.depAirportCodeLbl.text = String(formattedFromStr)
             
             result.durationLbl.text = self.returnDetailsArr [indexPath.row].duration
-            result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].stop
+           // result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].stop
             result.arrivalTimeLbl.text = self.returnDetailsArr [indexPath.row].arrivalTime
             
             let tempToAirportCodeStr = self.returnDetailsArr [indexPath.row].toAirportName

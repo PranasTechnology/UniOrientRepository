@@ -79,10 +79,10 @@ class TravellerDetailVCGoomo: UIViewController {
         self.fromCityLbl.text = selectedStruct.detailArrWithFlightDetailStruct[0].fromCity
         self.toCityLbl.text = selectedStruct.detailArrWithFlightDetailStruct.last?.toCity
         if selectedStruct.wayType == "one" {
-            self.onewayOrTwowayImgView.image = UIImage.init(named: "Oneway100")
+            self.onewayOrTwowayImgView.image = UIImage.init(named: "FlightCir")
             self.dateLbl.text = selectedStruct.detailArrWithFlightDetailStruct.first?.departureDate
         }else{
-            self.onewayOrTwowayImgView.image = UIImage.init(named: "Roundtrip100")
+            self.onewayOrTwowayImgView.image = UIImage (named: "FlightCir")// UIImage.init(named: "FlightCir")
             self.dateLbl.text =  selectedStruct.detailArrWithFlightDetailStruct[0].departureDate! + " - " + selectedStruct.returnDetailArrWithFlightDetailStruct[0].departureDate!
         }
         
