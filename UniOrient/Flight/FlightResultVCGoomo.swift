@@ -12,8 +12,10 @@ import QuartzCore
 
 class FlightResultVCGoomo: UIViewController {
  
-//MARK: - IBOutlet
-    
+    @IBOutlet weak var filterView: UIView!
+    //MARK: - IBOutlet
+    var myMutableString = NSMutableAttributedString()
+    @IBOutlet weak var loadingGifImgs : UIImageView!
     @IBOutlet weak var gif1: UIImageView!
      @IBOutlet weak var gif2: UIImageView!
      @IBOutlet weak var gif3: UIImageView!
@@ -47,12 +49,15 @@ class FlightResultVCGoomo: UIViewController {
     @IBOutlet weak var departureBtn: UIButton!
     @IBOutlet weak var flightBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
-    @IBOutlet weak var departureBtnImgView: UIImageView!
-    @IBOutlet weak var flightBtnImgView: UIImageView!
-    @IBOutlet weak var priceBtnImgView: UIImageView!
+//    @IBOutlet weak var departureBtnImgView: UIImageView!
+//    @IBOutlet weak var flightBtnImgView: UIImageView!
+//    @IBOutlet weak var priceBtnImgView: UIImageView!
     
+    @IBOutlet weak var departFilterBtn: UIButton!
     
-//MARK: - variable Declaration
+    @IBOutlet weak var priceFiltrBtn: UIButton!
+    @IBOutlet weak var flightNamrFilterBtn: UIButton!
+    //MARK: - variable Declaration
     var strURL : String = String()
     var arrToDisplay = [FlightResultAndDetailStruct]()
     var arrToSort = [FlightResultAndDetailStruct]()
@@ -81,6 +86,18 @@ class FlightResultVCGoomo: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+        let shadowPath = UIBezierPath()
+        shadowPath.move(to: CGPoint(x: self.filterView.bounds.origin.x, y: self.filterView.frame.size.height))
+        shadowPath.addLine(to: CGPoint(x: self.filterView.bounds.width / 2, y: self.filterView.bounds.height + 7.0))
+        shadowPath.addLine(to: CGPoint(x: self.filterView.bounds.width, y: self.filterView.bounds.height))
+        shadowPath.close()
+        
+        self.filterView.layer.shadowColor = UIColor.darkGray.cgColor
+        self.filterView.layer.shadowOpacity = 1
+        self.filterView.layer.masksToBounds = false
+        self.filterView.layer.shadowPath = shadowPath.cgPath
+        self.filterView.layer.shadowRadius = 5
         
       // self.filterBtn.isHidden = true
         //        self.filterBtn.isSelected = false
@@ -89,7 +106,7 @@ class FlightResultVCGoomo: UIViewController {
         self.noResultView.isHidden = true
 //         self.onewayView.isHidden = true
 //         self.twowayView.isHidden=true
-         loadingGifImg.image = UIImage (named: "gifFlight.png")//"loadingGif.gif")
+         loadingGifImgs.image = UIImage (named: "airoplane.gif")//"loadingGif.gif")
          gif1.image = UIImage (named: "loadingHotelGif.gif")
         gif2.image = UIImage (named: "loadingHotelGif.gif")
         gif3.image = UIImage (named: "loadingHotelGif.gif")
@@ -838,11 +855,11 @@ class FlightResultVCGoomo: UIViewController {
     }
     @IBAction func departureBtnTapped(_ sender: UIButton) {
         
-        flightBtnImgView.image = .none
-        priceBtnImgView.image = nil
+//        flightBtnImgView.image = .none
+//        priceBtnImgView.image = nil
         
-        flightBtn.isSelected = false
-        priceBtn.isSelected = false
+//        flightBtn.isSelected = false
+//        priceBtn.isSelected = false
         
         /*
          if filterBtn.isSelected {
@@ -854,7 +871,9 @@ class FlightResultVCGoomo: UIViewController {
         arrToSort = arrToDisplay
         
         if !sender.isSelected { //isSelected : default is NO..Though if u tap on btn,isSelected value will be NO.We have to set.
-            departureBtnImgView.image = UIImage.init(named: "downArrowGreen")
+           
+            self.departFilterBtn .setImage(UIImage (named: "down-arrow-1"), for: UIControl.State.normal)
+          
             sender.isSelected = true
             
             self.arrToSort.sort { (firstStruct, secondStruct) -> Bool in
@@ -872,7 +891,8 @@ class FlightResultVCGoomo: UIViewController {
                 return totalSecOfFirstStruct > totalSecOfSecondStruct
             }
         }else{
-            departureBtnImgView.image = UIImage.init(named: "upArrowGreen")
+              self.departFilterBtn .setImage(UIImage (named: "up-arrow-1"), for: UIControl.State.normal)
+           // departureBtnImgView.image = UIImage.init(named: "up-arrow-1")
             sender.isSelected = false
             
             self.arrToSort.sort { (firstStruct, secondStruct) -> Bool in
@@ -904,11 +924,9 @@ class FlightResultVCGoomo: UIViewController {
     
     
     @IBAction func flightNameBtnTapped(_ sender: UIButton) {
-        departureBtnImgView.image = nil
-        priceBtnImgView.image = .none
-        
-        departureBtn.isSelected = false
-        priceBtn.isSelected = false
+   
+//        departureBtn.isSelected = false
+//        priceBtn.isSelected = false
         
         /*
          if filterBtn.isSelected {
@@ -919,13 +937,15 @@ class FlightResultVCGoomo: UIViewController {
         arrToSort = arrToDisplay
         
         if !sender.isSelected {
-            flightBtnImgView.image = UIImage.init(named: "downArrowGreen")
+              self.flightNamrFilterBtn .setImage(UIImage (named: "down-arrow-1"), for: UIControl.State.normal)
+          //  flightBtnImgView.image = UIImage.init(named: "down-arrow-1")
             sender.isSelected = true
             self.arrToSort.sort { (abc, xyz) -> Bool in
                 return  abc.flightName > xyz.flightName
             }
         }else{
-            flightBtnImgView.image = UIImage.init(named: "upArrowGreen")
+              self.flightNamrFilterBtn .setImage(UIImage (named: "up-arrow-1"), for: UIControl.State.normal)
+            //flightBtnImgView.image = UIImage.init(named: "up-arrow-1")
             sender.isSelected = false
             self.arrToSort.sort { (abc, xyz) -> Bool in
                 return  abc.flightName < xyz.flightName
@@ -944,11 +964,9 @@ class FlightResultVCGoomo: UIViewController {
         }
     }
     @IBAction func priceBtnTapped(_ sender: UIButton) {
-        departureBtnImgView.image = nil
-        flightBtnImgView.image = .none
-        
-        departureBtn.isSelected = false
-        flightBtn.isSelected = false
+       
+//        departureBtn.isSelected = false
+//        flightBtn.isSelected = false
         
         
         /*
@@ -960,7 +978,8 @@ class FlightResultVCGoomo: UIViewController {
         arrToSort = arrToDisplay
         
         if !sender.isSelected {
-            priceBtnImgView.image = UIImage.init(named: "downArrowGreen")
+            self.priceFiltrBtn .setImage(UIImage (named: "down-arrow-1"), for: UIControl.State.normal)
+          //  priceBtnImgView.image = UIImage.init(named: "down-arrow-1")
             sender.isSelected = true
             //            self.flightResultAndDetailsArr.sort { $0.amount.I > $1.Int(amount)}
             
@@ -971,7 +990,8 @@ class FlightResultVCGoomo: UIViewController {
                 return amount0Int > amount1Int
             }
         }else{
-            priceBtnImgView.image = UIImage.init(named: "upArrowGreen")
+              self.priceFiltrBtn .setImage(UIImage (named: "up-arrow-1"), for: UIControl.State.normal)
+          //  priceBtnImgView.image = UIImage.init(named: "up-arrow-1")
             sender.isSelected = false
             //            self.flightResultAndDetailsArr.sort { Int($0.amount) < Int($1.amount)}
             self.arrToSort.sort { (efg, hij) -> Bool in
@@ -1078,7 +1098,13 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         cell.departCode.text = self.arrToDisplay[indexPath.row].departureAirportCode
         cell.duration.text = self.arrToDisplay[indexPath.row].duration
         cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
-        cell.amount.text = self.arrToDisplay[indexPath.row].amount!;
+       
+        myMutableString = NSMutableAttributedString(string: "PHP " + self.arrToDisplay[indexPath.row].amount!, attributes: [NSAttributedString.Key.font:UIFont(name: "Helvetica Neue", size: 15.0)!])
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: WebServicesUrl.appColor2, range: NSRange(location:0,length:3))
+        // set label Attribute
+        cell.amount.attributedText = myMutableString
+        
+       // cell.amount.text =  "PHP " + self.arrToDisplay[indexPath.row].amount!;
 
         return cell
         
@@ -1133,7 +1159,12 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         cell.duration.text = self.arrToDisplay[indexPath.row].duration.appending(" | ").appending(self.arrToDisplay[indexPath.row].noOfStops)
        // cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
     
-        cell.amount.text = self.arrToDisplay[indexPath.row].amount!;
+        myMutableString = NSMutableAttributedString(string: "PHP " + self.arrToDisplay[indexPath.row].amount!, attributes: [NSAttributedString.Key.font:UIFont(name: "Helvetica Neue", size: 15.0)!])
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: WebServicesUrl.appColor2, range: NSRange(location:0,length:3))
+        // set label Attribute
+        cell.amount.attributedText = myMutableString
+        
+//        cell.amount.text =  "PHP " + self.arrToDisplay[indexPath.row].amount!;
         
 ////Return
       
@@ -1219,7 +1250,11 @@ extension FlightResultVCGoomo : UITableViewDelegate,UITableViewDataSource {
         cell.duration.text = self.arrToDisplay[indexPath.row].duration.appending(" | ").appending(self.arrToDisplay[indexPath.row].noOfStops)
         // cell.stop.text = self.arrToDisplay[indexPath.row].noOfStops
 
-        cell.amount.text = self.arrToDisplay[indexPath.row].amount!;
+        myMutableString = NSMutableAttributedString(string: "PHP " + self.arrToDisplay[indexPath.row].amount!, attributes: [NSAttributedString.Key.font:UIFont(name: "Helvetica Neue", size: 15.0)!])
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: WebServicesUrl.appColor2, range: NSRange(location:0,length:3))
+        // set label Attribute
+        cell.amount.attributedText = myMutableString
+        //cell.amount.text =  "PHP " + self.arrToDisplay[indexPath.row].amount!;
 
         ////Return
 

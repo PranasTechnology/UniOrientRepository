@@ -7,8 +7,21 @@
 //
 
 import UIKit
+import RevealingSplashView
+
 class ViewController: UIViewController , UICollectionViewDelegate, UICollectionViewDataSource
 {
+    @IBOutlet weak var loginView: UIView!
+    private var revealingLoaded = false
+    
+    override var shouldAutorotate: Bool {
+        return revealingLoaded
+        
+    }
+    
+    @IBOutlet weak var topView: UIView!
+    
+    @IBOutlet weak var welcomeView: UIView!
     @IBOutlet weak var testBtn: UIButton!
     @IBOutlet weak var bookingLbl: UILabel!
     @IBOutlet weak var bookingImg: UIImageView!
@@ -29,6 +42,24 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "pageloading.gif")!, iconInitialSize: CGSize(width: self.view.frame.width, height: 150), backgroundImage: UIImage(named: "whiteImg.png")!)//"backgd1.jpeg"
+      
+        self.view.addSubview(revealingSplashView)
+        
+        revealingSplashView.duration = 6.0
+        
+        revealingSplashView.iconColor = UIColor.red
+        revealingSplashView.useCustomIconColor = false
+        
+        revealingSplashView.animationType = SplashAnimationType.swingAndZoomOut
+        
+        revealingSplashView.startAnimation(){
+            self.revealingLoaded = true
+            self.setNeedsStatusBarAppearanceUpdate()
+            print("Completed")
+        }
+        
      arrFlightDeal = ["1.jpeg","2.jpeg","3.jpeg","1.jpeg","2.jpeg","3.jpeg"]
      arrPackageDeal = ["3.jpeg","1.jpeg","2.jpeg","3.jpeg","1.jpeg","2.jpeg"]
         
@@ -57,7 +88,16 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
         self.navigationController?.pushViewController(vc!, animated: true)
     }
-
+    
+    override var prefersStatusBarHidden: Bool {
+        return !UIApplication.shared.isStatusBarHidden
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return UIStatusBarAnimation.fade
+    }
+    
+    
     @objc func handleTap2(_ sender: UITapGestureRecognizer) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
         self.navigationController?.pushViewController(vc!, animated: true)

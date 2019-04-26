@@ -179,8 +179,22 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         strChild = "0"
         strInfant = "0"
  
+        
         DictInputs = ["adultCnt":strAdult,"childCnt":strChild ,"infantCnt":strInfant,"class":"Business"]
-            
+     
+        if(wayType == "one")
+        {
+            txtTraveller . text = DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child," + DictInputs["infantCnt"]! + " Infant "
+        }
+        else if(wayType == "two")
+        {
+            RtxtTraveller . text =  DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child, " + DictInputs["infantCnt"]! + " Infant "
+        }
+        else
+        {
+            multiTraveller . text = DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child, " + DictInputs["infantCnt"]! + " Infant "
+        }
+        
         self .getCurrentDate()
         multicityTableView.tableFooterView = multiCityBottomView
 
@@ -241,20 +255,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
 }
     override func viewWillAppear(_ animated: Bool)
     {
-        
-        if(wayType == "one")
-        {
-            txtTraveller . text = DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child," + DictInputs["infantCnt"]! + " Infant "
-        }
-        else if(wayType == "two")
-        {
-            RtxtTraveller . text =  DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child, " + DictInputs["infantCnt"]! + " Infant "
-        }
-        else
-        {
-            multiTraveller . text = DictInputs["adultCnt"]! + " Adult, " + DictInputs["childCnt"]! +  " Child, " + DictInputs["infantCnt"]! + " Infant "
-        }
-        
+       
         let departureCity = (UserDefaults.standard.value(forKey: "DselectedCityName") as! String)
         let departureCode = (UserDefaults.standard.value(forKey: "DselectedCityCode") as! String)
         let arrivalCity = (UserDefaults.standard.value(forKey: "AselectedCityName") as! String)
@@ -628,8 +629,10 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func travellerChooseBtn(_ sender: Any)
     {
+        
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "passengerVC") as? PassengerViewController
         vc?.selectableTraveller = wayType
+        vc?.delegateVariable = self
         self.navigationController?.pushViewController(vc!, animated: true)
       
          //travellerView .isHidden = false
@@ -640,6 +643,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
     {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "passengerVC") as? PassengerViewController
         vc?.selectableTraveller = wayType
+          vc?.delegateVariable = self
         self.navigationController?.pushViewController(vc!, animated: true)
       //  classChooseView .isHidden = false
     }
@@ -1059,6 +1063,7 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "searchCityVC") as? SearchCityViewController
         vc?.selectableCity = "arrival"
         self.navigationController?.pushViewController(vc!, animated: true)
+        
     }
     @objc func dateBtnClicked(sender: UIButton)
     {
@@ -1069,8 +1074,8 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "CustomCalenderVC") as? CustomCalenderViewController
         vc?.selectableDate = "departureDate"
         vc?.selectdDate1 = arrMultiDate[0] + "+" + arrMultiDay[0]
-         vc?.selectdDate2 = arrMultiDate[1] + "+" + arrMultiDay[1]
-         vc?.selectdDate3 = arrMultiDate[2] + "+" + arrMultiDay[2]
+        vc?.selectdDate2 = arrMultiDate[1] + "+" + arrMultiDay[1]
+        vc?.selectdDate3 = arrMultiDate[2] + "+" + arrMultiDay[2]
         vc?.selectedIndex = "\(index)"
         self.navigationController?.pushViewController(vc!, animated: true)
     }
@@ -1128,4 +1133,34 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
         onewayBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
         roundTripBtn.backgroundColor = UIColor(red: 154/255.0, green: 154/255.0, blue: 154/255.0, alpha: 0.2)
     }
+  
 }
+extension FlightSearchViewController : savePassengerDetailsDelegate{
+    func saveFightPassenger(passengerStruct: passengerDetailsStruct, viewController: PassengerViewController)
+    {
+        print(passengerStruct)
+        self.navigationController?.popViewController(animated: true)
+        strAdult = passengerStruct.Adult
+        strChild = passengerStruct.Child
+        strInfant = passengerStruct.Infant
+        
+        print(strAdult)
+        print(strChild)
+        if(wayType == "one")
+        {
+            self.txtTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+              self.txtClass.text = passengerStruct.cabinClass
+        }
+        else if(wayType == "two")
+        {
+            self.RtxtTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+            self.RtxtClass.text = passengerStruct.cabinClass
+        }
+        else
+        {
+            self.multiTraveller . text = "\(strAdult) Adult, \(strChild) Child, \(strInfant) Infant"
+            self.txtMultiClass.text = passengerStruct.cabinClass
+        }
+    }
+}
+

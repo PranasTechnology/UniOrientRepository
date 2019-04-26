@@ -97,7 +97,7 @@ class TravellerDetailVCGoomo: UIViewController {
         fStr.append(abc)
         //        fStr.append(NSAttributedString(string: "\n"))
         fStr.append(xyz)
-        self.amountLbl.attributedText = fStr
+      //  self.amountLbl.attributedText = fStr
         
         mobileNoTxtField.delegate = self
         emailTxtField.delegate = self

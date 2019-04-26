@@ -11,4 +11,5 @@ target 'UniOrient' do
     pod 'EDStarRating'
     pod 'AACarousel'
   pod 'SwipeMenuViewController'
+  pod 'RevealingSplashView'
 end

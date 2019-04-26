@@ -8,8 +8,14 @@
 
 import UIKit
 
-class PassengerViewController: UIViewController {
-
+protocol savePassengerDetailsDelegate  {
+    func saveFightPassenger (passengerStruct : passengerDetailsStruct, viewController : PassengerViewController)
+}
+class PassengerViewController: UIViewController
+{
+    var arrGetPassengerDetails = [passengerDetailsStruct]()
+    var delegateVariable : savePassengerDetailsDelegate!
+    
     var selectableTraveller : String = String()
     @IBOutlet weak var lblInfant: UILabel!
     @IBOutlet weak var lblChild: UILabel!
@@ -160,7 +166,16 @@ class PassengerViewController: UIViewController {
     
     @IBAction func confirmBtn(_ sender: Any)
     {
-        self.navigationController?.popViewController(animated: true)
+        var aAirportStructObj = passengerDetailsStruct()
+        aAirportStructObj.Adult = "\(adultCnt)"
+        aAirportStructObj.Child = "\(childCnt)"
+        aAirportStructObj.Infant = "\(infantCnt)"
+        aAirportStructObj.cabinClass = "Premium Economy"
+        
+        print(aAirportStructObj)
+        delegateVariable.saveFightPassenger(passengerStruct: aAirportStructObj, viewController: self)
+      
+      //  self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func backBtn(_ sender: Any)

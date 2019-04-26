@@ -1,6 +1,7 @@
 PODS:
   - AACarousel (1.1.1)
   - EDStarRating (1.1)
+  - RevealingSplashView (0.6.0)
   - SDWebImage (4.4.6):
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
@@ -9,6 +10,7 @@ PODS:
 DEPENDENCIES:
   - AACarousel
   - EDStarRating
+  - RevealingSplashView
   - SDWebImage (~> 4.0)
   - SwipeMenuViewController
 
@@ -16,15 +18,17 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AACarousel
     - EDStarRating
+    - RevealingSplashView
     - SDWebImage
     - SwipeMenuViewController
 
 SPEC CHECKSUMS:
   AACarousel: e0dbd2d3153c56c36df8aa282553f20fc88e132b
   EDStarRating: a41a6440a945020745d0e9ff8ada7d1afa952114
+  RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SwipeMenuViewController: 572a6fcd7fa95c3d744c760d5e836896817c5735
 
-PODFILE CHECKSUM: e665a31a28524a967af4f695584cd2e55a888222
+PODFILE CHECKSUM: 334996e00205b1e231ab7d583405053404f06e8f
 
 COCOAPODS: 1.6.1

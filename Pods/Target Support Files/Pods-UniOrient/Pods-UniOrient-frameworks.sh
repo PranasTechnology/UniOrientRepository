@@ -155,12 +155,14 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AACarousel/AACarousel.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EDStarRating/EDStarRating.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RevealingSplashView/RevealingSplashView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwipeMenuViewController/SwipeMenuViewController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AACarousel/AACarousel.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EDStarRating/EDStarRating.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RevealingSplashView/RevealingSplashView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SwipeMenuViewController/SwipeMenuViewController.framework"
 fi

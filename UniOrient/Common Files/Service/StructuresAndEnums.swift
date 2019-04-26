@@ -208,6 +208,14 @@ extension FinalStruct {
     
 }
 
+//rekha created
+struct passengerDetailsStruct {
+    var Adult : String!
+    var Child : String!
+    var Infant : String!
+    var cabinClass : String!
+    
+}
 //Not Required
 struct RoomStruct1 {
     var roomNo : String!
