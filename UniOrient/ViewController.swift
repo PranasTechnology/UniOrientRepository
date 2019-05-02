@@ -99,8 +99,8 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
     
     
     @objc func handleTap2(_ sender: UITapGestureRecognizer) {
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
-        self.navigationController?.pushViewController(vc!, animated: true)
+//        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "flightSearchVC") as? FlightSearchViewController
+//        self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     @IBAction func flightBtn(_ sender: Any)
@@ -113,6 +113,11 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
     {
     }
     
+    @IBAction func loginBtn(_ sender: Any)
+    {
+        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "LoginPageVC") as! LoginPageVCGoomo
+        self.navigationController?.pushViewController(ctrl, animated: true)
+    }
     @IBAction func holidayBtn(_ sender: Any) {
     }
     @IBAction func homeBtn(_ sender: Any)
@@ -132,6 +137,8 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
         myAccountLbl.textColor = WebServicesUrl.appColor1
         bookingImg.image = UIImage (named: "briefcaseGray")
         bookingLbl.textColor = UIColor.darkGray
+//        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "LoginPageVC") as! LoginPageVCGoomo
+//        self.navigationController?.pushViewController(ctrl, animated: true)
     }
     @IBAction func myBookingBtn(_ sender: Any)
     {

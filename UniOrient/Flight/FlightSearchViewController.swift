@@ -144,10 +144,15 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
          travelView.layer.cornerRadius = 5.0
         className = ["Economy Class","Premium Economy Class","Business Class","First Class"]
         arrMultiTitle = ["   Flight 1   ","   Flight 2   ","   Flight 3   "]
-        arrMultiDepartCode = ["Source","Source","Source"]
-        arrMultiDepartCity = ["Select City","Select City","Select City"]
-        arrMultiArriCode = ["Destination","Destination","Destination"]
-        arrMultiArriCity = ["Select City","Select City","Select City"]
+//        arrMultiDepartCode = ["Source","Source","Source"]
+//        arrMultiDepartCity = ["Select City","Select City","Select City"]
+//        arrMultiArriCode = ["Destination","Destination","Destination"]
+//        arrMultiArriCity = ["Select City","Select City","Select City"]
+      
+        arrMultiDepartCode = ["SIN","KUL","JFK"]
+        arrMultiDepartCity = ["Singapore","Kuala Lumpur","New York"]
+        arrMultiArriCode = ["KUL","JFK","SIN"]
+        arrMultiArriCity = ["Kuala Lumpur","New York","Singapore"]
         arrMultiDate = ["Date","Date","Date"]
         arrMultiDay = ["Day","Day","Day"]
         
@@ -307,11 +312,17 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
                     {
                         arrMultiArriCity.insert(String(mySubstring), at: 0)
                         arrMultiArriCode.insert(String(last4), at: 0)
+                        
+                        arrMultiDepartCity.insert(String(mySubstring), at: 1)
+                        arrMultiDepartCode.insert(String(last4), at: 1)
                     }
                     else if(index == 1)
                     {
                         arrMultiArriCity.insert(String(mySubstring), at: 1)
                         arrMultiArriCode.insert(String(last4), at: 1)
+                        
+                        arrMultiDepartCity.insert(String(mySubstring), at: 2)
+                        arrMultiDepartCode.insert(String(last4), at: 2)
                     }
                     else if(index == 2)
                     {
@@ -692,22 +703,43 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
        var DictInput = Dictionary<String, String>()
         if(wayType == "one")
         {
+            var strNonStop : String = String()
             var departDate : String = String()
             departDate = convertDateFormater(txtDepartureDate.text!)
             print("date",departDate)
-            DictInput = ["Origin":txtDeparture.text!,"Destination":txtArrival.text! ,"DepartureDate":departDate,"Returndate":"","WayType":"one","CabinClass":txtClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+            if RstopBtn.isSelected == true
+            {
+                strNonStop = "0"
+            }
+            else
+            {
+                strNonStop = "1"
+            }
+            
+            DictInput = ["Origin":txtDeparture.text!,"Destination":txtArrival.text! ,"DepartureDate":departDate,"Returndate":"","WayType":"one","CabinClass":txtClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":strNonStop,"ReqType":"JSON"]
         }
         else if(wayType == "two"){
+             var strNonStop : String = String()
             var departDate : String = String()
             departDate = convertDateFormater(RdepartureDate.text!)
             print("date",departDate)
             var arriveDate : String = String()
             arriveDate = convertDateFormater(RarrivalDate.text!)
             print("date",arriveDate)
-            
-            DictInput = ["Origin":RdepartureCity.text!,"Destination":Rarrivalcity.text!,"DepartureDate":departDate,"Returndate":arriveDate,"WayType":"two","CabinClass":RtxtClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+           
+            if RstopBtn.isSelected == true
+            {
+                strNonStop = "0"
+            }
+            else
+            {
+                strNonStop = "1"
+            }
+            DictInput = ["Origin":RdepartureCity.text!,"Destination":Rarrivalcity.text!,"DepartureDate":departDate,"Returndate":arriveDate,"WayType":"two","CabinClass":RtxtClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":strNonStop,"ReqType":"JSON"]
         }
         else{
+            var strNonStop : String = String()
+            
             var departDate1 : String = String()
             departDate1 = convertDateFormater(arrMultiDate[0])
             print("date",departDate1)
@@ -717,12 +749,23 @@ class FlightSearchViewController: UIViewController, UITableViewDelegate, UITable
             var departDate3 : String = String()
             departDate3 = convertDateFormater(arrMultiDate[2])
             print("date",departDate3)
-            DictInput = ["Origin1":"SIN","Destination1":"KUL","DepartureDate1":"2019-05-15","Origin2":"KUL","Destination2":"JFK","DepartureDate2":"2019-05-20","Origin3":"JFK","Destination3":"SIN","DepartureDate3":"2019-05-25","WayType":"multi","CabinClass":txtMultiClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON","WayCount":"3"]
+            
+            if multiStopBtn.isSelected == true
+            {
+                strNonStop = "0"
+            }
+            else
+            {
+                strNonStop = "1"
+            }
+            
+            DictInput = ["Origin1":arrMultiDepartCode[0],"Destination1":arrMultiArriCode[0],"DepartureDate1":departDate1,"Origin2":arrMultiDepartCode[1],"Destination2":arrMultiArriCode[1],"DepartureDate2":departDate2,"Origin3":arrMultiDepartCode[2],"Destination3":arrMultiArriCode[2],"DepartureDate3":departDate3,"WayType":"multi","CabinClass":txtMultiClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":strNonStop,"ReqType":"JSON","WayCount":"3"]
             
 //            DictInput = ["Origin1":arrMultiDepartCode[0],"DepartureDate1":departDate1,"Origin2":arrMultiDepartCode[1],"DepartureDate2":departDate2,"Origin3":arrMultiDepartCode[2],"DepartureDate3":departDate3,"WayType":"multi","CabinClass":txtMultiClass.text!,"AdultCount":strAdult,"ChildCount":strChild,"InfantCount":strInfant,"SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON","WayCount":"3"]
         }
 
 //        DictInput = ["Origin":"SIN","Destination":"JFK","DepartureDate":"2019-05-15","Returndate":"2019-05-25","WayType":"two","CabinClass":"Economy","AdultCount":"1","ChildCount":"0","InfantCount":"0","SeniorCount":"0","PreferredCarrier":"1","PromotionalPlanType":"0","SearchSessionid":"0","ModuleId":"14","ParentAccountId":"IXCRAJ042","ChildAccountId":"IXCRAJ042","ApiName":"TBO","NonStop":"","ReqType":"JSON"]
+     
         
         let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "FlightResultVC") as! FlightResultVCGoomo
         ctrl.inputDict = DictInput

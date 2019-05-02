@@ -13,6 +13,10 @@ class FlightReviewVCGoomo: UIViewController {
 
     @IBOutlet weak var continueBtn: UIButton!
     
+    @IBOutlet weak var noofPassenger: UILabel!
+    
+    @IBOutlet weak var checkinBaggage: UILabel!
+    @IBOutlet weak var cabinBaggage: UILabel!
     @IBOutlet weak var txtTotalAmt: UILabel!
     @IBOutlet weak var lblTaxAmt: UILabel!
     @IBOutlet weak var lblFareAmount: UILabel!
@@ -27,9 +31,15 @@ class FlightReviewVCGoomo: UIViewController {
     @IBOutlet weak var amountLbl: UILabel!
     var detailsArr = [FlightDetailStruct]()
     var returnDetailsArr = [FlightDetailStruct]()
+    var multiDetailsArr = [FlightDetailStruct]()
     
     var myArray : [FinalStruct?]?
     var myArray1 : [FinalStruct?]?
+    var myArray2 : [FinalStruct?]?
+   
+    var adultCount : Int!
+    var childCount : Int!
+    var infantCount : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +50,15 @@ class FlightReviewVCGoomo: UIViewController {
 //            self.continueBtn.isHidden = true
 //        }
        
+        adultCount = Int(self.providedInputDict["AdultCount"]!)
+        childCount = Int(self.providedInputDict["ChildCount"]!)
+        infantCount = Int(self.providedInputDict["InfantCount"]!)
+     
+        noofPassenger.text = "\(adultCount!)" + " Adult, " + "\(childCount!)" + " Child, " + "\(infantCount!)" + " Infant"
+        
+         cabinBaggage.text = self.selectedStruct.CabinBaggage
+         checkinBaggage.text = self.selectedStruct.CheckInBaggage
+        
         tripDetaillbl.text = UserDefaults .standard .value(forKey: "toplbl") as! String
         print("selected Struct = ",self.selectedStruct)
         self.lblFareAmount.text = "PHP " + self.selectedStruct.amount
@@ -70,6 +89,22 @@ class FlightReviewVCGoomo: UIViewController {
             
           //  self.myArray?.append(returnDetailStructFinal)
            self.myArray1 = [returnDetailStructFinal]
+        }
+        if selectedStruct.wayType == "multi" {
+           
+            ////Return Details
+            self.returnDetailsArr = selectedStruct.returnDetailArrWithFlightDetailStruct
+            let returnDetailStructFinal = FinalStruct.init(CabinBaggage: "Nothing from DB", CheckInBaggage: "Nothing from DB",departureDate:selectedStruct.returnDepartureDate,arrivalDate:selectedStruct.returnArrivalDate,flightImgName:selectedStruct.returnFlightImgName,flightImgData:nil, flightName: selectedStruct.returnFlightName, departureTime: selectedStruct.returnDepartureTime, departureAirportCode: selectedStruct.returnDepartureAirportCode, duration: selectedStruct.returnDuration, stop: selectedStruct.returnNoofStops, arrivalTime: selectedStruct.returnArrivalTime, arrivalAirportCode: selectedStruct.returnArrivalAirportCode,TripDetailsArr: returnDetailsArr)
+            
+            //  self.myArray?.append(returnDetailStructFinal)
+            self.myArray1 = [returnDetailStructFinal]
+            
+            ////Multi Details
+            self.multiDetailsArr = selectedStruct.multiDetailArrWithFlightDetailStruct
+            let multiDetailStructFinal = FinalStruct.init(CabinBaggage: "Nothing from DB", CheckInBaggage: "Nothing from DB",departureDate:selectedStruct.multiDepartureDate,arrivalDate:selectedStruct.multiArrivalDate,flightImgName:selectedStruct.multiFlightImgName,flightImgData:nil, flightName: selectedStruct.multiFlightName, departureTime: selectedStruct.multiDepartureTime, departureAirportCode: selectedStruct.multiDepartureAirportCode, duration: selectedStruct.multiDuration, stop: selectedStruct.multiNoofStops, arrivalTime: selectedStruct.multiArrivalTime, arrivalAirportCode: selectedStruct.multiArrivalAirportCode,TripDetailsArr: multiDetailsArr)
+            
+            //  self.myArray?.append(returnDetailStructFinal)
+            self.myArray2 = [multiDetailStructFinal]
         }
         self.myTV.delegate = self
         self.myTV.dataSource = self
@@ -114,14 +149,17 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
         if selectedStruct.wayType == "one" {
             return 1
         }
+        else if selectedStruct.wayType == "two" {
+            return 2
+        }
         else
         {
-            return  2
+            return  3
         }
     }
  
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60.0
+        return 65.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -133,6 +171,11 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
             result.depAirportCodeLbl.text = rowData.departureAirportCode + " -> " + rowData.arrivalAirportCode
             result.stopDetailsLbl.text = rowData.stop
             result.departureDateLbl.text = rowData.departureDate + "," + rowData.arrivalDate
+            
+            print(rowData.CabinBaggage)
+            print(rowData.CheckInBaggage)
+            
+          //  result.cabbinBaggage.text = rowData.CabinBaggage + " Cabbin Baggage, " + rowData.CheckInBaggage + " CheckIn Baggage"
             return result
         }
     }
@@ -142,6 +185,22 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
             result.depAirportCodeLbl.text = rowData.departureAirportCode + " -> " + rowData.arrivalAirportCode
             result.stopDetailsLbl.text = rowData.stop
             result.departureDateLbl.text = rowData.departureDate + " - " + rowData.arrivalDate
+            
+            print(rowData.CabinBaggage)
+            print(rowData.CheckInBaggage)
+            
+         //    result.cabbinBaggage.text = rowData.CabinBaggage + " Cabbin Baggage" + rowData.CheckInBaggage + " CheckIn Baggage"
+            return result
+        }
+        }
+      else if(section == 2){
+        if let rowData = myArray2?[0]
+        {
+            print(rowData)
+            result.depAirportCodeLbl.text = rowData.departureAirportCode + " -> " + rowData.arrivalAirportCode
+            result.stopDetailsLbl.text = rowData.stop
+            result.departureDateLbl.text = rowData.departureDate + " - " + rowData.arrivalDate
+         //   result.cabbinBaggage.text = rowData.CabinBaggage + " Cabbin Baggage" + rowData.CheckInBaggage + " CheckIn Baggage"
             return result
         }
         }
@@ -152,10 +211,14 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
        if(section == 0)
        {
         return self.detailsArr.count
-    }
+       }
+        else if(section == 1)
+       {
+            return self.returnDetailsArr.count
+        }
         else
        {
-        return self.returnDetailsArr.count
+        return self.multiDetailsArr.count
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -252,7 +315,51 @@ extension FlightReviewVCGoomo : UITableViewDelegate , UITableViewDataSource {
 
             return result
         }
-        
+        else if (indexPath.section == 2)
+        {
+            result.flightNameLbl.text = self.multiDetailsArr [indexPath.row].operating
+            result.depAirportCodeLbl.text = self.multiDetailsArr [indexPath.row].fromAirportName
+            //    result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].marketing
+            result.arrivalAirportCodeLbl.text = self.multiDetailsArr [indexPath.row].toAirportName
+            result.departureDateLbl.text = self.multiDetailsArr [indexPath.row].departureDate
+            result.arrivalDateLbl.text = self.multiDetailsArr [indexPath.row].arrivalDate
+            
+            result.depTimeLbl.text = self.multiDetailsArr [indexPath.row].departureTime
+            let tempfromAirportCodeStr = self.multiDetailsArr [indexPath.row].fromAirportName
+            let startInd = tempfromAirportCodeStr?.index(after: (tempfromAirportCodeStr?.lastIndex(of: "("))!)
+            let endInd = tempfromAirportCodeStr?.lastIndex(of: ")")
+            let formattedFromStr = tempfromAirportCodeStr![startInd!..<endInd!]
+            result.depAirportCodeLbl.text = String(formattedFromStr)
+            
+            result.durationLbl.text = self.multiDetailsArr [indexPath.row].duration
+            // result.stopDetailsLbl.text = self.returnDetailsArr [indexPath.row].stop
+            result.arrivalTimeLbl.text = self.multiDetailsArr [indexPath.row].arrivalTime
+            
+            let tempToAirportCodeStr = self.multiDetailsArr [indexPath.row].toAirportName
+            let startInde = tempToAirportCodeStr?.index(after: (tempToAirportCodeStr?.lastIndex(of: "("))!)
+            let endInde = tempToAirportCodeStr?.lastIndex(of: ")")
+            let formattedToStr = tempToAirportCodeStr![startInde!..<endInde!]
+            result.arrivalAirportCodeLbl.text = String(formattedToStr)
+            
+            let tempDepDateArr = self.multiDetailsArr [indexPath.row].departureDate.components(separatedBy: ",")
+            result.departureDateLbl.text = tempDepDateArr[1]
+            let tempArrivalDateArr = self.multiDetailsArr [indexPath.row].arrivalDate.components(separatedBy: ",")
+            result.arrivalDateLbl.text = tempArrivalDateArr[1]
+            
+            
+            //Image
+            let flightImgURL = WebServicesUrl.FlightImgURL + self.multiDetailsArr [indexPath.row].marketing + ".gif"
+            result.flightImgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+                if error == nil{
+                    print("Image downloaded without error......")
+                }else{
+                    print("Error from SBWebImage Block = ",error!)
+                }
+                
+            })
+            
+            return result
+        }
         return UITableViewCell()
         
     }
@@ -351,6 +458,8 @@ class MainCellClassGoomo : UITableViewCell{
     @IBOutlet weak var classTypeLbl: DesignableLabel!
     @IBOutlet weak var departureDateLbl: UILabel!
     @IBOutlet weak var arrivalDateLbl: UILabel!
+    
+    @IBOutlet weak var cabbinBaggage: UILabel!
 }
 class SubCellClassGoomo : UITableViewCell{
     @IBOutlet weak var flightImgView: UIImageView!

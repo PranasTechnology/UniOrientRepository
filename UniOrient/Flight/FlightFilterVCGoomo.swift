@@ -24,9 +24,9 @@ class FlightFilterVCGoomo: UIViewController {
     var uniqueFlightResultAndDetailArrBasedOnFlightName : [FlightResultAndDetailStruct]!
     
     
-//    @IBOutlet weak var nonStopBtn: DesignableButton!
-//    @IBOutlet weak var oneStopBtn: DesignableButton!
-//    @IBOutlet weak var twoStopBtn: DesignableButton!
+    @IBOutlet weak var nonStopBtn: DesignableButton!
+    @IBOutlet weak var oneStopBtn: DesignableButton!
+    @IBOutlet weak var twoStopBtn: DesignableButton!
     
     @IBOutlet weak var before11AMBtn: UIButton!
     @IBOutlet weak var elevenAMtoFivePMBtn: UIButton!
@@ -40,17 +40,23 @@ class FlightFilterVCGoomo: UIViewController {
         
         self.preferredAirlinesTV.delegate = self
         self.preferredAirlinesTV.dataSource = self
-        
+       
+        print(uniqueFlightResultAndDetailArrBasedOnFlightName)
     }
     
     @IBAction func applyBtnTapped(_ sender: DesignableButton){
         
-//        let aSt = FlightUserSelectedFiltersStruct(preferredAirlinesArr: self.selectedFlightNameArr,isNonStop: nonStopBtn.isSelected, isOneStop: oneStopBtn.isSelected, isTwoPlusStops: twoStopBtn.isSelected, beforeElevenAM: before11AMBtn.isSelected, elevenAMToFivePM: elevenAMtoFivePMBtn.isSelected, fivePMToNinePM: fivePMToNinePMBtn.isSelected, afterNinePM: afterNinePMBtn.isSelected)
-//
-//        print("Selected Filters are :",aSt)
-//        delegateVariable.didApplyBtnTapped(userSelectedFilterStruct: aSt, controller: self)
+        let aSt = FlightUserSelectedFiltersStruct(preferredAirlinesArr: self.selectedFlightNameArr,isNonStop: nonStopBtn.isSelected, isOneStop: oneStopBtn.isSelected, isTwoPlusStops: twoStopBtn.isSelected, beforeElevenAM: before11AMBtn.isSelected, elevenAMToFivePM: elevenAMtoFivePMBtn.isSelected, fivePMToNinePM: fivePMToNinePMBtn.isSelected, afterNinePM: afterNinePMBtn.isSelected)
+
+        print("Selected Filters are :",aSt)
+        delegateVariable.didApplyBtnTapped(userSelectedFilterStruct: aSt, controller: self)
     }
     
+    @IBAction func backBtn(_ sender: Any)
+    {
+        delegateVariable.didBackBtnTapped(filterBtnTappedFlag: false, controller: self)
+       // self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
         
         delegateVariable.didBackBtnTapped(filterBtnTappedFlag: false, controller: self)
@@ -59,17 +65,18 @@ class FlightFilterVCGoomo: UIViewController {
     func callBtnSelectionFunctionality(theBtn : DesignableButton){
         theBtn.isSelected = true
 //        theBtn.backgroundColor = hexStringToUIColor(hex: "#AFCA1F") //TripArcher Green Color
-        theBtn.backgroundColor = hexStringToUIColor(hex: "#338EDF") //TripArcher Blue Color
+        theBtn.backgroundColor = hexStringToUIColor(hex: "#16137c") //TripArcher Blue Color
         theBtn.setTitleColor(UIColor.white, for: .selected)
         theBtn.borderColor = UIColor.black
         theBtn.shadowOffset = CGSize(width: 0,height: 5)
         theBtn.shadowOpacity = 1
     }
+    //ed2324 - Red 16137c - violet
     func callBtnNonSelectionFunctionality(theBtn : DesignableButton){
         theBtn.isSelected = false
         theBtn.backgroundColor = hexStringToUIColor(hex: "#FFFFFF")
         theBtn.setTitleColor(UIColor.darkGray, for: .normal)
-        theBtn.borderColor = hexStringToUIColor(hex: "#338EDF")
+        theBtn.borderColor = hexStringToUIColor(hex: "#16137c")
         theBtn.shadowOffset = CGSize(width: 0,height: 0)
         theBtn.shadowOpacity = 0
         
@@ -236,9 +243,9 @@ extension FlightFilterVCGoomo : UITableViewDelegate,UITableViewDataSource {
         return self.uniqueFlightResultAndDetailArrBasedOnFlightName.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PreferredAirlinesCellIDGoomo", for: indexPath) as! PreferredAirlinesCellClassGoomo
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PreferredAirlinesCell", for: indexPath) as! PreferredAirlinesCell
         
-        cell.preferredAirlinesLbl.text = self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].flightName!
+        cell.flightName.text = self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].flightName!
         
         //        if self.flightResultAndDetailsArr[indexPath.row].flightImgData != nil {
         //            cell.flightImgView.image = UIImage(data: self.flightResultAndDetailsArr[indexPath.row].flightImgData!)
@@ -256,9 +263,9 @@ extension FlightFilterVCGoomo : UITableViewDelegate,UITableViewDataSource {
         let flightImgURL = WebServicesUrl.FlightImgURL + self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].detailArrWithFlightDetailStruct[0].marketing + ".gif"
         
         if self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].flightImgData != nil {
-            cell.preferredAirlinesImgView.image = UIImage(data: self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].flightImgData!)
+            cell.imgView.image = UIImage(data: self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].flightImgData!)
         }else{
-            cell.preferredAirlinesImgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "flightGreen"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
+            cell.imgView.sd_setImage(with: URL(string: flightImgURL), placeholderImage: UIImage(named: "placeholder.png"),options: SDWebImageOptions(rawValue: 0), completed: { downloadedImage, error, cacheType, imageURL in
                 if error == nil{
                     self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].flightImgData = downloadedImage!.pngData()
                 }else{
@@ -272,9 +279,9 @@ extension FlightFilterVCGoomo : UITableViewDelegate,UITableViewDataSource {
         cell.preferredAirlinesSelectionBtn.tag = indexPath.row
         
         if self.uniqueFlightResultAndDetailArrBasedOnFlightName[indexPath.row].isSelected {
-            cell.preferredAirlinesSelectionBtn.setImage(UIImage(named: "checkboxChecked"), for: .normal)
+            cell.preferredAirlinesSelectionBtn.setImage(UIImage(named: "black-check-box-with-white-check.png"), for: .normal)
         }else{
-            cell.preferredAirlinesSelectionBtn.setImage(UIImage(named: "checkboxUnchecked"), for: .normal)
+            cell.preferredAirlinesSelectionBtn.setImage(UIImage(named: "square.png"), for: .normal)
         }
         
         
@@ -300,9 +307,11 @@ extension FlightFilterVCGoomo : UITableViewDelegate,UITableViewDataSource {
     }
 }
 
-class PreferredAirlinesCellClassGoomo : UITableViewCell {
-    @IBOutlet weak var preferredAirlinesImgView: UIImageView!
-    @IBOutlet weak var preferredAirlinesLbl: UILabel!
+class PreferredAirlinesCell : UITableViewCell {
+  
+   
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var flightName: UILabel!
     @IBOutlet weak var preferredAirlinesSelectionBtn: UIButton!
-    
+
 }

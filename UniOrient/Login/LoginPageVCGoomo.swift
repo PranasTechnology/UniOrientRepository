@@ -101,11 +101,14 @@ class LoginPageVCGoomo: UIViewController {
     }
     
     @IBAction func signupBtnTapped(_ sender: UIButton) {
-//        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "RegisterVCSBID") as! RegisterVC
-//        self.navigationController?.pushViewController(ctrl, animated: true)
-        //        self.navigationController?.present(ctrl, animated: true, completion: nil)
+        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "RegisterVC") as! RegisterViewController
+        self.navigationController?.pushViewController(ctrl, animated: true)
+        //self.navigationController?.present(ctrl, animated: true, completion: nil)
     }
     
+    @IBAction func backBtn(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func backBtnTapped(_ sender: UIBarButtonItem) {
         if loginFrom == "HomePage"{
             self.dismiss(animated: true, completion: nil)

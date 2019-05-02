@@ -15,6 +15,7 @@ class PassengerViewController: UIViewController
 {
     var arrGetPassengerDetails = [passengerDetailsStruct]()
     var delegateVariable : savePassengerDetailsDelegate!
+    var selectedClass : Int = Int()
     
     var selectableTraveller : String = String()
     @IBOutlet weak var lblInfant: UILabel!
@@ -137,6 +138,7 @@ class PassengerViewController: UIViewController
         guard let button = sender as? UIButton else {
             return
         }
+        selectedClass = button.tag
         switch button.tag {
         case 1:
             self.firstClsBtn .setImage(UIImage (named: "circleWithDot"), for: UIControl.State.normal)
@@ -170,7 +172,22 @@ class PassengerViewController: UIViewController
         aAirportStructObj.Adult = "\(adultCnt)"
         aAirportStructObj.Child = "\(childCnt)"
         aAirportStructObj.Infant = "\(infantCnt)"
-        aAirportStructObj.cabinClass = "Premium Economy"
+        if selectedClass == 1
+        {
+            aAirportStructObj.cabinClass = "First"
+        }
+        else if selectedClass == 2
+        {
+            aAirportStructObj.cabinClass = "Business"
+        }
+        else if selectedClass == 3
+        {
+            aAirportStructObj.cabinClass = "Economy"
+        }else
+        {
+            aAirportStructObj.cabinClass = "Premium Economy"
+        }
+        
         
         print(aAirportStructObj)
         delegateVariable.saveFightPassenger(passengerStruct: aAirportStructObj, viewController: self)
