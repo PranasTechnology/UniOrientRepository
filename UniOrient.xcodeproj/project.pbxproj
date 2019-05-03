@@ -75,6 +75,8 @@
 		2E5F5267224E1992006ACE1E /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5264224E1991006ACE1E /* UIViewExtension.swift */; };
 		2E8A3E522255CB92000D983D /* AnimatedGIFImageSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A3E512255CB8A000D983D /* AnimatedGIFImageSerialization.m */; };
 		2E8A3E542255D015000D983D /* loadingGif.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2E8A3E532255CFFA000D983D /* loadingGif.gif */; };
+		8F01ED3A227C228800399183 /* MyBookingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F01ED39227C228800399183 /* MyBookingsViewController.swift */; };
+		8F01ED3C227C3CFC00399183 /* trip-luggage.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F01ED3B227C3CFB00399183 /* trip-luggage.png */; };
 		8F0C9502225DA9D600297EF9 /* noResultImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F0C9501225DA9D300297EF9 /* noResultImg.png */; };
 		8F1BB08B224DE16B00032798 /* FlightResultVCGoomo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */; };
 		8F1BB0A0224DE72E00032798 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1BB08E224DE72E00032798 /* AFHTTPRequestOperation.m */; };
@@ -212,6 +214,8 @@
 		2E8A3E512255CB8A000D983D /* AnimatedGIFImageSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedGIFImageSerialization.m; sourceTree = "<group>"; };
 		2E8A3E532255CFFA000D983D /* loadingGif.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loadingGif.gif; sourceTree = SOURCE_ROOT; };
 		8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniOrient.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniOrient/Pods-UniOrient.release.xcconfig"; sourceTree = "<group>"; };
+		8F01ED39227C228800399183 /* MyBookingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookingsViewController.swift; sourceTree = "<group>"; };
+		8F01ED3B227C3CFB00399183 /* trip-luggage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trip-luggage.png"; sourceTree = "<group>"; };
 		8F0C9501225DA9D300297EF9 /* noResultImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noResultImg.png; sourceTree = "<group>"; };
 		8F1BB08A224DE16B00032798 /* FlightResultVCGoomo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightResultVCGoomo.swift; sourceTree = "<group>"; };
 		8F1BB08D224DE72E00032798 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 				2E27D43D224C8E06009A0E1F /* Main.storyboard */,
 				8F8FB5F92271C167007F1546 /* Launch Screen.storyboard */,
 				8F1BB0F2224DEA7E00032798 /* Login */,
+				8F01ED38227C226100399183 /* MyBookings */,
 				2E27D407224C8D67009A0E1F /* Flight */,
 				2E27D3D6224C8D66009A0E1F /* Common Files */,
 				2E27D43F224C8EB8009A0E1F /* Images */,
@@ -447,6 +452,7 @@
 		2E27D43F224C8EB8009A0E1F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8F01ED3B227C3CFB00399183 /* trip-luggage.png */,
 				8F8FB5FB2271C42E007F1546 /* wallpaper.jpg */,
 				8F8FB5FC2271C42E007F1546 /* whiteImg.png */,
 				8FFF64132271849B003B8716 /* airoplane.gif */,
@@ -500,6 +506,14 @@
 				8AFD6BEAB71C8FC5D3A9A145 /* Pods-UniOrient.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		8F01ED38227C226100399183 /* MyBookings */ = {
+			isa = PBXGroup;
+			children = (
+				8F01ED39227C228800399183 /* MyBookingsViewController.swift */,
+			);
+			path = MyBookings;
 			sourceTree = "<group>";
 		};
 		8F1BB08C224DE72E00032798 /* AFNetworking */ = {
@@ -689,6 +703,7 @@
 				2E27D43E224C8E07009A0E1F /* Main.storyboard in Resources */,
 				2E27D450224C8EB8009A0E1F /* 3.jpeg in Resources */,
 				2E27D454224C8EB8009A0E1F /* backgd2.jpeg in Resources */,
+				8F01ED3C227C3CFC00399183 /* trip-luggage.png in Resources */,
 				8FFF64152271849E003B8716 /* airoplane.gif in Resources */,
 				2E27D452224C8EB8009A0E1F /* backgd.jpeg in Resources */,
 				8F0C9502225DA9D600297EF9 /* noResultImg.png in Resources */,
@@ -798,6 +813,7 @@
 				2E27D3C8224C8B42009A0E1F /* ViewController.swift in Sources */,
 				8F1BB0A7224DE72E00032798 /* AFURLResponseSerialization.m in Sources */,
 				8FF8087E2266E0BE00019444 /* RoundTripViewController.swift in Sources */,
+				8F01ED3A227C228800399183 /* MyBookingsViewController.swift in Sources */,
 				8F1BB0D3224DE76E00032798 /* FSCalendarCalculator.m in Sources */,
 				2E27D421224C8D67009A0E1F /* CVCalendarViewDelegate.swift in Sources */,
 				8F1BB0D6224DE76E00032798 /* FSCalendarCollectionViewLayout.m in Sources */,

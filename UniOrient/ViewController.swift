@@ -43,22 +43,22 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "pageloading.gif")!, iconInitialSize: CGSize(width: self.view.frame.width, height: 150), backgroundImage: UIImage(named: "whiteImg.png")!)//"backgd1.jpeg"
-      
-        self.view.addSubview(revealingSplashView)
-        
-        revealingSplashView.duration = 6.0
-        
-        revealingSplashView.iconColor = UIColor.red
-        revealingSplashView.useCustomIconColor = false
-        
-        revealingSplashView.animationType = SplashAnimationType.swingAndZoomOut
-        
-        revealingSplashView.startAnimation(){
-            self.revealingLoaded = true
-            self.setNeedsStatusBarAppearanceUpdate()
-            print("Completed")
-        }
+//        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "pageloading.gif")!, iconInitialSize: CGSize(width: self.view.frame.width, height: 150), backgroundImage: UIImage(named: "whiteImg.png")!)//"backgd1.jpeg"
+//      
+//        self.view.addSubview(revealingSplashView)
+//        
+//        revealingSplashView.duration = 6.0
+//        
+//        revealingSplashView.iconColor = UIColor.red
+//        revealingSplashView.useCustomIconColor = false
+//        
+//        revealingSplashView.animationType = SplashAnimationType.swingAndZoomOut
+//        
+//        revealingSplashView.startAnimation(){
+//            self.revealingLoaded = true
+//            self.setNeedsStatusBarAppearanceUpdate()
+//            print("Completed")
+//        }
         
      arrFlightDeal = ["1.jpeg","2.jpeg","3.jpeg","1.jpeg","2.jpeg","3.jpeg"]
      arrPackageDeal = ["3.jpeg","1.jpeg","2.jpeg","3.jpeg","1.jpeg","2.jpeg"]
@@ -148,7 +148,13 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
         myAccountLbl.textColor = UIColor.darkGray
         bookingImg.image = UIImage (named: "briefcaseViolet")
         bookingLbl.textColor = WebServicesUrl.appColor1
+        
+        let ctrl = self.storyboard?.instantiateViewController(withIdentifier: "MyBookingsVC") as! MyBookingsViewController
+        self.navigationController?.pushViewController(ctrl, animated: true)
+        
+        //
     }
+    
     
     
 ////// CollectionView

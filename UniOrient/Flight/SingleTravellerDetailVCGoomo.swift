@@ -55,9 +55,9 @@ class SingleTravellerDetailVCGoomo: UIViewController {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         //        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor.black
+        toolBar.tintColor = UIColor.white
         //        toolBar.backgroundColor = hexStringToUIColor(hex: "#AFCA1F")
-        toolBar.barTintColor = hexStringToUIColor(hex: "#AFCA1F")
+        toolBar.barTintColor = hexStringToUIColor(hex: "#16137c")
         toolBar.sizeToFit()
         
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.plain, target: self, action:#selector(donePicker))

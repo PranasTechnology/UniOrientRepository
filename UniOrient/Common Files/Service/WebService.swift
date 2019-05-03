@@ -41,7 +41,7 @@ class WebService {
             let strDic = String(stringFromData!.dropFirst(75))
             
             let finalStr = strDic.dropLast(9) as NSString
-            //            print(finalStr)
+                      print(finalStr)
             
             if let FinalData = finalStr.data(using: String.Encoding.utf8.rawValue) {
                 if let JsonDict:[String:AnyObject] = try? JSONSerialization.jsonObject(with: FinalData, options: .mutableContainers) as! [String:AnyObject] {

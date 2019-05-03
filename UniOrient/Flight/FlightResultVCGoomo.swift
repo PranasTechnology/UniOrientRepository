@@ -250,7 +250,9 @@ class FlightResultVCGoomo: UIViewController {
           else{
                 strURL = WebServicesUrl.FlightResult
             }
-         
+            print(WebServicesUrl.FlightServiceUrl)
+            print(messageDict)
+            print(strURL)
             WebService().HTTP_POST_WebServiceMethod_Flight(mainURL:WebServicesUrl.FlightServiceUrl,suffix: strURL, parameterDict: messageDict) { (ResponceDict, success) in
                 
               //  hideLoading()
@@ -304,7 +306,7 @@ class FlightResultVCGoomo: UIViewController {
                         
                         //Baggage - "CabinBaggage": "&lt;p&gt;7 KG&lt;/p&gt;",
                         //aResultAndDetailStruct.CabinBaggage = "\(aResultDict["CabinBaggage"]!)"
-                      //  if self.way == "one" { // As of now only for one way baggage details data available in backend
+                      if self.way == "one" { // As of now only for one way baggage details data available in backend
                             let tempCabinBagArr = "\(aResultDict["CabinBaggage"]!)".components(separatedBy: ";")
                             let tempCabinBagArr2 = tempCabinBagArr[2].components(separatedBy: "&")
                             aResultAndDetailStruct.CabinBaggage = tempCabinBagArr2[0]
@@ -314,7 +316,7 @@ class FlightResultVCGoomo: UIViewController {
                             let tempCheckInBagArr = "\(aResultDict["CheckInBaggage"]!)".components(separatedBy: ";")
                             let tempCheckInBagArr2 = tempCheckInBagArr[2].components(separatedBy: "&")
                             aResultAndDetailStruct.CheckInBaggage = tempCheckInBagArr2[0]
-                  //      }
+                       }
                   
                         //Flight Details
                         for aDetailDict in self.flightDetailsArr {

@@ -34,7 +34,6 @@ class LoginPageVCGoomo: UIViewController {
     @IBAction func loginBtnTapped(_ sender: UIButton) {
         if !(Reachability()!.isReachable) {
             print("No Internet from Login..................")
-           
         }
         else {
             callLoginService()
